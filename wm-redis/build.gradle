@@ -1,0 +1,8 @@
+ext{
+	springDataRedisVersion='1.7.4.RELEASE'
+	jedisVersion='2.9.0'
+}
+dependencies {
+	compile "org.springframework.data:spring-data-redis:${springDataRedisVersion}"
+	compile "redis.clients:jedis:${jedisVersion}"
+}

@@ -1,0 +1,10 @@
+bin
+build
+.project
+.settings
+
+wm-*/bin
+wm-*/build
+
+
+/**/logs

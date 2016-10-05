@@ -1,0 +1,8 @@
+A project that implements functionality of sending message to multiple users.
+
+Technology used:
+Spring framework
+Netty
+Redis
+MySQL
+

@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.server;
+package com.keepthinker.wavemessaging.client;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ import io.netty.handler.codec.mqtt.MqttMessageType;
 public class MqttServiceContainer {
 	
 	@Autowired
-	private PingReqService pingReqService;
+	private PingRespService pingRespService;
 	
 	private final Map<MqttMessageType, ProtocolService<MqttMessage>> services = new HashMap<>();
 	
@@ -31,7 +31,7 @@ public class MqttServiceContainer {
 	
 	@PostConstruct
 	public void init(){
-		services.put(MqttMessageType.PINGREQ, pingReqService);
+		services.put(MqttMessageType.PINGRESP, pingRespService);
 	}
 	
 }

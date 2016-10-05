@@ -1,6 +1,11 @@
 package com.keepthinker.wavemessaging.client;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.keepthinker.wavemessaging.core.MqttUtils;
+import com.keepthinker.wavemessaging.core.PropertiesUtils;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -13,12 +18,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
-import io.netty.handler.codec.mqtt.MqttFixedHeader;
-import io.netty.handler.codec.mqtt.MqttMessage;
-import io.netty.handler.codec.mqtt.MqttMessageType;
-import io.netty.handler.codec.mqtt.MqttQoS;
 
 public class ClientStartup {
+
+	@Autowired
+	private ServiceHandler serviceHandler;
+	
 	private EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 	private Bootstrap b = new Bootstrap();
@@ -31,7 +36,20 @@ public class ClientStartup {
 		this.port = port;
 		init();
 	}
-	
+
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
+
 	public void init(){
 		b.group(workerGroup);
 		b.channel(NioSocketChannel.class);
@@ -39,7 +57,7 @@ public class ClientStartup {
 		b.handler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			public void initChannel(SocketChannel ch) throws Exception {
-				ch.pipeline().addLast(new MqttDecoder(), new ServiceHandler(), MqttEncoder.INSTANCE);
+				ch.pipeline().addLast(MqttEncoder.INSTANCE, new MqttDecoder(), serviceHandler);
 			}
 		});
 	}
@@ -59,18 +77,28 @@ public class ClientStartup {
 
 
 	public static void main(String[] args) throws Exception {
-		String host = null;
-		int port = 0;
+
+		ApplicationContext context =  new ClassPathXmlApplicationContext("spring.xml");
+		ClientStartup startup = context.getBean(ClientStartup.class);
+
 		if(args.length == 2){
-			host = args[0];
-			port = Integer.parseInt(args[1]);
-		}else{
-			throw new RuntimeException("host port not set");
+			String host = args[0];
+			int port = Integer.parseInt(args[1]);
+			startup.setHost(host);
+			startup.setPort(port);
 		}
-		ClientStartup clientStartup = new ClientStartup(host, port);
-		Channel channel = clientStartup.connect();
-		channel.writeAndFlush(MqttUtils.getPingReqMessage());
-		channel.closeFuture().sync();
+		Channel channel = startup.connect();
+
+		for(;;){
+			if(channel.isActive() == false){
+				System.out.println("cilent channel is inactive");
+			}
+			channel.writeAndFlush(MqttUtils.getPingReqMessage());
+			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
+
+		}
+//		channel.closeFuture().sync();
+
 	}
-	
+
 }

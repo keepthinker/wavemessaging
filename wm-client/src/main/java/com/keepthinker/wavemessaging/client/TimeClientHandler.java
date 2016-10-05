@@ -2,11 +2,17 @@ package com.keepthinker.wavemessaging.client;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
+
+	@Autowired
+	private ServiceHandler serviceHandler;
+	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		ByteBuf m = (ByteBuf) msg; // (1)

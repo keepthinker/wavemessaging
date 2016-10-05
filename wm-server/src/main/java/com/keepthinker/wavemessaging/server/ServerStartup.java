@@ -2,6 +2,8 @@ package com.keepthinker.wavemessaging.server;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -15,7 +17,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 
-@Service
 public class ServerStartup {
 
 	private int port;
@@ -23,7 +24,6 @@ public class ServerStartup {
 	public ServerStartup(int port) {
 		this.port = port;
 	}
-
 	public int getPort() {
 		return port;
 	}
@@ -31,7 +31,6 @@ public class ServerStartup {
 	public void setPort(int port) {
 		this.port = port;
 	}
-
 	
 	@Autowired
 	private ServiceHandler serviceHandler;
@@ -47,7 +46,7 @@ public class ServerStartup {
 			.childHandler(new ChannelInitializer<SocketChannel>() { // (4)
 				@Override
 				public void initChannel(SocketChannel ch) throws Exception {
-					ch.pipeline().addLast(new MqttDecoder(), serviceHandler, MqttEncoder.INSTANCE);
+					ch.pipeline().addLast(MqttEncoder.INSTANCE, new MqttDecoder(), serviceHandler);
 				}
 			})
 			.option(ChannelOption.SO_BACKLOG, 128)          // (5)
@@ -67,12 +66,13 @@ public class ServerStartup {
 	}
 
 	public static void main(String[] args) throws Exception {
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		ServerStartup startup = context.getBean(ServerStartup.class);
 		int port;
 		if (args.length > 0) {
 			port = Integer.parseInt(args[0]);
-		} else {
-			port = 8008;
+			startup.setPort(port);
 		}
-		new ServerStartup(port).run();
+		startup.run();
 	}
 }

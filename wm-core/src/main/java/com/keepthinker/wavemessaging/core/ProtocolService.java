@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.server;
+package com.keepthinker.wavemessaging.core;
 
 import io.netty.channel.ChannelHandlerContext;
 

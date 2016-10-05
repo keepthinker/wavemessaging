@@ -1,10 +1,12 @@
 bin
 build
-.project
-.settings
 
 wm-*/bin
 wm-*/build
 
-
 /**/logs
+/.gradle/
+
+#eclipse config file
+/**/.project
+/**/.settings

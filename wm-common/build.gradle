@@ -1,3 +1,9 @@
+description ="""
+
+Project name: ${project.name}
+Shared by all projects
+
+"""
 
 dependencies {
 	

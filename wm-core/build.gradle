@@ -1,5 +1,13 @@
 
 dependencies {
-	compile group: 'io.netty', name: 'netty-all', version: '4.1.5.Final'
+	compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+	compile group: 'org.apache.curator', name: 'curator-framework', version: "${curatorVersion}"
 	
+	compile project(':wm-common');
 }
+
+task copyJarsToLibs(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}
+

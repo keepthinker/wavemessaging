@@ -1,5 +1,6 @@
 
 apply plugin: 'java'
+apply plugin: 'eclipse'
 
 repositories {
     mavenCentral()
@@ -46,6 +47,11 @@ allprojects {
 	group = 'com.keepthinker.wavemessaging'
 	version = '1.0.0'
 	sourceCompatibility = 1.7
+	repositories {
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+	    mavenCentral()
+	    jcenter()
+	}
 }
 
 subprojects {
@@ -67,12 +73,11 @@ subprojects {
 		c3p0Version = '0.9.5.1'
 		jacksonVersion = '2.6.3'
 		commonsLangVersion='2.6'
+		nettyVersion='4.1.5.Final'
+		quartzVersion='2.2.3'
+		curatorVersion='2.11.0'
 	}
 	
-	repositories {
-	    mavenCentral()
-	    jcenter()
-	}
 
 	dependencies {
 	 	compile "org.springframework:spring-context:${springVersion}"

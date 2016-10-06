@@ -10,3 +10,4 @@ wm-*/build
 #eclipse config file
 /**/.project
 /**/.settings
+/**/.classpath

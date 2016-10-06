@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.keepthinker.wavemessaging.core.MqttUtils;
-import com.keepthinker.wavemessaging.core.PropertiesUtils;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -20,6 +17,9 @@ import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 
 public class ClientStartup {
+	
+	@Autowired
+	private ChannelHolder channelManager;
 
 	@Autowired
 	private ServiceHandler serviceHandler;
@@ -61,6 +61,10 @@ public class ClientStartup {
 			}
 		});
 	}
+	
+	public void start(){
+		channelManager.setChannel(connect());
+	}
 
 	public Channel connect(){
 		ChannelFuture f = null;
@@ -87,16 +91,17 @@ public class ClientStartup {
 			startup.setHost(host);
 			startup.setPort(port);
 		}
-		Channel channel = startup.connect();
-
-		for(;;){
-			if(channel.isActive() == false){
-				System.out.println("cilent channel is inactive");
-			}
-			channel.writeAndFlush(MqttUtils.getPingReqMessage());
-			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
-
-		}
+		startup.start();
+//		ChannelManager manager = context.getBean(ChannelManager.class);
+//		manager.setChannel(channel);
+//		for(;;){
+//			if(channel.isActive() == false){
+//				System.out.println("cilent channel is inactive");
+//			}
+//			channel.writeAndFlush(MqttUtils.getPingReqMessage());
+//			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
+//
+//		}
 //		channel.closeFuture().sync();
 
 	}

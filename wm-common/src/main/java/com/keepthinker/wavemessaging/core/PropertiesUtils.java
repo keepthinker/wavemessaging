@@ -15,7 +15,7 @@ public class PropertiesUtils {
 	}
 
 	public static String getString(String key){
-		return PROPERTIES.getProperty("ping.time.interval");
+		return PROPERTIES.getProperty(key);
 	}
 
 	public static int getInt(String key){

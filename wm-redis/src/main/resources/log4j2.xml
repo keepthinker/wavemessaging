@@ -13,7 +13,7 @@
 			</Policies>
 		</RollingRandomAccessFile>
 		<Console name="STDOUT" target="SYSTEM_OUT">
-			<PatternLayout pattern="%m%n" />
+			<PatternLayout pattern="%d %p %c{3.} [%t] %m%n" />
 		</Console>
 	</Appenders>
 	<Loggers>

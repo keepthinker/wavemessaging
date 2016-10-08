@@ -1,9 +1,16 @@
 package com.keepthinker.wavemessaging.server;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.ZookeeperUtils;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -17,7 +24,7 @@ import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 
 public class ServerStartup {
-
+	private static final Logger LOGGER = LogManager.getLogger();
 	private int port;
 
 	public ServerStartup(int port) {
@@ -30,10 +37,29 @@ public class ServerStartup {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	
+
 	@Autowired
 	private ServiceHandler serviceHandler;
 
+	/**
+	 * register and watch changes in /handlers's children
+	 */
+	public void zkOperation(){
+		ZookeeperUtils.register(Constants.ZK_BROKER_BASE_PATH + Constants.PRIVATE_IP);
+		ZookeeperUtils.getChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
+	}
+
+	public static class HandlersWatcher implements Watcher{
+		@Override
+		public void process(WatchedEvent event) {
+			LOGGER.info("changes in {}, event's type:{}, state:{}, path:{}", Constants.ZK_HANDLER_BASE_PATH, 
+					event.getType(), event.getState(), event.getPath());
+			//remove inactive handler channel
+
+			//keep watching handler nodes
+			ZookeeperUtils.getChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
+		}
+	}
 
 	public void run() throws Exception {
 		EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
@@ -52,8 +78,11 @@ public class ServerStartup {
 			.childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
 			// Bind and start to accept incoming connections.
-			ChannelFuture f = b.bind(port).sync(); // (7)
+			ChannelFuture f = b.bind(port);
 
+			zkOperation();
+			
+			f.sync(); // (7)
 			// Wait until the server socket is closed.
 			// In this example, this does not happen, but you can do that to gracefully
 			// shut down your server.
@@ -62,6 +91,7 @@ public class ServerStartup {
 			workerGroup.shutdownGracefully();
 			bossGroup.shutdownGracefully();
 		}
+
 	}
 
 	public static void main(String[] args) throws Exception {

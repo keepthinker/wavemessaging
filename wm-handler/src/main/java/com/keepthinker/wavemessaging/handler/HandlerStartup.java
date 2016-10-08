@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.ZookeeperUtils;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -92,7 +95,9 @@ public class HandlerStartup {
 			startup.setPort(port);
 		}
 		startup.start();
-
+		
+		ZookeeperUtils.register("handlers/" + Constants.PRIVATE_IP);
+		
 	}
 
 }

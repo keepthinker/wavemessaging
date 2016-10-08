@@ -1,8 +1,8 @@
-A project that implements functionality of sending message to multiple users.
+A project that implements functionality of sending messages to multiple users.
 
 Technology used:
 Spring framework
 Netty
+Zookeeper
 Redis
 MySQL
-

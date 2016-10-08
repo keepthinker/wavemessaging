@@ -16,7 +16,7 @@ import org.apache.zookeeper.Watcher;
  *
  */
 public class CuratorUtils {
-	public static CuratorFramework createSimple(String connectionString) {
+	public static CuratorFramework createSimple(String connectionString, String namespace) {
 		// these are reasonable arguments for the ExponentialBackoffRetry. The first
 		// retry will wait 1 second - the second will wait up to 2 seconds - the
 		// third will wait up to 4 seconds.
@@ -24,7 +24,10 @@ public class CuratorUtils {
 
 		// The simplest way to get a CuratorFramework instance. This will use default values.
 		// The only required arguments are the connection string and the retry policy
-		return CuratorFrameworkFactory.newClient(connectionString, retryPolicy);
+		return CuratorFrameworkFactory.builder()
+		.connectString(connectionString)
+		.retryPolicy(retryPolicy).namespace(namespace)
+		.build();
 	}
 
 	public static CuratorFramework  createWithOptions(String connectionString, RetryPolicy retryPolicy, int connectionTimeoutMs, int sessionTimeoutMs) {

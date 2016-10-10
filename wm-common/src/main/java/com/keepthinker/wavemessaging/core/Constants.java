@@ -11,6 +11,8 @@ public class Constants {
 	public static final String ZK_BROKER_BASE_PATH = "/brokers";
 	
 	public static final String ZK_HANDLER_BASE_PATH = "/handlers";
+	
+	public static final String SIGN_SLASH = "/";
 
 	/**
 	 * Any address in the range 192.168.xxx.xxx is a private (aka site local) IP address. 

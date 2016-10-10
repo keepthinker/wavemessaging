@@ -11,5 +11,6 @@ public class ChannelChecker {
 	public void checkValidity(){
 		
 		LOGGER.info("checking channel");
+		//remove inactive channel
 	}
 }

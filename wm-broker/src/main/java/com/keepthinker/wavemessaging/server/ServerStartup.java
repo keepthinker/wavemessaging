@@ -10,6 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.JsonUtils;
+import com.keepthinker.wavemessaging.core.ZkServerInfo;
 import com.keepthinker.wavemessaging.core.ZookeeperUtils;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -45,8 +47,17 @@ public class ServerStartup {
 	 * register and watch changes in /handlers's children
 	 */
 	public void zkOperation(){
-		ZookeeperUtils.register(Constants.ZK_BROKER_BASE_PATH + Constants.PRIVATE_IP);
-		ZookeeperUtils.getChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
+		boolean result = ZookeeperUtils.createIfNotExisted(Constants.ZK_BROKER_BASE_PATH);
+		if(result == false){
+			throw new RuntimeException("create a node in zookeeper failed");
+		}
+		
+		ZkServerInfo zkServerInfo = new ZkServerInfo();
+		
+		ZookeeperUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
+				+ Constants.SIGN_SLASH + Constants.PRIVATE_IP + ":" + port, 
+				JsonUtils.objectToString(zkServerInfo));
+		ZookeeperUtils.watchChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
 	}
 
 	public static class HandlersWatcher implements Watcher{

@@ -10,8 +10,6 @@
 	<context:property-placeholder location="wm.properties"/>
 	
 	<bean id="serverStartup" class="com.keepthinker.wavemessaging.handler.HandlerStartup">
-		<constructor-arg name="port" value="${server.port}"/>
-		<constructor-arg name="host" value="${server.host}"/>
 	</bean>
 	
 	<import resource="spring-quartz.xml"/>

@@ -71,7 +71,7 @@ subprojects {
 		mybatisVersion = '3.3.0'
 		mybatisSpringVersion = '1.2.3'
 		c3p0Version = '0.9.5.1'
-		jacksonVersion = '2.6.3'
+		jacksonVersion = '2.8.3'
 		commonsLangVersion='2.6'
 		nettyVersion='4.1.5.Final'
 		quartzVersion='2.2.3'

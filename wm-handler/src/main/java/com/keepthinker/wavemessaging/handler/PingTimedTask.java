@@ -29,6 +29,7 @@ public class PingTimedTask {
 			return;
 		}
 		if(channel.isActive() == false){
+			channel.close();
 			LOGGER.warn("handler-server channel is inactive");
 			//try to find a new active broker, if not at present ,wait for few minutes and check again
 			tryToConnectToActiveServer();

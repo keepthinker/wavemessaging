@@ -13,6 +13,7 @@ public class Constants {
 	public static final String ZK_HANDLER_BASE_PATH = "/handlers";
 	
 	public static final String SIGN_SLASH = "/";
+	public static final String SIGN_COLON = ":";
 
 	/**
 	 * Any address in the range 192.168.xxx.xxx is a private (aka site local) IP address. 
@@ -23,6 +24,7 @@ public class Constants {
 	 *  
 	 */
 	public static final String PRIVATE_IP;
+
 	
 	static {
 		PRIVATE_IP = getIPV4Private();

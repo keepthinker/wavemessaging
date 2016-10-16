@@ -3,8 +3,6 @@ package com.keepthinker.wavemessaging.server;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -13,6 +11,8 @@ import com.keepthinker.wavemessaging.core.Constants;
 import com.keepthinker.wavemessaging.core.JsonUtils;
 import com.keepthinker.wavemessaging.core.ZkServerInfo;
 import com.keepthinker.wavemessaging.core.ZookeeperUtils;
+import com.keepthinker.wavemessaging.server.watcher.BrokerWatcher;
+import com.keepthinker.wavemessaging.server.watcher.HandlerWatcher;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -42,6 +42,12 @@ public class ServerStartup {
 
 	@Autowired
 	private ServiceHandler serviceHandler;
+	
+	@Autowired
+	private HandlerWatcher handlerWatcher;
+	
+	@Autowired
+	private BrokerWatcher brokerWatcher;
 
 	/**
 	 * register and watch changes in /handlers's children
@@ -53,23 +59,13 @@ public class ServerStartup {
 		}
 		
 		ZkServerInfo zkServerInfo = new ZkServerInfo();
-		
 		ZookeeperUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
 				+ Constants.SIGN_SLASH + Constants.PRIVATE_IP + ":" + port, 
 				JsonUtils.objectToString(zkServerInfo));
-		ZookeeperUtils.watchChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
-	}
+		
+		ZookeeperUtils.watchChildren(Constants.ZK_HANDLER_BASE_PATH, handlerWatcher);
 
-	public static class HandlersWatcher implements Watcher{
-		@Override
-		public void process(WatchedEvent event) {
-			LOGGER.info("changes in {}, event's type:{}, state:{}, path:{}", Constants.ZK_HANDLER_BASE_PATH, 
-					event.getType(), event.getState(), event.getPath());
-			//remove inactive handler channel
-
-			//keep watching handler nodes
-			ZookeeperUtils.getChildren(Constants.ZK_HANDLER_BASE_PATH, new HandlersWatcher());
-		}
+		ZookeeperUtils.watchChildren(Constants.ZK_BROKER_BASE_PATH, brokerWatcher);
 	}
 
 	public void run() throws Exception {

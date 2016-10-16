@@ -2,13 +2,17 @@ package com.keepthinker.wavemessaging.handler;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.keepthinker.wavemessaging.core.ClientType;
 import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.JsonUtils;
+import com.keepthinker.wavemessaging.core.ZkServerInfo;
 import com.keepthinker.wavemessaging.core.ZookeeperUtils;
 
 import io.netty.bootstrap.Bootstrap;
@@ -71,19 +75,19 @@ public class HandlerStartup {
 
 	@Autowired
 	private HandlersWatcher handlersWatcher;
-	
+
 	public void zkOperation(){
 		ZookeeperUtils.createIfNotExisted(Constants.ZK_HANDLER_BASE_PATH);
 		ZookeeperUtils.createEphemeral(Constants.ZK_HANDLER_BASE_PATH + Constants.SIGN_SLASH
 				+ Constants.PRIVATE_IP);
 		ZookeeperUtils.watchChildren(Constants.ZK_BROKER_BASE_PATH, handlersWatcher);
 	}
-	
 
-	
+
+
 	public void start(){
 		List<String> brokerPath = ZookeeperUtils.getChildren(Constants.ZK_BROKER_BASE_PATH);
-		
+
 		channelManager.setChannel(connect());
 
 		zkOperation();
@@ -98,6 +102,9 @@ public class HandlerStartup {
 			return null;
 		}
 		Channel channel = f.channel();
+		
+		ZookeeperUtils.increaseZkServerInfo(host, port, ClientType.HANDLER);
+		
 		return channel;
 	}
 

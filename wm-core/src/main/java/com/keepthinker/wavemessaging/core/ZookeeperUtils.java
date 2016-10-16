@@ -2,6 +2,7 @@ package com.keepthinker.wavemessaging.core;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -134,5 +135,31 @@ public class ZookeeperUtils {
 		}
 	}
 
+	/**
+	 * increase clientNum, handlerNum
+	 * @param host
+	 * @param port
+	 */
+	public static void increaseZkServerInfo(String host, int port, ClientType type){
+		//Presuming node's state change is not concurrent, Locks is considered in future
+		String path = Constants.ZK_BROKER_BASE_PATH
+				+ Constants.SIGN_SLASH + host +  Constants.SIGN_COLON + port;
+		String info = ZookeeperUtils.get(path);
+		ZkServerInfo zkServerInfo;
+		if(StringUtils.isNotBlank(info)){
+			zkServerInfo = JsonUtils.stringToObject(info, ZkServerInfo.class);
+			zkServerInfo.setClientNum(zkServerInfo.getClientNum() + 1);
+			if(type == ClientType.HANDLER){
+				zkServerInfo.setHandlerNum(zkServerInfo.getHandlerNum() + 1);
+			}
+		}else{
+			zkServerInfo = new ZkServerInfo();
+			zkServerInfo.setClientNum(1);
+			if(type == ClientType.HANDLER){
+				zkServerInfo.setHandlerNum(1);
+			}
+		}
+		ZookeeperUtils.set(path, JsonUtils.objectToString(zkServerInfo));
+	}
 
 }

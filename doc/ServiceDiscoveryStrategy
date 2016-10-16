@@ -1,0 +1,9 @@
+Advanced function(Do it later):
+1. Broker detect its broker siblings, if the number of them is increased, then try to kill the connection from a handler
+ if its connection number is more than 2. the difference of number of handlers that each broker connected is less than 1;
+
+2. Handler detect connections, if connection is disconnected(for example, the broker connected before is crashed)，
+ then try to find a broker which has the lowest connections and connect. If no broker found, retry later.
+ 
+3. The change of connection number should be synchronized, the better method is using lock, however at random point in time
+ to detect connection may be ok.

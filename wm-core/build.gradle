@@ -8,7 +8,7 @@ Shared by handler, broker
 dependencies {
 	compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
 	compile group: 'org.apache.curator', name: 'curator-framework', version: "${curatorVersion}"
-	
+	compile group: 'org.apache.curator', name: 'curator-recipes', version: "${curatorVersion}"
 	compile project(':wm-common');
 }
 

@@ -9,10 +9,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.keepthinker.wavemessaging.core.Constants;
 import com.keepthinker.wavemessaging.core.JsonUtils;
+import com.keepthinker.wavemessaging.core.SpringUtils;
 import com.keepthinker.wavemessaging.core.ZkServerInfo;
-import com.keepthinker.wavemessaging.core.ZookeeperUtils;
-import com.keepthinker.wavemessaging.server.watcher.BrokerWatcher;
-import com.keepthinker.wavemessaging.server.watcher.HandlerWatcher;
+import com.keepthinker.wavemessaging.core.ZkCommonUtils;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -26,6 +25,7 @@ import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 
 public class ServerStartup {
+	
 	private static final Logger LOGGER = LogManager.getLogger();
 	private int port;
 
@@ -43,32 +43,24 @@ public class ServerStartup {
 	@Autowired
 	private ServiceHandler serviceHandler;
 	
-	@Autowired
-	private HandlerWatcher handlerWatcher;
-	
-	@Autowired
-	private BrokerWatcher brokerWatcher;
 
 	/**
 	 * register and watch changes in /handlers's children
 	 */
 	public void zkOperation(){
-		boolean result = ZookeeperUtils.createIfNotExisted(Constants.ZK_BROKER_BASE_PATH);
+		boolean result = ZkCommonUtils.createIfNotExisted(Constants.ZK_BROKER_BASE_PATH);
 		if(result == false){
 			throw new RuntimeException("create a node in zookeeper failed");
 		}
 		
 		ZkServerInfo zkServerInfo = new ZkServerInfo();
-		ZookeeperUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
+		ZkCommonUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
 				+ Constants.SIGN_SLASH + Constants.PRIVATE_IP + ":" + port, 
 				JsonUtils.objectToString(zkServerInfo));
-		
-		ZookeeperUtils.watchChildren(Constants.ZK_HANDLER_BASE_PATH, handlerWatcher);
-
-		ZookeeperUtils.watchChildren(Constants.ZK_BROKER_BASE_PATH, brokerWatcher);
 	}
 
 	public void run() throws Exception {
+		LOGGER.info("Broker is going to run");
 		EventLoopGroup bossGroup = new NioEventLoopGroup(); // (1)
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
@@ -90,6 +82,7 @@ public class ServerStartup {
 			zkOperation();
 			
 			f.sync(); // (7)
+			LOGGER.info("Broker has started with port {}", port);
 			// Wait until the server socket is closed.
 			// In this example, this does not happen, but you can do that to gracefully
 			// shut down your server.
@@ -103,6 +96,7 @@ public class ServerStartup {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		SpringUtils.setContext(context);
 		ServerStartup startup = context.getBean(ServerStartup.class);
 		int port;
 		if (args.length > 0) {

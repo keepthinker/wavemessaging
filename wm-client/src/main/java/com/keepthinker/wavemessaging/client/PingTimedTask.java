@@ -25,6 +25,6 @@ public class PingTimedTask {
 			System.out.println("cilent channel is inactive");
 			return;
 		}
-		channel.writeAndFlush(MqttUtils.getPingReqMessage());
+		channel.writeAndFlush(MqttUtils.PINGREQ);
 	}
 }

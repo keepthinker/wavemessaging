@@ -31,7 +31,7 @@ public class PingTimedTask {
 				tryToConnectToActiveServer();
 				return;
 			}
-			channel.writeAndFlush(MqttUtils.getPingReqMessage());
+			channel.writeAndFlush(MqttUtils.PINGREQ);
 		}
 	}
 

@@ -93,7 +93,7 @@ public class ServerStartup {
 		}
 
 	}
-
+	
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		SpringUtils.setContext(context);

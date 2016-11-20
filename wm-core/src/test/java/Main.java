@@ -1,4 +1,4 @@
-import com.keepthinker.wavemessaging.core.PropertiesUtils;
+import com.keepthinker.wavemessaging.common.PropertiesUtils;
 import com.keepthinker.wavemessaging.core.ZkCommonUtils;
 
 public class Main {

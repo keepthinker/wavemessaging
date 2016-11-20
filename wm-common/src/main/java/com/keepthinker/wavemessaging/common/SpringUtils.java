@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.core;
+package com.keepthinker.wavemessaging.common;
 
 import org.springframework.context.ApplicationContext;
 

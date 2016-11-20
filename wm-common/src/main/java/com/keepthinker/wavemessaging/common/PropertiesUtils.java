@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.core;
+package com.keepthinker.wavemessaging.common;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -7,7 +7,7 @@ public class PropertiesUtils {
 	private static final Properties PROPERTIES = new Properties();
 	static {
 		try {
-			PROPERTIES.load(WmUtils.getInputStreamFromClasspath("wm.properties"));
+			PROPERTIES.load(ClassloaderUtils.getInputStreamFromClasspath("wm.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());

@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.keepthinker.wavemessaging.core.Constants;
-import com.keepthinker.wavemessaging.core.JsonUtils;
-import com.keepthinker.wavemessaging.core.SpringUtils;
-import com.keepthinker.wavemessaging.core.ZkServerInfo;
+import com.keepthinker.wavemessaging.common.Constants;
+import com.keepthinker.wavemessaging.common.JsonUtils;
+import com.keepthinker.wavemessaging.common.SpringUtils;
+import com.keepthinker.wavemessaging.common.WmUtils;
 import com.keepthinker.wavemessaging.core.ZkCommonUtils;
+import com.keepthinker.wavemessaging.core.ZkServerInfo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -55,7 +56,7 @@ public class ServerStartup {
 		
 		ZkServerInfo zkServerInfo = new ZkServerInfo();
 		ZkCommonUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
-				+ Constants.SIGN_SLASH + Constants.PRIVATE_IP + ":" + port, 
+				+ Constants.SIGN_SLASH + WmUtils.getIPV4Private() + ":" + port, 
 				JsonUtils.objectToString(zkServerInfo));
 	}
 

@@ -1,6 +1,7 @@
 package com.keepthinker.wavemessaging.handler.utils;
 
-import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.common.Constants;
+import com.keepthinker.wavemessaging.common.WmUtils;
 
 import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import io.netty.handler.codec.mqtt.MqttConnectPayload;
@@ -12,7 +13,7 @@ import io.netty.handler.codec.mqtt.MqttQoS;
 public class HandlerUtils {
 
 	private static MqttConnectMessage createHandlerConnectMessage(){
-		String clientIdentifier = "handler:" + Constants.PRIVATE_IP;
+		String clientIdentifier = "handler:" + WmUtils.getIPV4Private();
 		String willTopic = "all";
 		String willMessage = null;
 		String userName = null;

@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.core;
+package com.keepthinker.wavemessaging.common;
 
 public class ChannelInfo {
 	private String host;

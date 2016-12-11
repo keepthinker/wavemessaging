@@ -1,6 +1,5 @@
 package com.keepthinker.wavemessaging.core;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -189,7 +188,7 @@ public class ZkCommonUtils {
 	}
 
 	/**
-	 * increase clientNum, handlerNum
+	 * increase clientNum, handlerNum, handler is also a client
 	 * @param host
 	 * @param port
 	 */

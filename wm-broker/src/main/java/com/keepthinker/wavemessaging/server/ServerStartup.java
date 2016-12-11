@@ -7,12 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.keepthinker.wavemessaging.common.Constants;
-import com.keepthinker.wavemessaging.common.JsonUtils;
 import com.keepthinker.wavemessaging.common.SpringUtils;
-import com.keepthinker.wavemessaging.common.WmUtils;
-import com.keepthinker.wavemessaging.core.ZkCommonUtils;
-import com.keepthinker.wavemessaging.core.ZkServerInfo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -28,6 +23,7 @@ import io.netty.handler.codec.mqtt.MqttEncoder;
 public class ServerStartup {
 	
 	private static final Logger LOGGER = LogManager.getLogger();
+	
 	private int port;
 
 	public ServerStartup(int port) {
@@ -44,21 +40,6 @@ public class ServerStartup {
 	@Autowired
 	private ServiceHandler serviceHandler;
 	
-
-	/**
-	 * register and watch changes in /handlers's children
-	 */
-	public void zkOperation(){
-		boolean result = ZkCommonUtils.createIfNotExisted(Constants.ZK_BROKER_BASE_PATH);
-		if(result == false){
-			throw new RuntimeException("create a node in zookeeper failed");
-		}
-		
-		ZkServerInfo zkServerInfo = new ZkServerInfo();
-		ZkCommonUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH 
-				+ Constants.SIGN_SLASH + WmUtils.getIPV4Private() + ":" + port, 
-				JsonUtils.objectToString(zkServerInfo));
-	}
 
 	public void run() throws Exception {
 		LOGGER.info("Broker is going to run");
@@ -80,7 +61,7 @@ public class ServerStartup {
 			// Bind and start to accept incoming connections.
 			ChannelFuture f = b.bind(port);
 
-			zkOperation();
+			ZkBrokerUtils.registerBroker(port);
 			
 			f.sync(); // (7)
 			LOGGER.info("Broker has started with port {}", port);

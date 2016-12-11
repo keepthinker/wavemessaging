@@ -1,6 +1,5 @@
 package com.keepthinker.wavemessaging.handler.utils;
 
-import com.keepthinker.wavemessaging.common.Constants;
 import com.keepthinker.wavemessaging.common.WmUtils;
 
 import io.netty.handler.codec.mqtt.MqttConnectMessage;

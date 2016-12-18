@@ -1,0 +1,22 @@
+
+description ="""
+
+Project name: ${project.name}
+Used by who need relationanl database
+
+"""
+
+ext{
+	mysqlVersion = '6.0.5'
+	mybatisVersion = '3.4.1'
+	mybatisSpringVersion = '1.3.0'
+	c3p0Version = '0.9.5.2'
+}
+dependencies {
+    compile "mysql:mysql-connector-java:${mysqlVersion}"
+    compile "org.mybatis:mybatis:${mybatisVersion}"
+    compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+    compile "com.mchange:c3p0:${c3p0Version}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+}

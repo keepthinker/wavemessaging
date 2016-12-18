@@ -1,2 +1,3 @@
 every client info is cached in redis.
 client id generated when client who is valid to register.
+generate a token for a pair of username and password.  

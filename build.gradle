@@ -52,6 +52,7 @@ allprojects {
 	    mavenCentral()
 	    jcenter()
 	}
+  
 }
 
 subprojects {
@@ -72,12 +73,17 @@ subprojects {
 		mybatisSpringVersion = '1.2.3'
 		c3p0Version = '0.9.5.1'
 		jacksonVersion = '2.8.3'
-		commonsLangVersion='2.6'
-		nettyVersion='4.1.5.Final'
-		quartzVersion='2.2.3'
-		curatorVersion='2.11.0'
+		commonsLangVersion = '2.6'
+		nettyVersion = '4.1.5.Final'
+		quartzVersion = '2.2.3'
+		curatorVersion = '2.11.0'
+		mockitoVersion = '2.3.5'
 	}
 	
+    configurations {
+      all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+      //compile.exclude module: 'slf4j-log4j12'
+    }
 
 	dependencies {
 	 	compile "org.springframework:spring-context:${springVersion}"
@@ -85,12 +91,13 @@ subprojects {
 	    compile "org.springframework:spring-core:${springVersion}"
 		compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j2Version}"
 	  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j2Version}"
+	  	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j2Version}"
 	  	compile group: 'commons-lang', name: 'commons-lang', version: "${commonsLangVersion}"
 	  	compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
 	  	compile "org.slf4j:slf4j-api:${slf4jVersion}"
-	  	compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 	  	compile "log4j:log4j:${log4jVersion}"
 	  	
+	    testCompile 'org.mockito:mockito-core:2.3.5'
 	    testCompile 'junit:junit:4.12'
 	}
 }

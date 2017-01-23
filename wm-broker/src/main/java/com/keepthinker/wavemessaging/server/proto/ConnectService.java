@@ -6,14 +6,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.keepthinker.wavemessaging.common.ClientType;
-import com.keepthinker.wavemessaging.common.Constants;
-import com.keepthinker.wavemessaging.common.WmUtils;
+import com.keepthinker.wavemessaging.core.ClientType;
+import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.ProtocolService;
-import com.keepthinker.wavemessaging.core.ZkCommonUtils;
-import com.keepthinker.wavemessaging.server.ChannelManager;
+import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
+import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
 import com.keepthinker.wavemessaging.server.ServerStartup;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import io.netty.handler.codec.mqtt.MqttConnectPayload;
@@ -23,15 +24,13 @@ import io.netty.handler.codec.mqtt.MqttConnectVariableHeader;
 public class ConnectService implements ProtocolService<MqttConnectMessage>{
 
 	private static final Logger LOGGER = LogManager.getLogger();
-	
+
 	@Resource
 	private ServerStartup serverStartup;
 
 	@Resource
-	private ChannelManager handlerChannelManager;
+	private HandlerChannelMananger handlerChannelManager;
 
-	@Resource
-	private ChannelManager sDKChannelManager;
 
 	@Override
 	public void handle(ChannelHandlerContext ctx, MqttConnectMessage msg) {
@@ -56,8 +55,9 @@ public class ConnectService implements ProtocolService<MqttConnectMessage>{
 				LOGGER.error("clientId:{} is invalid", clientId);
 				return;
 			}
-			sDKChannelManager.add(ctx.channel());
-			ZkCommonUtils.increaseZkServerInfo(WmUtils.getIPV4Private(), serverStartup.getPort(), ClientType.SDK);
+
+			Channel channel = handlerChannelManager.get(clientId);
+			channel.writeAndFlush(msg);
 		}
 
 	}

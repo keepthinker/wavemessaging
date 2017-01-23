@@ -3,7 +3,7 @@ package com.keepthinker.wavemessaging.dao;
 import com.keepthinker.wavemessaging.dao.model.ClientInfo;
 
 public interface ClientInfoMapper {
-	ClientInfo get(long id);
-	void save(ClientInfo info);
+	ClientInfo select(long id);
+	void insert(ClientInfo info);
 	void delete(long id);
 }

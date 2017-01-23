@@ -33,6 +33,19 @@ public class WmStringRedisTemplate {
 		Long value = jedis.del(key);
 		jedis.close();
 		return value;
-		
+	}
+	
+	public Long hset(String key, String field, String value){
+		ShardedJedis jedis = shardedJedisPool.getResource();
+		Long reply = jedis.hset(key, field,	value);
+		jedis.close();
+		return reply;
+	}
+	
+	public String hget(String key, String field){
+		ShardedJedis jedis = shardedJedisPool.getResource();
+		String result = jedis.hget(key, field);
+		jedis.close();
+		return result;
 	}
 }

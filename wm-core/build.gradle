@@ -2,7 +2,7 @@
 description ="""
 
 Project name: ${project.name}
-Shared by handler, broker
+Shared
 
 """
 dependencies {

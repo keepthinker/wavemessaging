@@ -26,7 +26,7 @@ public class ClientStartup {
 	
 	private EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-	private Bootstrap b = new Bootstrap();
+	private Bootstrap b;
 
 	private String host;
 	private int port;
@@ -50,7 +50,12 @@ public class ClientStartup {
 		this.port = port;
 	}
 
-	public void init(){
+	/**
+	 *  Create tcp keep alive connection via netty.<br/>
+	 *  Protocol: MQTT
+	 *	 */
+	private void initMqtt(){
+		b = new Bootstrap();
 		b.group(workerGroup);
 		b.channel(NioSocketChannel.class);
 		b.option(ChannelOption.SO_KEEPALIVE, true);
@@ -60,6 +65,19 @@ public class ClientStartup {
 				ch.pipeline().addLast(MqttEncoder.INSTANCE, new MqttDecoder(), serviceHandler);
 			}
 		});
+	}
+
+	/**
+	 * register via http service
+	 */
+	private boolean initRegister(){
+		return false;
+	}
+
+	public void init(){
+		if(initRegister()) {
+			initMqtt();
+		}
 	}
 	
 	public void start(){
@@ -79,6 +97,9 @@ public class ClientStartup {
 	}
 
 
+	public void register(){
+
+	}
 
 	public static void main(String[] args) throws Exception {
 

@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.keepthinker.wavemessaging.core.MqttUtils;
+import com.keepthinker.wavemessaging.core.utils.MqttUtils;
 
 import io.netty.channel.Channel;
 

@@ -11,14 +11,15 @@ apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'idea'
 
 version = '1.0'
 war.baseName = 'wm-web-api'
 
 eclipse {
   classpath {  
-  downloadSources = true
-  downloadJavadoc = false
+    downloadSources = true
+    downloadJavadoc = false
   }
 }
 
@@ -28,15 +29,17 @@ ext{
 dependencies {
 
   compile project(':wm-redis')
-  compile project(':wm-common')
+  compile project(':wm-mybatis')
+  compile project(':wm-core')
   
   compile "org.springframework:spring-context-support:${springVersion}"
   compile "org.springframework:spring-tx:${springVersion}"
+  compile "org.springframework:spring-orm:${springVersion}"
   
   compile "org.springframework:spring-web:${springVersion}"
   compile "org.springframework:spring-webmvc:${springVersion}"
   
-  compile group: 'javax.servlet', name: 'servlet-api', version: '3.0-alpha-1'
+  compile group: 'javax.servlet', name: 'servlet-api', version: "${servletApiVersion}"
 
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
      "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",

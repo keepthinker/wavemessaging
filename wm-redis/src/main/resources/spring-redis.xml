@@ -7,7 +7,7 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:property-placeholder location="classpath:db.properties" />
+	<context:property-placeholder location="classpath*:config/redis.properties" ignore-unresolvable="true"/>
 
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.pool.maxIdle}" />
@@ -18,7 +18,7 @@
 
 	<bean id="shardedJedisPool" class="com.keepthinker.wavemessaging.redis.ShardedJedisPoolFactory">
 		<property name="hostPorts" value="${redis.hostPorts}"/>
-		<property name="poolConfig" ref="poolConfig"></property>
+		<property name="poolConfig" ref="poolConfig"/>
 	</bean>
 	
 	<bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.redis.WmStringRedisTemplate">

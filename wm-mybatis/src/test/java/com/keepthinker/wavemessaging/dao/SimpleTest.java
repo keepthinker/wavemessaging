@@ -19,9 +19,9 @@ public class SimpleTest {
 		clientInfo.setUsername("keepthinker");
 		clientInfo.setPassword("wavemessaging");
 		ClientInfoMapper mapper = context.getBean(ClientInfoMapper.class);
-		mapper.save(clientInfo);
+		mapper.insert(clientInfo);
 		System.out.println(clientInfo);
-		ClientInfo info = mapper.get(clientInfo.getId());
+		ClientInfo info = mapper.select(clientInfo.getId());
 		System.out.println(info);
 		mapper.delete(info.getId());
 		

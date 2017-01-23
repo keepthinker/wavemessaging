@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.keepthinker.wavemessaging.core.MqttUtils;
+import com.keepthinker.wavemessaging.core.utils.MqttUtils;
 import com.keepthinker.wavemessaging.core.ProtocolService;
 
 import io.netty.channel.ChannelHandlerContext;

@@ -1,6 +1,8 @@
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
@@ -58,9 +60,10 @@ allprojects {
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
-	
+	apply plugin: 'eclipse-wtp'
+	apply plugin: 'idea'
 	ext{
-		springVersion = '4.2.1.RELEASE'
+		springVersion = '4.3.5.RELEASE'
 		servletVersion = '3.1.0'	
 		jspApiVersion= '2.2'
 		tomcatVersion = '7.0.59'
@@ -78,6 +81,9 @@ subprojects {
 		quartzVersion = '2.2.3'
 		curatorVersion = '2.11.0'
 		mockitoVersion = '2.3.5'
+		commonsNetVersion = '3.5'
+		commonsCodecVersion = '1.10'
+		servletApiVersion = '3.0-alpha-1'
 	}
 	
     configurations {

@@ -1,9 +1,9 @@
 package com.keepthinker.wavemessaging.server;
 
-import com.keepthinker.wavemessaging.common.Constants;
-import com.keepthinker.wavemessaging.common.JsonUtils;
-import com.keepthinker.wavemessaging.common.WmUtils;
-import com.keepthinker.wavemessaging.core.ZkCommonUtils;
+import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.utils.JsonUtils;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
+import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.core.ZkServerInfo;
 
 public class ZkBrokerUtils {

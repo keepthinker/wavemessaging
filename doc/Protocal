@@ -1,5 +1,9 @@
 Definition:
-	clientId
-		Intranet:
-			handler:
-				"handler:${ipv4}"
+  clientId
+    Intranet:
+      handler:
+        "handler:${ipv4}"
+    Extranet:
+      client:
+        "${uniqueGeneratedId}"
+				

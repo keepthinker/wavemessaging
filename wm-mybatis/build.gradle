@@ -19,4 +19,5 @@ dependencies {
     compile "com.mchange:c3p0:${c3p0Version}"
     compile "org.springframework:spring-jdbc:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-orm:${springVersion}"
 }

@@ -16,7 +16,7 @@ import redis.clients.jedis.ShardedJedisPool;
  *
  */
 public class ShardedJedisPoolFactory implements FactoryBean<ShardedJedisPool>{
-	private static final Logger log = LogManager.getLogger(); 
+	private static final Logger log = LogManager.getLogger();
 	
 	private GenericObjectPoolConfig poolConfig;
 	

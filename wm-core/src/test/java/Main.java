@@ -1,5 +1,5 @@
-import com.keepthinker.wavemessaging.common.PropertiesUtils;
-import com.keepthinker.wavemessaging.core.ZkCommonUtils;
+import com.keepthinker.wavemessaging.core.utils.PropertiesUtils;
+import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 
 public class Main {
 

@@ -4,9 +4,9 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.keepthinker.wavemessaging.common.Constants;
+import com.keepthinker.wavemessaging.core.Constants;
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
-import com.keepthinker.wavemessaging.core.ZkCommonUtils;
+import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.handler.ChannelCreater;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.SpringUtils;

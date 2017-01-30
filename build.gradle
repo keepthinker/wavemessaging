@@ -1,7 +1,5 @@
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'idea'
 
 repositories {
@@ -9,13 +7,13 @@ repositories {
     jcenter()
 }
 
-ext{
+ext {
 }
 
 dependencies {
 }
 
-description ="""
+description = """
 Example project for a Gradle build
 
 Project name: ${project.name}
@@ -25,85 +23,95 @@ More detailed information here... """
 task onlySpecifiesCodeForConfigurationPhase {
     group 'com.keepthinker'
     description 'Configuration phase task.'
-    
+
     println "Gradle is working on ${project.name}"
 }
 
 defaultTasks 'clean', 'compile'
 
-task hello << {println 'Hello Gradle'}
+task hello {
+    doLast {
+        println 'Hello Gradle'
+    }
+}
 
 task hello2 {
-     group 'test'
-     description 'my test'
+    group 'test'
+    description 'my test'
 
-     doFirst {
+    doFirst {
         println 'Hello Gradle'
-     }
-     doLast {
+    }
+    doLast {
         println 'Bye bye Gradle'
-     }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 allprojects {
-	group = 'com.keepthinker.wavemessaging'
-	version = '1.0.0'
-	sourceCompatibility = 1.7
-	repositories {
-		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
-	    mavenCentral()
-	    jcenter()
-	}
-  
+    group = 'com.keepthinker.wavemessaging'
+    version = '1.0.0'
+    sourceCompatibility = 1.7
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+        jcenter()
+    }
+
 }
 
 subprojects {
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-	apply plugin: 'eclipse-wtp'
-	apply plugin: 'idea'
-	ext{
-		springVersion = '4.3.5.RELEASE'
-		servletVersion = '3.1.0'	
-		jspApiVersion= '2.2'
-		tomcatVersion = '7.0.59'
-		slf4jVersion = '1.7.12'
-		log4jVersion = '1.2.17'
-		log4j2Version = '2.6.2'
-		aspectJVersion = '1.8.7'
-		mysqlVersion = '5.1.36'
-		mybatisVersion = '3.3.0'
-		mybatisSpringVersion = '1.2.3'
-		c3p0Version = '0.9.5.1'
-		jacksonVersion = '2.8.3'
-		commonsLangVersion = '2.6'
-		nettyVersion = '4.1.5.Final'
-		quartzVersion = '2.2.3'
-		curatorVersion = '2.11.0'
-		mockitoVersion = '2.3.5'
-		commonsNetVersion = '3.5'
-		commonsCodecVersion = '1.10'
-		servletApiVersion = '3.0-alpha-1'
-	}
-	
-    configurations {
-      all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-      //compile.exclude module: 'slf4j-log4j12'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'eclipse-wtp'
+    apply plugin: 'idea'
+    ext {
+        springVersion = '4.3.5.RELEASE'
+        servletVersion = '3.1.0'
+        jspApiVersion = '2.2'
+        tomcatVersion = '7.0.59'
+        slf4jVersion = '1.7.12'
+        log4jVersion = '1.2.17'
+        log4j2Version = '2.6.2'
+        aspectJVersion = '1.8.7'
+        mysqlVersion = '5.1.36'
+        mybatisVersion = '3.3.0'
+        mybatisSpringVersion = '1.2.3'
+        c3p0Version = '0.9.5.1'
+        jacksonVersion = '2.8.3'
+        commonsLangVersion = '2.6'
+        nettyVersion = '4.1.5.Final'
+        quartzVersion = '2.2.3'
+        curatorVersion = '2.11.0'
+        mockitoVersion = '2.3.5'
+        commonsNetVersion = '3.5'
+        commonsCodecVersion = '1.10'
+        servletApiVersion = '3.0-alpha-1'
+        httpClientVersion = '4.5.2'
     }
 
-	dependencies {
-	 	compile "org.springframework:spring-context:${springVersion}"
-	    compile "org.springframework:spring-beans:${springVersion}"
-	    compile "org.springframework:spring-core:${springVersion}"
-		compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j2Version}"
-	  	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j2Version}"
-	  	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j2Version}"
-	  	compile group: 'commons-lang', name: 'commons-lang', version: "${commonsLangVersion}"
-	  	compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
-	  	compile "org.slf4j:slf4j-api:${slf4jVersion}"
-	  	compile "log4j:log4j:${log4jVersion}"
-	  	
-	    testCompile 'org.mockito:mockito-core:2.3.5'
-	    testCompile 'junit:junit:4.12'
-	}
+    configurations {
+        all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        //compile.exclude module: 'slf4j-log4j12'
+    }
+
+    dependencies {
+        compile "org.springframework:spring-context:${springVersion}"
+        compile "org.springframework:spring-beans:${springVersion}"
+        compile "org.springframework:spring-core:${springVersion}"
+        compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j2Version}"
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j2Version}"
+        compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j2Version}"
+        compile group: 'commons-lang', name: 'commons-lang', version: "${commonsLangVersion}"
+        compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+        compile "log4j:log4j:${log4jVersion}"
+        compile group: 'org.apache.httpcomponents', name: 'httpclient', version: "${httpClientVersion}"
+
+        testCompile 'org.mockito:mockito-core:2.3.5'
+        testCompile 'junit:junit:4.12'
+    }
 }

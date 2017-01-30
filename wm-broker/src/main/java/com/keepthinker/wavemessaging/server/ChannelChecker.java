@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ChannelChecker {
-	private static final Logger LOGGER = LogManager.getLogger();
-	
-	public void checkValidity(){
-		
-		LOGGER.info("checking channel");
-		//remove inactive channel
-	}
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    public void checkValidity() {
+
+        LOGGER.info("checking channel");
+        //remove inactive channel
+    }
 }

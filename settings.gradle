@@ -15,6 +15,6 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-include 'wm-core', 'wm-redis', 'wm-broker', 'wm-client', 'wm-common', 'wm-handler', 'wm-web-api', 'wm-mybatis'
+include 'wm-core', 'wm-redis', 'wm-broker', 'wm-client', 'wm-handler', 'wm-web-api', 'wm-mybatis'
 
 rootProject.name = 'wavemessaging'

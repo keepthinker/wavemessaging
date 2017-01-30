@@ -1,9 +1,8 @@
-
 dependencies {
-	compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
-	compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
-	compile "org.springframework:spring-context-support:${springVersion}"
-	compile "org.springframework:spring-tx:${springVersion}"
-	
-	compile project(':wm-core')
+    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+
+    compile project(':wm-core')
 }

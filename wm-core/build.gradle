@@ -1,15 +1,17 @@
-
-description ="""
+description = """
 
 Project name: ${project.name}
 Shared
 
 """
 dependencies {
-	compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
-	compile group: 'org.apache.curator', name: 'curator-framework', version: "${curatorVersion}"
-	compile group: 'org.apache.curator', name: 'curator-recipes', version: "${curatorVersion}"
-	compile project(':wm-common');
+    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+    compile group: 'org.apache.curator', name: 'curator-framework', version: "${curatorVersion}"
+    compile group: 'org.apache.curator', name: 'curator-recipes', version: "${curatorVersion}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${jacksonVersion}"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${jacksonVersion}"
+    compile group: 'commons-net', name: 'commons-net', version: '3.5'
 }
 
 task copyJarsToLibs(type: Copy) {

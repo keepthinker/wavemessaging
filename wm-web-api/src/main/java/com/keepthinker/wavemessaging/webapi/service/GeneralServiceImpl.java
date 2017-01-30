@@ -17,39 +17,42 @@ import redis.clients.jedis.ShardedJedisPipeline;
 import java.util.Date;
 
 @Service
-public class GeneralServiceImpl implements GeneralService{
-	private static final Logger LOGGER = LogManager.getLogger();
+public class GeneralServiceImpl implements GeneralService {
+    private static final Logger LOGGER = LogManager.getLogger();
 
-	@Autowired
-	private ClientInfoMapper clientInfoMapper;
-	
-	@Autowired
-	private WmStringRedisTemplate redisTemplate;
-	
-	@Override
-	public RegisterResult register(RegisterInfo registerInfo) {
-		long clientId = WmUtils.generateUniqueId();
-		ClientInfo clientInfo = new ClientInfo();
-		clientInfo.setUsername(CryptoUtils.hash(registerInfo.getUsername()));
-		clientInfo.setPassword(CryptoUtils.hash(registerInfo.getPassword()));
-		clientInfo.setClientId(clientId);
-		RegisterResult result = new RegisterResult();
-		try{
-			clientInfoMapper.insert(clientInfo);
-			result.setClientId(clientInfo.getClientId());
-			
-			ShardedJedisPipeline pipeline = redisTemplate.getShardedJedisPool().getResource().pipelined();
-			pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_ACCESS_TIME, Long.toString(new Date().getTime()));
-			String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
-			pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientId));
-			pipeline.hset(username, RedisUtils.UN_PASSWORD, clientInfo.getPassword());
-			pipeline.sync();
-			result.setSuccess(true);
-		}catch(Exception e){
-			LOGGER.warn("client insert exception", e);
-			result.setSuccess(false);
-		}
-		return result;
-	}
+    @Autowired
+    private ClientInfoMapper clientInfoMapper;
+
+    @Autowired
+    private WmStringRedisTemplate redisTemplate;
+
+    @Override
+    public RegisterResult register(RegisterInfo registerInfo) {
+        long clientId = WmUtils.generateUniqueId();
+        ClientInfo clientInfo = new ClientInfo();
+        clientInfo.setUsername(CryptoUtils.hash(registerInfo.getUsername()));
+        clientInfo.setPassword(CryptoUtils.hash(registerInfo.getPassword()));
+        clientInfo.setClientId(clientId);
+        RegisterResult result = new RegisterResult();
+        try {
+            clientInfoMapper.insert(clientInfo);
+            result.setClientId(clientInfo.getClientId());
+
+            ShardedJedisPipeline pipeline = redisTemplate.getShardedJedisPool().getResource().pipelined();
+            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_ACCESS_TIME, Long.toString(new Date().getTime()));
+            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_USERNAME, clientInfo.getUsername());
+            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_PASSWORD, clientInfo.getPassword());
+
+//			String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
+//			pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientId));
+            pipeline.sync();
+            result.setSuccess(true);
+        } catch (Exception e) {
+            //usually because of same record(username or clientId) in db
+            LOGGER.warn("client insert exception", e);
+            result.setSuccess(false);
+        }
+        return result;
+    }
 
 }

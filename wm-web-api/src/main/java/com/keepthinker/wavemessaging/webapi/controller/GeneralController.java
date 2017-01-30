@@ -16,37 +16,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(produces = Constants.MIME_TYPE_APPLICATION_JSON)
 public class GeneralController {
 
-	@Autowired
-	private GeneralService generalService;
-	/**
-	 * https
-	 * @return
-	 */
-	@RequestMapping(value = "/register", method=RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
-	public @ResponseBody ResponseData register(@RequestBody RegisterInfo registerInfo){
-		try{
-			RegisterResult result = generalService.register(registerInfo);
-			if(result.isSuccess()){
-				return ResponseData.newSuccess(result.getClientId());
-			}else{
-				ResponseData responseData = new ResponseData();
-				responseData.setErrorCode(ResponseData.ERROR_CODE_PARAM_INVALID);
-				responseData.setErrorMsg("该账号已存在，请换其他账号");
-				return responseData;
-			}
-		}catch(Exception e){
-			return ResponseData.RESPONSE_SERVER_ERROR;
-		}
-	}
+    @Autowired
+    private GeneralService generalService;
 
-	@RequestMapping(value = "/ip", method=RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
-	public @ResponseBody ResponseData getIp(){
+    /**
+     * https
+     *
+     * @return
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
+    public
+    @ResponseBody
+    ResponseData register(@RequestBody RegisterInfo registerInfo) {
+        try {
+            RegisterResult result = generalService.register(registerInfo);
+            if (result.isSuccess()) {
+                return ResponseData.newSuccess(result.getClientId());
+            } else {
+                ResponseData responseData = new ResponseData();
+                responseData.setErrorCode(ResponseData.ERROR_CODE_PARAM_INVALID);
+                responseData.setErrorMsg("该账号已存在，请换其他账号");
+                return responseData;
+            }
+        } catch (Exception e) {
+            return ResponseData.RESPONSE_SERVER_ERROR;
+        }
+    }
 
-		return ResponseData.newSuccess("ip");
-	}
+    @RequestMapping(value = "/ip", method = RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
+    public
+    @ResponseBody
+    ResponseData getIp() {
 
-	@RequestMapping(value = "/ping", method=RequestMethod.GET)
-	public @ResponseBody String ping(){
-		return "pong";
-	}
+        return ResponseData.newSuccess("ip");
+    }
+
+    @RequestMapping(value = "/ping", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ping() {
+        return "pong";
+    }
 }

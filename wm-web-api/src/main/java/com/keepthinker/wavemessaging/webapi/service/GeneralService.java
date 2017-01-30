@@ -5,10 +5,11 @@ import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
 
 public interface GeneralService {
 
-	/**
-	 * generate a unique id for the username.<br/>
-	 * save client info in redis
-	 * @param registerInfo
-	 */
-	RegisterResult register(RegisterInfo registerInfo);
+    /**
+     * generate a unique id for the username.<br/>
+     * save client info in redis
+     *
+     * @param registerInfo
+     */
+    RegisterResult register(RegisterInfo registerInfo);
 }

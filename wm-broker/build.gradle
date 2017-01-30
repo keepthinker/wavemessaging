@@ -1,51 +1,58 @@
+description = """
+
+Project name: ${project.name}
+process connect request.
+dispatch subscribe, unsubscribe, publish, puback to other service.
+
+"""
 
 dependencies {
 
-	compile project(':wm-core')
-	compile project(':wm-redis')
-	
-	compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
-	compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
-	compile "org.springframework:spring-context-support:${springVersion}"
-	compile "org.springframework:spring-tx:${springVersion}"
-	
+    compile project(':wm-core')
+    compile project(':wm-redis')
+
+    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+
 }
 
 jar {
-  manifest {
-    attributes(
-      //'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-      'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
-    )
-  }
+    manifest {
+        attributes(
+                //'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
+        )
+    }
 }
 
 task dependenciesJar(type: Jar) {
-	manifest {
-        attributes 'Implementation-Title': 'wm-server',  
-        	'Implementation-Version': version
-        	//'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
+    manifest {
+        attributes 'Implementation-Title': 'wm-server',
+                'Implementation-Version': version
+        //'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
     }
     baseName = project.name + '-dependencies'
     from {
-    	configurations.compile.collect { 
-    		it.isDirectory() ? it : zipTree(it) 
-    	}
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
 }
 
 //compress all jar or classes to one jar file
 task allJar(type: Jar) {
-	manifest {
-        attributes 'Implementation-Title': 'wm-server',  
-        	'Implementation-Version': version,
-        	'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
+    manifest {
+        attributes 'Implementation-Title': 'wm-server',
+                'Implementation-Version': version,
+                'Main-Class': 'com.keepthinker.wavemessaging.server.ServerStartup'
     }
     baseName = project.name + '-all'
     from {
-    	configurations.compile.collect { 
-    		it.isDirectory() ? it : zipTree(it) 
-    	}
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
     with jar
 }

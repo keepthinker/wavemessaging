@@ -1,65 +1,41 @@
 package com.keepthinker.wavemessaging.handler.utils;
 
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
-
-import io.netty.handler.codec.mqtt.MqttConnAckMessage;
-import io.netty.handler.codec.mqtt.MqttConnAckVariableHeader;
-import io.netty.handler.codec.mqtt.MqttConnectMessage;
-import io.netty.handler.codec.mqtt.MqttConnectPayload;
-import io.netty.handler.codec.mqtt.MqttConnectReturnCode;
-import io.netty.handler.codec.mqtt.MqttConnectVariableHeader;
-import io.netty.handler.codec.mqtt.MqttFixedHeader;
-import io.netty.handler.codec.mqtt.MqttMessageType;
-import io.netty.handler.codec.mqtt.MqttQoS;
+import io.netty.handler.codec.mqtt.*;
 
 public class HandlerUtils {
 
-	private static MqttConnectMessage createHandlerConnectMessage(){
-		String clientIdentifier = "handler:" + WmUtils.getIPV4Private();
-		String willTopic = "all";
-		String willMessage = null;
-		String userName = null;
-		String password = null;
+    public static final MqttConnectMessage HANDLER_CONNECT_MESSAGE;
 
-		//remaining length is calculated in MqttEncoder, here just to emphasize
-		//variable header size(10) plus payload size(data length(2) + data(?))
-		int remainingLength = 10 + (2 + (2 + clientIdentifier.length()) + (2 + willTopic.length())) ;
+    static {
+        HANDLER_CONNECT_MESSAGE = createHandlerConnectMessage();
 
-		MqttConnectPayload connectPayload = new
-				MqttConnectPayload(clientIdentifier, willTopic, willMessage, userName, password);
+    }
 
-		MqttConnectVariableHeader innerAuthedVariableHeader = 
-				new MqttConnectVariableHeader("MQTT", 4, false, false, true, 0, true, false, 6 * 60);
+    private static MqttConnectMessage createHandlerConnectMessage() {
+        String clientIdentifier = "handler:" + WmUtils.getIPV4Private();
+        String willTopic = "all";
+        String willMessage = null;
+        String userName = null;
+        String password = null;
 
-		MqttFixedHeader connectFixedHeader = new MqttFixedHeader
-				(MqttMessageType.CONNECT, false, MqttQoS.AT_MOST_ONCE, false, remainingLength);
+        //remaining length is calculated in MqttEncoder, here just to emphasize
+        //variable header size(10) plus payload size(data length(2) + data(?))
+        int remainingLength = 10 + (2 + (2 + clientIdentifier.length()) + (2 + willTopic.length()));
 
-		MqttConnectMessage connectMessage = new MqttConnectMessage(connectFixedHeader,
-				innerAuthedVariableHeader,
-				connectPayload);
+        MqttConnectPayload connectPayload = new
+                MqttConnectPayload(clientIdentifier, willTopic, willMessage, userName, password);
 
-		return connectMessage;
-	}
+        MqttConnectVariableHeader innerAuthedVariableHeader =
+                new MqttConnectVariableHeader("MQTT", 4, false, false, true, 0, true, false, 6 * 60);
 
-	public static final MqttConnectMessage HANDLER_CONNECT_MESSAGE;
-	
-	public static final MqttConnAckMessage HANDLER_CONNECTION_ACCEPTED_MESSAGE;
-	
-	public static final MqttConnAckMessage HANDLER_CONNECTION_REFUSED_BAD_USER_NAME_OR_PASSWORD_MESSAGE;
+        MqttFixedHeader connectFixedHeader = new MqttFixedHeader
+                (MqttMessageType.CONNECT, false, MqttQoS.AT_MOST_ONCE, false, remainingLength);
 
-	static {
-		HANDLER_CONNECT_MESSAGE = createHandlerConnectMessage();
-		HANDLER_CONNECTION_ACCEPTED_MESSAGE = createHandlerConnAckMessage(MqttConnectReturnCode.CONNECTION_ACCEPTED);
-		HANDLER_CONNECTION_REFUSED_BAD_USER_NAME_OR_PASSWORD_MESSAGE = createHandlerConnAckMessage(MqttConnectReturnCode.CONNECTION_REFUSED_BAD_USER_NAME_OR_PASSWORD);
-		
-	}
+        MqttConnectMessage connectMessage = new MqttConnectMessage(connectFixedHeader,
+                innerAuthedVariableHeader,
+                connectPayload);
 
-
-	public static MqttConnAckMessage createHandlerConnAckMessage(MqttConnectReturnCode returnCode){
-		MqttFixedHeader mqttFixedHeader = new MqttFixedHeader(
-				MqttMessageType.CONNACK, false, MqttQoS.AT_MOST_ONCE, false, 0);
-		MqttConnAckVariableHeader variableHeader =  new MqttConnAckVariableHeader(returnCode, true);
-		MqttConnAckMessage connAckMessage = new MqttConnAckMessage(mqttFixedHeader, variableHeader);
-		return connAckMessage;
-	}
+        return connectMessage;
+    }
 }

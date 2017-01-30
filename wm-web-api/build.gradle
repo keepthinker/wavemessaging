@@ -1,10 +1,10 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
-  }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
+    }
 }
 
 apply plugin: 'java'
@@ -17,66 +17,66 @@ version = '1.0'
 war.baseName = 'wm-web-api'
 
 eclipse {
-  classpath {  
-    downloadSources = true
-    downloadJavadoc = false
-  }
+    classpath {
+        downloadSources = true
+        downloadJavadoc = false
+    }
 }
 
-ext{
-  tomcatVersion = '7.0.59'
+ext {
+    tomcatVersion = '7.0.59'
 }
 dependencies {
 
-  compile project(':wm-redis')
-  compile project(':wm-mybatis')
-  compile project(':wm-core')
-  
-  compile "org.springframework:spring-context-support:${springVersion}"
-  compile "org.springframework:spring-tx:${springVersion}"
-  compile "org.springframework:spring-orm:${springVersion}"
-  
-  compile "org.springframework:spring-web:${springVersion}"
-  compile "org.springframework:spring-webmvc:${springVersion}"
-  
-  compile group: 'javax.servlet', name: 'servlet-api', version: "${servletApiVersion}"
+    compile project(':wm-redis')
+    compile project(':wm-mybatis')
+    compile project(':wm-core')
 
-  tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-     "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
-     "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-   
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-orm:${springVersion}"
+
+    compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+
+    compile group: 'javax.servlet', name: 'servlet-api', version: "${servletApiVersion}"
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+
 }
 
 
 task dependenciesJar(type: Jar) {
-  manifest {
-  attributes 'Implementation-Title': 'wm-web-api',  
-    'Implementation-Version': version
-  }
-  baseName = project.name + '-dependencies'
-  from {
-    configurations.compile.collect { 
-      it.isDirectory() ? it : zipTree(it) 
+    manifest {
+        attributes 'Implementation-Title': 'wm-web-api',
+                'Implementation-Version': version
     }
-  }
+    baseName = project.name + '-dependencies'
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 //compress all jar or classes to one jar file
 task allJar(type: Jar) {
-   manifest {
-  attributes 'Implementation-Title': 'wm-web-api',
-  'Implementation-Version': version
-  }
-  baseName = project.name + '-all'
-  from {
-    configurations.compile.collect { 
-      it.isDirectory() ? it : zipTree(it) 
+    manifest {
+        attributes 'Implementation-Title': 'wm-web-api',
+                'Implementation-Version': version
     }
-  }
-  with jar
+    baseName = project.name + '-all'
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
 }
 
 task copyJarsToLibs(type: Copy) {
-  into "$buildDir/libs"
-  from configurations.runtime
+    into "$buildDir/libs"
+    from configurations.runtime
 }

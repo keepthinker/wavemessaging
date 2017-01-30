@@ -5,7 +5,15 @@ wm-*/bin
 wm-*/build
 
 /**/logs
-/.gradle/
+/.gradle
+
+/out
+
+#idea config file
+/.idea
+/**/*.iml
+/wavemessaging.ipr
+/wavemessaging.iws
 
 #eclipse config file
 /**/.project

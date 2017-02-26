@@ -16,7 +16,7 @@ import java.io.InputStream;
  */
 public class JsonUtils {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static String objectToString(Object obj) {
         try {

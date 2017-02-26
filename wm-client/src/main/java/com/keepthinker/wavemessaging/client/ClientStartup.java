@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.client;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
 import com.keepthinker.wavemessaging.core.utils.JsonUtils;
@@ -16,6 +17,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -47,40 +50,13 @@ public class ClientStartup {
 
     private String host;
     private int port;
+
     @Autowired
     private ClientInfoDao clientInfoDao;
 
     public ClientStartup(String host, int port) {
         this.host = host;
         this.port = port;
-        init();
-    }
-
-    public static void main(String[] args) throws Exception {
-
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        ClientStartup startup = context.getBean(ClientStartup.class);
-
-        if (args.length == 2) {
-            String host = args[0];
-            int port = Integer.parseInt(args[1]);
-            startup.setHost(host);
-            startup.setPort(port);
-        }
-        startup.start();
-
-//		ChannelManager manager = context.getBean(ChannelManager.class);
-//		manager.setChannel(channel);
-//		for(;;){
-//			if(channel.isActive() == false){
-//				System.out.println("cilent channel is inactive");
-//			}
-//			channel.writeAndFlush(MqttUtils.getPingReqMessage());
-//			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
-//
-//		}
-//		channel.closeFuture().sync();
-
     }
 
     public String getHost() {
@@ -125,19 +101,18 @@ public class ClientStartup {
             return true;
         }
 
-        String username = "username";
+        String username = "username1";
         String password = "password";
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(PropertiesUtils.getString("web.api.host"));
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        nvps.add(new BasicNameValuePair("username", username));
-        nvps.add(new BasicNameValuePair("password", password));
-        try {
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        HttpPost httpPost = new HttpPost(PropertiesUtils.getString("web.api.register.url"));
+
+        ObjectNode jsonNode = JsonUtils.OBJECT_MAPPER.createObjectNode();
+        jsonNode.put("u", username);
+        jsonNode.put("p", password);
+
+        LOGGER.info(jsonNode.toString());
+        httpPost.setEntity(new StringEntity(jsonNode.toString(), ContentType.APPLICATION_JSON));
 
         CloseableHttpResponse response = null;
         try {
@@ -164,7 +139,9 @@ public class ClientStartup {
             return false;
         } finally {
             try {
-                response.close();
+                if(response != null) {
+                    response.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -176,6 +153,8 @@ public class ClientStartup {
     public void init() {
         if (initRegister()) {
             initMqtt();
+        }else{
+            LOGGER.error("failed in initializing register operation");
         }
     }
 
@@ -208,6 +187,34 @@ public class ClientStartup {
         }
         Channel channel = f.channel();
         return channel;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        ClientStartup startup = context.getBean(ClientStartup.class);
+
+        if (args.length == 2) {
+            String host = args[0];
+            int port = Integer.parseInt(args[1]);
+            startup.setHost(host);
+            startup.setPort(port);
+        }
+        startup.start();
+
+//		ChannelManager manager = context.getBean(ChannelManager.class);
+//		manager.setChannel(channel);
+//		for(;;){
+//			if(channel.isActive() == false){
+//				System.out.println("cilent channel is inactive");
+//			}
+//			channel.writeAndFlush(MqttUtils.getPingReqMessage());
+//			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
+//
+//		}
+//		channel.closeFuture().sync();
+
     }
 
 }

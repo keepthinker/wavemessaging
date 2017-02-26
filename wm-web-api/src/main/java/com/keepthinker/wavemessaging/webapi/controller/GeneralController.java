@@ -5,6 +5,8 @@ import com.keepthinker.wavemessaging.core.ResponseData;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
 import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
 import com.keepthinker.wavemessaging.webapi.service.GeneralService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(produces = Constants.MIME_TYPE_APPLICATION_JSON)
 public class GeneralController {
+    private final static Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private GeneralService generalService;
@@ -28,6 +31,7 @@ public class GeneralController {
     public
     @ResponseBody
     ResponseData register(@RequestBody RegisterInfo registerInfo) {
+        LOGGER.info(registerInfo);
         try {
             RegisterResult result = generalService.register(registerInfo);
             if (result.isSuccess()) {

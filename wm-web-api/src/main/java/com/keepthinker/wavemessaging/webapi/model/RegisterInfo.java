@@ -24,4 +24,11 @@ public class RegisterInfo {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "RegisterInfo{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

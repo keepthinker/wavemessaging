@@ -10,7 +10,7 @@
     <context:component-scan base-package="com.keepthinker.wavemessaging"/>
     <context:property-placeholder location="wm.properties"/>
 
-    <bean id="serverStartup" class="com.keepthinker.wavemessaging.client.ClientStartup">
+    <bean id="clientStartup" class="com.keepthinker.wavemessaging.client.ClientStartup" init-method="init">
         <constructor-arg name="port" value="${server.port}"/>
         <constructor-arg name="host" value="${server.host}"/>
     </bean>

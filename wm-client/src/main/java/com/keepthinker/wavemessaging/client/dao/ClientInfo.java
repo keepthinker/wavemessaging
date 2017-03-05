@@ -7,6 +7,7 @@ public class ClientInfo {
     private long clientId;
     private String username;
     private String password;
+    private String token;
 
     public long getClientId() {
         return clientId;
@@ -32,12 +33,21 @@ public class ClientInfo {
         this.password = password;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "ClientInfo{" +
                 "clientId=" + clientId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,12 @@
+1. ClientId
+"ci"
+    accessTime
+    username
+    password
+    token //  when accessTime minus now is less then 2 days' time, remove it.
+
+2. Username
+"un"
+
+
+3.

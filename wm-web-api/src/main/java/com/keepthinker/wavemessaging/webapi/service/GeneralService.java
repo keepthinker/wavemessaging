@@ -1,5 +1,7 @@
 package com.keepthinker.wavemessaging.webapi.service;
 
+import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
+import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
 import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
 
@@ -12,4 +14,6 @@ public interface GeneralService {
      * @param registerInfo
      */
     RegisterResult register(RegisterInfo registerInfo);
+
+    LoginResult login(LoginInfo loginInfo);
 }

@@ -1,6 +1,5 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.core.ProtocolService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.mqtt.MqttMessage;
 import org.apache.logging.log4j.LogManager;

@@ -11,5 +11,7 @@ public interface ClientInfoDao {
      */
     void insert(ClientInfo clientInfo);
 
+    void update(ClientInfo clientInfo);
+
     ClientInfo get();
 }

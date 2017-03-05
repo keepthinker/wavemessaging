@@ -4,7 +4,7 @@ import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import io.netty.handler.codec.mqtt.*;
 
 public class ClientUtils {
-    public static MqttConnectMessage createConnectMessage(String userName, String password, String willTopic) {
+    public static MqttConnectMessage createConnectMessage(long clientId, String userName, String password, String willTopic) {
         String clientIdentifier = "handler:" + WmUtils.getIPV4Private();
         String willMessage = null;
 

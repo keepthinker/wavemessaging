@@ -3,8 +3,10 @@ package com.keepthinker.wavemessaging.client;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
-import com.keepthinker.wavemessaging.core.utils.JsonUtils;
-import com.keepthinker.wavemessaging.core.utils.PropertiesUtils;
+import com.keepthinker.wavemessaging.client.model.LoginResponse;
+import com.keepthinker.wavemessaging.client.model.RegisterResponse;
+import com.keepthinker.wavemessaging.client.utils.JsonUtils;
+import com.keepthinker.wavemessaging.client.utils.PropertiesUtils;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -13,15 +15,12 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,9 +29,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClientStartup {
 
@@ -79,7 +75,7 @@ public class ClientStartup {
      * Create tcp keep alive connection via netty.<br/>
      * Protocol: MQTT
      */
-    private void initMqtt() {
+    private void initMqttConnection() {
         b = new Bootstrap();
         b.group(workerGroup);
         b.channel(NioSocketChannel.class);
@@ -96,7 +92,7 @@ public class ClientStartup {
      * if registered before, return true.<br/>
      * else try to register via http request.<br/>
      */
-    private boolean initRegister() {
+    private boolean register() {
         if (clientInfoDao.get() != null) {
             return true;
         }
@@ -117,7 +113,7 @@ public class ClientStartup {
         CloseableHttpResponse response = null;
         try {
             response = httpclient.execute(httpPost);
-            System.out.println(response.getStatusLine());
+            LOGGER.info(response.getStatusLine());
             HttpEntity entity = response.getEntity();
             // do something useful with the response body
             // and ensure it is fully consumed
@@ -135,49 +131,86 @@ public class ClientStartup {
             }
             EntityUtils.consume(entity);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("register failed", e);
             return false;
         } finally {
-            try {
-                if(response != null) {
-                    response.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void init() {
-        if (initRegister()) {
-            initMqtt();
-        }else{
-            LOGGER.error("failed in initializing register operation");
+            return closeHttpQuietly(response);
         }
     }
 
     /**
+     * register --> connect --> ping
      * mock a user's operation
      */
     public void start() {
-        channelManager.setChannel(connect());
 
-        ClientInfo clientInfo = clientInfoDao.get();
-        if (clientInfo == null) {
-            //register
-
-        } else {
-
+        if (!register()) {
+            LOGGER.error("failed in initializing register operation");
         }
+        login();
+        initMqttConnection();
+        mqttConnectRequest();
+        channelManager.setChannel(tcpConnect());
+
         //Check if clientId, username, password
         //Try to connect
         //if failed register
 
     }
 
-    public Channel connect() {
+    private boolean login(){
+        ClientInfo clientInfo = clientInfoDao.get();
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(PropertiesUtils.getString("web.api.login.url"));
+
+        ObjectNode jsonNode = JsonUtils.OBJECT_MAPPER.createObjectNode();
+        jsonNode.put("u", clientInfo.getUsername());
+        jsonNode.put("p", clientInfo.getPassword());
+
+        LOGGER.info(jsonNode.toString());
+        httpPost.setEntity(new StringEntity(jsonNode.toString(), ContentType.APPLICATION_JSON));
+
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpPost);
+            LOGGER.info(response.getStatusLine());
+            HttpEntity entity = response.getEntity();
+            LoginResponse loginResponse = JsonUtils.streamToObject(entity.getContent(), LoginResponse.class);
+            if (loginResponse.getData() != null) {
+                clientInfo.setToken(loginResponse.getData());
+                clientInfoDao.update(clientInfo);
+            } else {
+                LOGGER.error("http register failed with errorCode: {}, errorMsg: {}", loginResponse.getErrorCode(), loginResponse.getErrorMsg());
+                return false;
+            }
+            EntityUtils.consume(entity);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            return closeHttpQuietly(response);
+        }
+    }
+
+    private boolean closeHttpQuietly(CloseableHttpResponse response){
+        try {
+            if(response != null) {
+                response.close();
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void mqttConnectRequest(){
+        ClientInfo clientInfo = clientInfoDao.get();
+        clientInfo.getClientId();
+//        ClientUtils.createConnectMessage(clientInfo.getClientId());
+    }
+
+    public Channel tcpConnect() {
         ChannelFuture f = null;
         try {
             f = b.connect(host, port).sync();

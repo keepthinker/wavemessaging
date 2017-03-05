@@ -1,3 +1,8 @@
 every client info is cached in redis.
 client id generated when client who is valid to register.
-generate a token for a pair of username and password.  
+generate a token for a pair of username and password.
+
+
+sdk client login server with username + password, server response with a unique token.
+server keep the token in redis,
+sdk client connect server with clientId + token

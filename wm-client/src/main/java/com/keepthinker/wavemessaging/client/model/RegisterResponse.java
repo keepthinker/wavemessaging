@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.client;
+package com.keepthinker.wavemessaging.client.model;
 
 /**
  * Created by keepthinker on 2017/1/30.

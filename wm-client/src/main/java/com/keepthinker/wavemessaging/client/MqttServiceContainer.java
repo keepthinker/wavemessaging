@@ -1,6 +1,5 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.core.ProtocolService;
 import io.netty.handler.codec.mqtt.MqttMessage;
 import io.netty.handler.codec.mqtt.MqttMessageType;
 import org.springframework.beans.factory.annotation.Autowired;

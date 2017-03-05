@@ -9,6 +9,7 @@ public class RedisUtils {
     public static String CI_ACCESS_TIME = "accessTime";
     public static String CI_USERNAME = "username";
     public static String CI_PASSWORD = "password";
+    public static String CI_TOKEN = "token";
     /**
      * Hash: Usernam -- ${field} --> value
      */

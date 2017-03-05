@@ -2,6 +2,8 @@ package com.keepthinker.wavemessaging.webapi.controller;
 
 import com.keepthinker.wavemessaging.core.Constants;
 import com.keepthinker.wavemessaging.core.ResponseData;
+import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
+import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
 import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
 import com.keepthinker.wavemessaging.webapi.service.GeneralService;
@@ -24,14 +26,11 @@ public class GeneralController {
 
     /**
      * https
-     *
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
-    public
-    @ResponseBody
-    ResponseData register(@RequestBody RegisterInfo registerInfo) {
-        LOGGER.info(registerInfo);
+    public @ResponseBody ResponseData register(@RequestBody RegisterInfo registerInfo) {
+        LOGGER.info("register: " + registerInfo);
         try {
             RegisterResult result = generalService.register(registerInfo);
             if (result.isSuccess()) {
@@ -43,6 +42,23 @@ public class GeneralController {
                 return responseData;
             }
         } catch (Exception e) {
+            LOGGER.error("register error", e);
+            return ResponseData.RESPONSE_SERVER_ERROR;
+        }
+    }
+
+    /**
+     * https
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
+    public @ResponseBody ResponseData login(@RequestBody LoginInfo loginInfo){
+        LOGGER.info("login: " + loginInfo);
+        try {
+            LoginResult result = generalService.login(loginInfo);
+            return ResponseData.newSuccess(result.getToken());
+        } catch (Exception e) {
+            LOGGER.error("login error", e);
             return ResponseData.RESPONSE_SERVER_ERROR;
         }
     }

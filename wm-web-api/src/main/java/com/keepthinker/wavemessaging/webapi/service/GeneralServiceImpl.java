@@ -6,6 +6,8 @@ import com.keepthinker.wavemessaging.dao.ClientInfoMapper;
 import com.keepthinker.wavemessaging.dao.model.ClientInfo;
 import com.keepthinker.wavemessaging.redis.RedisUtils;
 import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
+import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
+import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
 import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
 import org.apache.logging.log4j.LogManager;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.ShardedJedisPipeline;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class GeneralServiceImpl implements GeneralService {
@@ -44,9 +47,9 @@ public class GeneralServiceImpl implements GeneralService {
             pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_ACCESS_TIME, Long.toString(new Date().getTime()));
             pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_USERNAME, clientInfo.getUsername());
             pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_PASSWORD, clientInfo.getPassword());
+			String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
+			pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientId));
 
-//			String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
-//			pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientId));
             pipeline.sync();
             result.setSuccess(true);
         } catch (Exception e) {
@@ -56,5 +59,15 @@ public class GeneralServiceImpl implements GeneralService {
         }
         return result;
     }
+
+    @Override
+    public LoginResult login(LoginInfo loginInfo) {
+        String token = UUID.randomUUID().toString();
+        String clientId = redisTemplate.hget(RedisUtils.getUsernameKey(CryptoUtils.hash(loginInfo.getUsername())), RedisUtils.UN_CLIENT_ID);
+        redisTemplate.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_TOKEN, token);
+        LoginResult result = new LoginResult(token);
+        return result;
+    }
+
 
 }

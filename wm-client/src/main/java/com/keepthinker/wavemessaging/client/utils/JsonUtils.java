@@ -1,8 +1,7 @@
-package com.keepthinker.wavemessaging.core.utils;
+package com.keepthinker.wavemessaging.client.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.keepthinker.wavemessaging.core.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

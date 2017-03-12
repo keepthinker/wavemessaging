@@ -6,4 +6,48 @@ Definition:
     Extranet:
       client:
         "${uniqueGeneratedId}"
+
+
+Wave Messaging Protocol
+
+Description:
+   method like mqtt protocol which is for IM application. Use protobuf to encode message
+
+Definition:
+    Reserved: 0
+    CONNECT: 1
+        Client to Server
+        Client request to connect to Server
+    CONNACK: 2
+        Server to Client
+        Connect acknowledgment
+    PUBLISH: 3
+        Client to Server
+        or
+        Server to Client
+        Publish message
+    PUBACK: 4
+        Client to Server
+        or
+        Server to Client
+        Publish acknowledgment
+    SUBSCRIBE: 5
+        Client to Server
+        Client subscribe request
+    SUBACK: 6
+        Server to Client
+        Subscribe acknowledgment
+    UNSUBSCRIBE: 7
+        Client to Server
+        Unsubscribe request
+    UNSUBACK: 8
+        Server to Client
+        Unsubscribe acknowledgment
+    PINGREQ: 9
+        Client to Server
+        PING request
+    PINGRESP: 10
+        Server to Client
+        PING response
+    DISCONNECT: 11
 				

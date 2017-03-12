@@ -3,6 +3,7 @@ package com.keepthinker.wavemessaging.client;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
+import com.keepthinker.wavemessaging.client.model.ClientWillMessage;
 import com.keepthinker.wavemessaging.client.model.LoginResponse;
 import com.keepthinker.wavemessaging.client.model.RegisterResponse;
 import com.keepthinker.wavemessaging.client.utils.JsonUtils;
@@ -12,6 +13,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import io.netty.handler.codec.mqtt.MqttDecoder;
 import io.netty.handler.codec.mqtt.MqttEncoder;
 import org.apache.http.HttpEntity;
@@ -149,12 +151,8 @@ public class ClientStartup {
         }
         login();
         initMqttConnection();
-        mqttConnectRequest();
         channelManager.setChannel(tcpConnect());
-
-        //Check if clientId, username, password
-        //Try to connect
-        //if failed register
+        mqttConnectRequest();
 
     }
 
@@ -207,7 +205,13 @@ public class ClientStartup {
     private void mqttConnectRequest(){
         ClientInfo clientInfo = clientInfoDao.get();
         clientInfo.getClientId();
-//        ClientUtils.createConnectMessage(clientInfo.getClientId());
+        String topic = "all";
+        ClientWillMessage willMessage = new ClientWillMessage();
+        willMessage.setToken(clientInfo.getToken());
+        MqttConnectMessage message =  ClientUtils.createConnectMessage(clientInfo.getClientId()
+                , willMessage
+                , "topic");
+        channelManager.getChannel().writeAndFlush(message);
     }
 
     public Channel tcpConnect() {

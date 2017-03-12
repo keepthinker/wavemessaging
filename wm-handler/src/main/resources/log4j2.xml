@@ -2,7 +2,7 @@
 <Configuration status="warn" name="MyApp" packages="">
     <Appenders>
         <RollingRandomAccessFile name="RollingRandomAccessFile"
-                                 fileName="logs/wm-server.log"
+                                 fileName="logs/wm-handler.log"
                                  filePattern="logs/$${date:yyyy-MM}/wm-client-%d{yyyy-MM-dd-HH}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>

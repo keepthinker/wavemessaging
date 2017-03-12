@@ -1,7 +1,7 @@
 package com.keepthinker.wavemessaging.webapi.controller;
 
-import com.keepthinker.wavemessaging.core.Constants;
-import com.keepthinker.wavemessaging.core.ResponseData;
+import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.model.ResponseData;
 import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
 import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;

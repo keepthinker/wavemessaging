@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package tutorial;
+
+option java_package = "com.keepthinker.wavemessaging.proto";
+option java_outer_classname = "WmpMessageProtos";
+
+message WmpConnectMessage {
+  int64 clientId = 1;
+  string token = 2;
+}
+
+message WmpConnackMessage {
+  int64 clientId = 1;
+  int32 returnCode = 2;
+}

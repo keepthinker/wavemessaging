@@ -1,0 +1,15 @@
+description = """
+
+Project name: ${project.name}
+
+"""
+dependencies {
+    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: "${protobufVersion}"
+}
+
+
+task copyJarsToLibs(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}

@@ -22,13 +22,15 @@ public class RedisTest1 {
             System.out.println(jedis.del("key" + i));
             jedis.close();
         }
-        WmStringRedisTemplate wmtringRedisTemplate = context.getBean("wmStringRedisTemplate", WmStringRedisTemplate.class);
+        WmStringRedisTemplate wmStringRedisTemplate = context.getBean("wmStringRedisTemplate", WmStringRedisTemplate.class);
 
         for (int i = 0; i < 100; i++) {
-            System.out.println(wmtringRedisTemplate.set("key" + i, "value" + i));
-            System.out.println(wmtringRedisTemplate.get("key" + i));
-            System.out.println(wmtringRedisTemplate.del("key" + i));
+            System.out.println(wmStringRedisTemplate.set("key" + i, "value" + i));
+            System.out.println(wmStringRedisTemplate.get("key" + i));
+            System.out.println(wmStringRedisTemplate.del("key" + i));
         }
+
+        System.out.println(wmStringRedisTemplate.get("asdfasdf"));
     }
 
 }

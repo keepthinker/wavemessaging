@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.core;
+package com.keepthinker.wavemessaging.core.utils;
 
 public class Constants {
     public static final String DEFAULT_CHARSET = "UTF-8";
@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String NODE_NAME_HANDLER = "handler";
     public static final String NODE_NAME_SERVER = "server";
+
+    public static final String CLIENT_ID_PREFIX_HANDLER = "handler:";
 
     public static final String MIME_TYPE_APPLICATION_JSON = "application/json;charset=utf-8";
 }

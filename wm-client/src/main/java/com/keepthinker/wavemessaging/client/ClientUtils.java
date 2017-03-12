@@ -1,28 +1,26 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.core.utils.WmUtils;
+import com.keepthinker.wavemessaging.client.model.ClientWillMessage;
 import io.netty.handler.codec.mqtt.*;
 
 public class ClientUtils {
-    public static MqttConnectMessage createConnectMessage(long clientId, String userName, String password, String willTopic) {
-        String clientIdentifier = "handler:" + WmUtils.getIPV4Private();
-        String willMessage = null;
+    public static MqttConnectMessage createConnectMessage(long clientId, ClientWillMessage willMessage, String willTopic) {
+        String clientIdentifier = String.valueOf(clientId);
 
         //remaining length is calculated in MqttEncoder, here just to emphasize
         //variable header size(10) plus payload size(data length(2) + data(?))
         int remainingLength = 10 + (2 + (2 + clientIdentifier.length()) + (2 + willTopic.length()));
 
         MqttConnectPayload connectPayload = new
-                MqttConnectPayload(clientIdentifier, willTopic, willMessage, userName, password);
+                MqttConnectPayload(clientIdentifier, willTopic, willMessage.getToken(), "", "");
 
-        MqttConnectVariableHeader innerAuthedVariableHeader =
+        MqttConnectVariableHeader variableHeader =
                 new MqttConnectVariableHeader("MQTT", 4, false, false, true, 0, true, false, 6 * 60);
-
         MqttFixedHeader connectFixedHeader = new MqttFixedHeader
                 (MqttMessageType.CONNECT, false, MqttQoS.AT_MOST_ONCE, false, remainingLength);
 
         MqttConnectMessage connectMessage = new MqttConnectMessage(connectFixedHeader,
-                innerAuthedVariableHeader,
+                variableHeader,
                 connectPayload);
 
         return connectMessage;

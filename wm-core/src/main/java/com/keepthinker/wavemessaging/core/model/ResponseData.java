@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.core;
+package com.keepthinker.wavemessaging.core.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

@@ -6,3 +6,9 @@ generate a token for a pair of username and password.
 sdk client login server with username + password, server response with a unique token.
 server keep the token in redis,
 sdk client connect server with clientId + token
+
+Handler behaved like a sdk-client. process msg dispatched by broker, return message with the same request method and result data.
+
+Broker behaved like a judge. It dispatches sdk request to handler, and receives handler's reponse as a confirmation of a sdk request success or failure. 
+
+change the original meaning of protocal in handler.

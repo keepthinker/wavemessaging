@@ -1,7 +1,7 @@
 package com.keepthinker.wavemessaging.server;
 
-import com.keepthinker.wavemessaging.core.Constants;
-import com.keepthinker.wavemessaging.core.ZkServerInfo;
+import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.model.ZkServerInfo;
 import com.keepthinker.wavemessaging.core.utils.JsonUtils;
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
@@ -23,5 +23,9 @@ public class ZkBrokerUtils {
         ZkCommonUtils.createEphemeral(Constants.ZK_BROKER_BASE_PATH
                         + Constants.SIGN_SLASH + WmUtils.getIPV4Private() + ":" + port,
                 JsonUtils.objectToString(zkServerInfo));
+    }
+
+    public static boolean isClientIdFromSDK(){
+        return false;
     }
 }

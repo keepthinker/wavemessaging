@@ -1,7 +1,7 @@
 package com.keepthinker.wavemessaging.handler.utils;
 
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
-import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.handler.ChannelCreater;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;

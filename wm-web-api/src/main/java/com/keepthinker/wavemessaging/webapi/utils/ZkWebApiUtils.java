@@ -1,6 +1,6 @@
 package com.keepthinker.wavemessaging.webapi.utils;
 
-import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 
 import java.util.List;

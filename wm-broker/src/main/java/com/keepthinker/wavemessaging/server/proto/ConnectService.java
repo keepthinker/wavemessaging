@@ -1,21 +1,19 @@
 package com.keepthinker.wavemessaging.server.proto;
 
 import com.keepthinker.wavemessaging.core.ClientType;
-import com.keepthinker.wavemessaging.core.Constants;
+import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.ProtocolService;
-import com.keepthinker.wavemessaging.core.utils.CryptoUtils;
-import com.keepthinker.wavemessaging.core.utils.MqttUtils;
-import com.keepthinker.wavemessaging.core.utils.WmUtils;
-import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
-import com.keepthinker.wavemessaging.redis.RedisUtils;
+import com.keepthinker.wavemessaging.core.utils.*;
 import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
+import com.keepthinker.wavemessaging.server.SDKChannelManager;
 import com.keepthinker.wavemessaging.server.ServerStartup;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.mqtt.MqttConnAckMessage;
 import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import io.netty.handler.codec.mqtt.MqttConnectPayload;
 import io.netty.handler.codec.mqtt.MqttConnectVariableHeader;
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +37,9 @@ public class ConnectService implements ProtocolService<MqttConnectMessage> {
     @Resource
     private HandlerChannelMananger handlerChannelManager;
 
+    @Resource
+    private SDKChannelManager sdkChannelManager;
+
     @Autowired
     private WmStringRedisTemplate redisTemplate;
 
@@ -49,10 +50,19 @@ public class ConnectService implements ProtocolService<MqttConnectMessage> {
         LOGGER.info("variableHeader: " + variableHeader);
         MqttConnectPayload payload = msg.payload();
         LOGGER.info("payload: " + payload);
-        if (variableHeader.hasUserName() == false) {// other nodes(handler etc.) in intranet don't need authentication
-            handleHandlerConnect(ctx, msg);
-        } else {
-            handlerSdkConnect(ctx, msg);
+        String clientIdStr = msg.payload().clientIdentifier();
+        try {
+            if (clientIdStr.startsWith(Constants.CLIENT_ID_PREFIX_HANDLER)) {
+                handleHandlerConnect(ctx, msg);
+            } else {
+                if(StringUtils.isNumeric(clientIdStr)){
+                    handlerSdkConnect(ctx, msg);
+                }else{
+                    LOGGER.warn("Client() is not valid.", clientIdStr);
+                }
+            }
+        }catch(Exception e){
+            LOGGER.error("error in handling connect action|{}", e);
         }
     }
 
@@ -76,35 +86,15 @@ public class ConnectService implements ProtocolService<MqttConnectMessage> {
     private void handlerSdkConnect(ChannelHandlerContext ctx, MqttConnectMessage msg) {
         MqttConnectPayload payload = msg.payload();
         String clientId = payload.clientIdentifier();
+        long clientIdLong;
         try {
-            Integer.valueOf(clientId);
+            clientIdLong = Long.parseLong(clientId);
         } catch (Exception e) {
             rejectId(ctx, clientId);
             return;
         }
-
-        MqttConnectVariableHeader header = msg.variableHeader();
-        String usernameHash = CryptoUtils.hash(payload.userName());
-        String passwordHash = CryptoUtils.hash(payload.password());
-        if (header.hasUserName() && header.hasPassword()) {
-            redisTemplate.get(RedisUtils.getClientIdKey(clientId));
-            String unHash = CryptoUtils.hash(redisTemplate.hget(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_USERNAME));
-            String pwdHash = CryptoUtils.hash(redisTemplate.hget(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_PASSWORD));
-            if (usernameHash.equals(unHash) && passwordHash.equals(pwdHash)) {
-                MqttConnAckMessage connAckMessage = MqttUtils.CONNACK_ACCEPTED_MESSAGE;
-                ctx.writeAndFlush(connAckMessage);
-            } else {
-                rejectUsernameAndPassword(ctx, usernameHash, passwordHash, clientId);
-            }
-        } else {
-            rejectUsernameAndPassword(ctx, usernameHash, passwordHash, clientId);
-        }
-    }
-
-    private void rejectUsernameAndPassword(ChannelHandlerContext ctx, String usernameHash, String passwordHash, String clientId) {
-        MqttConnAckMessage connAckMessage = MqttUtils.CONNACK_REFUSED_BAD_USER_NAME_OR_PASSWORD_MESSAGE;
-        ctx.writeAndFlush(connAckMessage);
-        LOGGER.warn("rejected username({}) or password({}) with identifier({})", usernameHash, passwordHash, clientId);
+        sdkChannelManager.put(clientIdLong, ctx.channel());
+        handlerChannelManager.get(clientId).writeAndFlush(msg);
 
     }
 }

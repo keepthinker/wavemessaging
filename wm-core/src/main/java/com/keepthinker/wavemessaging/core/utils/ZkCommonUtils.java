@@ -2,8 +2,7 @@ package com.keepthinker.wavemessaging.core.utils;
 
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
 import com.keepthinker.wavemessaging.core.ClientType;
-import com.keepthinker.wavemessaging.core.Constants;
-import com.keepthinker.wavemessaging.core.ZkServerInfo;
+import com.keepthinker.wavemessaging.core.model.ZkServerInfo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;

@@ -5,22 +5,16 @@ package com.keepthinker.wavemessaging.proto;
  */
 public class WmpMessage {
 
-    private WmpMethod method;
-    private Object messageBody;
+    protected WmpMessageMethod method;
 
-    public WmpMethod getMethod() {
+    public WmpMessageMethod getMethod() {
         return method;
     }
 
-    public void setMethod(WmpMethod method) {
+    protected void setMethod(WmpMessageMethod method) {
         this.method = method;
     }
 
-    public Object getMessageBody() {
-        return messageBody;
-    }
 
-    public void setMessageBody(Object messageBody) {
-        this.messageBody = messageBody;
-    }
+
 }

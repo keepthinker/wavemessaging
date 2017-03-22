@@ -5,12 +5,22 @@ package tutorial;
 option java_package = "com.keepthinker.wavemessaging.proto";
 option java_outer_classname = "WmpMessageProtos";
 
-message WmpConnectMessage {
-  int64 clientId = 1;
+message WmpConnectMessageBody {
+  string clientId = 1;
   string token = 2;
 }
 
-message WmpConnackMessage {
-  int64 clientId = 1;
-  int32 returnCode = 2;
+message WmpConnAckMessageBody {
+  string clientId = 1;
+  WmpConnectReturnCode returnCode = 3;
+}
+
+enum WmpConnectReturnCode {
+    ACCEPTED = 0;
+    REFUSED_UNACCEPTABLE_PROTOCOL_VERSION  = 1;
+    REFUSED_IDENTIFIER_REJECTED = 2;
+    /** not login or error token */
+    REFUSED_NOT_AUTHORIZED = 3;
+    /** server is busy or not able to provide service*/
+    REFUSED_SERVER_UNAVAILABLE = 4;
 }

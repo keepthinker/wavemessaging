@@ -6,3 +6,5 @@ Netty
 Zookeeper
 Redis
 MySQL
+Protobuf
+JSON

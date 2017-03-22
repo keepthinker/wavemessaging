@@ -1,11 +1,13 @@
 package com.keepthinker.wavemessaging.core.utils;
 
+import io.netty.channel.Channel;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.util.SubnetUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
@@ -78,9 +80,11 @@ public class WmUtils {
                 }
             }
         } catch (SocketException e1) {
-            e1.printStackTrace();
+            LOGGER.error("error in getting borker ip", e1);
+            throw new RuntimeException(e1);
         }
-        return null;
+        LOGGER.error("error in getting borker ip");
+        throw new RuntimeException();
     }
 
     public static boolean isIpv4Addr(final String ip) {
@@ -90,6 +94,15 @@ public class WmUtils {
     public static long generateUniqueId() {
         UUID uniqueKey = UUID.randomUUID();
         return Math.abs(uniqueKey.getLeastSignificantBits());
+    }
+
+    public static String getChannelRemoteAddress(Channel channel){
+        InetSocketAddress address  = (InetSocketAddress)channel.remoteAddress();
+        if(address != null) {
+            return address.getHostName() + ":" +  address.getPort();
+        }else {
+            return null;
+        }
     }
 
 

@@ -1,10 +1,10 @@
 package com.keepthinker.wavemessaging.server;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
+import com.keepthinker.wavemessaging.proto.WmpMessage;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.handler.codec.mqtt.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +19,12 @@ import org.springframework.stereotype.Service;
 public class ServiceHandler extends ChannelInboundHandlerAdapter {
 
     @Autowired
-    private MqttServiceContainer serviceContainer;
+    private WmpServiceContainer serviceContainer;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        MqttMessage m = (MqttMessage) msg;
-        ProtocolService<MqttMessage> service = serviceContainer.get(m.fixedHeader().messageType());
+        WmpMessage m = (WmpMessage) msg;
+        ProtocolService<WmpMessage> service = serviceContainer.get(m.getMethod());
         service.handle(ctx, m);
     }
 

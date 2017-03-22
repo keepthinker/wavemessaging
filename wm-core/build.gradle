@@ -5,6 +5,8 @@ Shared
 
 """
 dependencies {
+    compile project(':wm-proto')
+
     compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
     compile group: 'org.apache.curator', name: 'curator-framework', version: "${curatorVersion}"
     compile group: 'org.apache.curator', name: 'curator-recipes', version: "${curatorVersion}"

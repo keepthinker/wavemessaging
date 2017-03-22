@@ -1,6 +1,7 @@
 package com.keepthinker.wavemessaging.handler;
 
-import com.keepthinker.wavemessaging.core.utils.MqttUtils;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
+import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import io.netty.channel.Channel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,12 +26,13 @@ public class PingTimedTask {
             }
             if (channel.isActive() == false) {
                 channel.close();
-                LOGGER.warn("handler-server channel is inactive");
+                LOGGER.warn("handler-server channel is inactive|{}", WmUtils.getChannelRemoteAddress(channel));
                 //try to find a new active broker, if not at present ,wait for few minutes and check again
                 tryToConnectToActiveServer();
                 return;
             }
-            channel.writeAndFlush(MqttUtils.PINGREQ);
+            LOGGER.info("handler send ping request to broker|{}", WmUtils.getChannelRemoteAddress(channel));
+            channel.writeAndFlush(WmpUtils.PINGREQ);
         }
     }
 

@@ -8,14 +8,14 @@ import com.keepthinker.wavemessaging.client.model.LoginResponse;
 import com.keepthinker.wavemessaging.client.model.RegisterResponse;
 import com.keepthinker.wavemessaging.client.utils.JsonUtils;
 import com.keepthinker.wavemessaging.client.utils.PropertiesUtils;
+import com.keepthinker.wavemessaging.proto.WmpDecoder;
+import com.keepthinker.wavemessaging.proto.WmpEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.mqtt.MqttConnectMessage;
-import io.netty.handler.codec.mqtt.MqttDecoder;
-import io.netty.handler.codec.mqtt.MqttEncoder;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -85,7 +85,7 @@ public class ClientStartup {
         b.handler(new ChannelInitializer<SocketChannel>() {
             @Override
             public void initChannel(SocketChannel ch) throws Exception {
-                ch.pipeline().addLast(MqttEncoder.INSTANCE, new MqttDecoder(), serviceHandler);
+                ch.pipeline().addLast(WmpEncoder.INSTANCE, new WmpDecoder(), serviceHandler);
             }
         });
     }

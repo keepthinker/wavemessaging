@@ -2,12 +2,13 @@ package com.keepthinker.wavemessaging.handler.utils;
 
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
 import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.handler.ChannelCreater;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.SpringUtils;
+import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import io.netty.channel.Channel;
-import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,10 +41,22 @@ public class ZkHanlderUtils {
 
                 Channel channel = creater.connect(host, port);
 
-                MqttConnectMessage connectMessage = HandlerUtils.HANDLER_CONNECT_MESSAGE;
+                WmpConnectMessage connectMessage = HandlerUtils.HANDLER_CONNECT_MESSAGE;
                 channel.writeAndFlush(connectMessage);
             }
         });
     }
+
+    public static void registerReceiver(){
+        boolean result = ZkCommonUtils.createIfNotExisted(Constants.ZK_HANDLER_BASE_PATH);
+        if (result == false) {
+            throw new RuntimeException("create a node in zookeeper failed");
+        }
+
+        ZkCommonUtils.createEphemeral(Constants.ZK_HANDLER_BASE_PATH
+                        + Constants.SIGN_SLASH + WmUtils.getIPV4Private(),
+                "");
+    }
+
 
 }

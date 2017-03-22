@@ -1,8 +1,8 @@
 package com.keepthinker.wavemessaging.client;
 
+import com.keepthinker.wavemessaging.proto.WmpMessage;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.mqtt.MqttMessage;
 
-public interface ProtocolService<T extends MqttMessage> {
+public interface ProtocolService<T extends WmpMessage> {
     void handle(ChannelHandlerContext ctx, T msg);
 }

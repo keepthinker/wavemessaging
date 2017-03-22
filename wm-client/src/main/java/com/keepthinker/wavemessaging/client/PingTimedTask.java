@@ -1,6 +1,6 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.core.utils.MqttUtils;
+import com.keepthinker.wavemessaging.client.utils.WmpUtils;
 import io.netty.channel.Channel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +24,6 @@ public class PingTimedTask {
             System.out.println("cilent channel is inactive");
             return;
         }
-        channel.writeAndFlush(MqttUtils.PINGREQ);
+        channel.writeAndFlush(WmpUtils.PINGREQ);
     }
 }

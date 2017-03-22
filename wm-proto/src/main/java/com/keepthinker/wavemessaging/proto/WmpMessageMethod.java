@@ -1,9 +1,12 @@
 package com.keepthinker.wavemessaging.proto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by keepthinker on 2017/3/12.
  */
-public enum WmpMethod {
+public enum WmpMessageMethod {
     RESERVED(0),
     /**
      Client to Server
@@ -62,12 +65,27 @@ public enum WmpMethod {
 
     DISCONNECT(11);
 
+    private static Map<Integer, WmpMessageMethod> map = new HashMap<>();
+
+    static {
+        WmpMessageMethod[] wmpMethods = WmpMessageMethod.values();
+        for(int i = 0; i < wmpMethods.length; i++) {
+            map.put(wmpMethods[i].code, wmpMethods[i]);
+        }
+    }
+
+
     private int code;
-    WmpMethod(int code){
+
+    WmpMessageMethod(int code){
         this.code = code;
     }
 
     public int getCode(){
         return code;
+    }
+
+    public static WmpMessageMethod toEnum(int code){
+        return map.get(code);
     }
 }

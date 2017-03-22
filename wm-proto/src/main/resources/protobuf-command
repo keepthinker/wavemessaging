@@ -1,1 +1,1 @@
-protoc -I=main/resources --java_out=main/java main/resources/WmpMessage.proto
+protoc -I=src/main/resources --java_out=src/main/java src/main/resources/WmpMessage.proto

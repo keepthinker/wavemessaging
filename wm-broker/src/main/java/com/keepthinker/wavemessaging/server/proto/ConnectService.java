@@ -1,21 +1,20 @@
 package com.keepthinker.wavemessaging.server.proto;
 
-import com.keepthinker.wavemessaging.core.ClientType;
 import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.core.utils.Constants;
-import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpUtils;
-import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
+import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
 import com.keepthinker.wavemessaging.server.SDKChannelManager;
-import com.keepthinker.wavemessaging.server.ServerStartup;
+import com.keepthinker.wavemessaging.server.StatisticsService;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,14 +29,17 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Resource
-    private ServerStartup serverStartup;
+    @Autowired
+    private StatisticsService statisticsService;
 
     @Resource
     private HandlerChannelMananger handlerChannelManager;
 
     @Resource
     private SDKChannelManager sdkChannelManager;
+
+    @Resource
+    private WmStringRedisTemplate redisTemplate;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {
@@ -64,8 +66,8 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
         String clientId = msg.getBody().getClientId();
         if (clientId.indexOf(Constants.CLIENT_ID_PREFIX_HANDLER) == 0) {
             handlerChannelManager.add(ctx.channel());
-            ZkCommonUtils.increaseZkServerInfo(WmUtils.getIPV4Private(), serverStartup.getPort(), ClientType.HANDLER);
             ctx.writeAndFlush(WmpUtils.CONNACK_ACCEPTED_MESSAGE);
+            statisticsService.countConnection();
         } else {
             rejectId(ctx, clientId);
         }

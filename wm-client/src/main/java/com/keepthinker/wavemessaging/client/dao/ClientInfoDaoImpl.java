@@ -1,11 +1,10 @@
 package com.keepthinker.wavemessaging.client.dao;
 
-import com.keepthinker.wavemessaging.core.utils.ClassloaderUtils;
+import com.keepthinker.wavemessaging.client.utils.ClassloaderUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**

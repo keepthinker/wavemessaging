@@ -5,6 +5,7 @@ import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.utils.ZkHanlderUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
+import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * handler response for connect request from handlers to brokers
  * Created by keepthinker on 2017/1/27.
  */
 @Service
@@ -20,6 +22,9 @@ public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
 
     @Autowired
     private ChannelHolder channelHolder;
+
+    @Autowired
+    private WmStringRedisTemplate redisTemplate;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnAckMessage msg) {

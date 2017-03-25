@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.server;
 
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import io.netty.channel.Channel;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,15 @@ public class HandlerChannelMananger {
         w.lock();
         try {
             HANDLER_CHANNELS.add(handlerChannel);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    public int clearInvalid(){
+        w.lock();
+        try {
+            return WmUtils.clearInvalidChannel(HANDLER_CHANNELS);
         } finally {
             w.unlock();
         }

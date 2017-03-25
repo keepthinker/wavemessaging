@@ -21,9 +21,10 @@ public class PingTimedTask {
             return;
         }
         if (channel.isActive() == false) {
-            System.out.println("cilent channel is inactive");
+            LOGGER.warn("cilent channel is inactive");
             return;
         }
         channel.writeAndFlush(WmpUtils.PINGREQ);
+        LOGGER.info("send ping request to server");
     }
 }

@@ -3,11 +3,11 @@ package com.keepthinker.wavemessaging.client;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
-import com.keepthinker.wavemessaging.client.model.ClientWillMessage;
 import com.keepthinker.wavemessaging.client.model.LoginResponse;
 import com.keepthinker.wavemessaging.client.model.RegisterResponse;
 import com.keepthinker.wavemessaging.client.utils.JsonUtils;
 import com.keepthinker.wavemessaging.client.utils.PropertiesUtils;
+import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpDecoder;
 import com.keepthinker.wavemessaging.proto.WmpEncoder;
 import io.netty.bootstrap.Bootstrap;
@@ -15,7 +15,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.mqtt.MqttConnectMessage;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -75,9 +74,9 @@ public class ClientStartup {
 
     /**
      * Create tcp keep alive connection via netty.<br/>
-     * Protocol: MQTT
+     * Protocol: WMP(wave messaging protocol)
      */
-    private void initMqttConnection() {
+    private void initWmpConnection() {
         b = new Bootstrap();
         b.group(workerGroup);
         b.channel(NioSocketChannel.class);
@@ -150,9 +149,9 @@ public class ClientStartup {
             LOGGER.error("failed in initializing register operation");
         }
         login();
-        initMqttConnection();
+        initWmpConnection();
         channelManager.setChannel(tcpConnect());
-        mqttConnectRequest();
+        wmpConnectRequest();
 
     }
 
@@ -202,20 +201,14 @@ public class ClientStartup {
         }
     }
 
-    private void mqttConnectRequest(){
+    private void wmpConnectRequest(){
         ClientInfo clientInfo = clientInfoDao.get();
-        clientInfo.getClientId();
-        String topic = "all";
-        ClientWillMessage willMessage = new ClientWillMessage();
-        willMessage.setToken(clientInfo.getToken());
-        MqttConnectMessage message =  ClientUtils.createConnectMessage(clientInfo.getClientId()
-                , willMessage
-                , "topic");
+        WmpConnectMessage message =  ClientUtils.createConnectMessage(clientInfo.getClientId(),clientInfo.getToken());
         channelManager.getChannel().writeAndFlush(message);
     }
 
     public Channel tcpConnect() {
-        ChannelFuture f = null;
+        ChannelFuture f;
         try {
             f = b.connect(host, port).sync();
         } catch (InterruptedException e) {

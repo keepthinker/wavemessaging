@@ -10,7 +10,9 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -103,6 +105,20 @@ public class WmUtils {
         }else {
             return null;
         }
+    }
+
+    public static int clearInvalidChannel(Collection<Channel> col){
+        int count = 0;
+        Iterator<Channel> ite = col.iterator();
+        while(ite.hasNext()){
+            Channel channel = ite.next();
+            if(!channel.isActive()){
+                channel.close();
+                ite.remove();
+                count++;
+            }
+        }
+        return count;
     }
 
 

@@ -15,7 +15,7 @@ public class PingReqService implements ProtocolService<WmpPingReqMessage> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpPingReqMessage msg) {
-        LOGGER.info("receive ping request|{}|" + WmUtils.getChannelRemoteAddress(ctx.channel()));
+        LOGGER.info("receive ping request|{}", WmUtils.getChannelRemoteAddress(ctx.channel()));
         ctx.channel().writeAndFlush(WmpUtils.PINGRESP);
     }
 

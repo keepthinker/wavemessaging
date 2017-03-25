@@ -6,9 +6,9 @@ import static com.keepthinker.wavemessaging.proto.WmpMessageProtos.*;
 
 public class WmpUtils {
 
-    public static final WmpPingReqMessage PINGREQ = new WmpPingReqMessage(WmpMessageMethod.PINGREQ);
+    public static final WmpPingReqMessage PINGREQ = new WmpPingReqMessage();
 
-    public static final WmpPingRespMessage PINGRESP = new WmpPingRespMessage(WmpMessageMethod.PINGRESP);
+    public static final WmpPingRespMessage PINGRESP = new WmpPingRespMessage();
 
     public static final WmpConnAckMessage CONNACK_ACCEPTED_MESSAGE;
     public static final WmpConnAckMessage CONNACK_REFUSED_INVALID_TOKEN;
@@ -23,7 +23,7 @@ public class WmpUtils {
     public static WmpConnAckMessage createHandlerConnAckMessage(WmpConnectReturnCode returnCode) {
         WmpConnAckMessageBody messageBody = WmpConnAckMessageBody
                 .newBuilder().setReturnCode(returnCode).build();
-        WmpConnAckMessage connAckMessage = new WmpConnAckMessage(WmpMessageMethod.CONNACK, messageBody);
+        WmpConnAckMessage connAckMessage = new WmpConnAckMessage(messageBody);
         return connAckMessage;
     }
 }

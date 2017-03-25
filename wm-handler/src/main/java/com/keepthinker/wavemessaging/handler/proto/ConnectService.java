@@ -44,6 +44,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
             WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(responseClientId,
                     WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
             ctx.writeAndFlush(response);
+
         } else {
             WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(responseClientId,
                     WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);

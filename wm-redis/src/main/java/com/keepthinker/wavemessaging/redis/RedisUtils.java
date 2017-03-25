@@ -16,6 +16,11 @@ public class RedisUtils {
     public static String UN_PASSWORD = CI_PASSWORD;
     public static String UN_CLIENT_ID = "clientId";
 
+    public static String GENERAL_STATISTICS = "generalStatistics";
+//    public static String GENERAL_STATISTICS_SDK_SIZE = "sdkSize";
+//    public static String GENERAL_STATISTICS_HANDLER_SIZE = "handlerSize";
+
+
     public static String getClientIdKey(long clientId) {
         return CLIENT_ID_PREFIX + clientId;
     }

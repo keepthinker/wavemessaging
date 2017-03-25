@@ -48,4 +48,15 @@ public class WmStringRedisTemplate {
         jedis.close();
         return result;
     }
+
+    /**
+     * @param num the number to be added
+     * @return size after increase
+     */
+    public Long hincr(String key, String field, int num){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Long result = jedis.hincrBy(key, field, num);
+        jedis.close();
+        return result;
+    }
 }

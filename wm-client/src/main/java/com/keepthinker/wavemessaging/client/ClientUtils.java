@@ -1,28 +1,17 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.client.model.ClientWillMessage;
-import io.netty.handler.codec.mqtt.*;
+import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
+import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 
 public class ClientUtils {
-    public static MqttConnectMessage createConnectMessage(long clientId, ClientWillMessage willMessage, String willTopic) {
+    public static WmpConnectMessage createConnectMessage(long clientId, String token) {
         String clientIdentifier = String.valueOf(clientId);
 
-        //remaining length is calculated in MqttEncoder, here just to emphasize
-        //variable header size(10) plus payload size(data length(2) + data(?))
-        int remainingLength = 10 + (2 + (2 + clientIdentifier.length()) + (2 + willTopic.length()));
+        WmpMessageProtos.WmpConnectMessageBody body = WmpMessageProtos.WmpConnectMessageBody.newBuilder()
+                .setClientId(clientIdentifier).setToken(token).build();
 
-        MqttConnectPayload connectPayload = new
-                MqttConnectPayload(clientIdentifier, willTopic, willMessage.getToken(), "", "");
-
-        MqttConnectVariableHeader variableHeader =
-                new MqttConnectVariableHeader("MQTT", 4, false, false, true, 0, true, false, 6 * 60);
-        MqttFixedHeader connectFixedHeader = new MqttFixedHeader
-                (MqttMessageType.CONNECT, false, MqttQoS.AT_MOST_ONCE, false, remainingLength);
-
-        MqttConnectMessage connectMessage = new MqttConnectMessage(connectFixedHeader,
-                variableHeader,
-                connectPayload);
-
-        return connectMessage;
+        WmpConnectMessage message = new WmpConnectMessage();
+        message.setBody(body);
+        return message;
     }
 }

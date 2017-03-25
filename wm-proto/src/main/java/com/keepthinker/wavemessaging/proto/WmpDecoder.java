@@ -33,6 +33,7 @@ public class WmpDecoder extends ReplayingDecoder {
                     break;
                 case PINGRESP:
                     out.add(new WmpPingRespMessage());
+                    break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
             }

@@ -9,8 +9,10 @@
 		http://www.springframework.org/schema/task		
 		http://www.springframework.org/schema/task/spring-task.xsd">
     <task:scheduled-tasks scheduler="qbScheduler">
-        <task:scheduled ref="channelChecker" method="checkValidity"
+        <task:scheduled ref="channelChecker" method="clearInvalid"
                         cron="*/5 * * * * ?"/>
+        <task:scheduled ref="statisticsTimedTask" method="countConnection"
+                        cron="*/20 * * * * ?"/>
     </task:scheduled-tasks>
     <!-- <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
      -->

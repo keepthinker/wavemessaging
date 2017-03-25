@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.handler;
 
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import io.netty.channel.Channel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,6 +43,12 @@ public class ChannelHolder {
                     LOGGER.info("Remove a channel whose host is {}, and port is {}", host, port);
                 }
             }
+        }
+    }
+
+    public int clearInvalid(){
+        synchronized (handlerBrokerChannels) {
+            return WmUtils.clearInvalidChannel(handlerBrokerChannels);
         }
     }
 

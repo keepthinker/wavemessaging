@@ -1,7 +1,7 @@
 package com.keepthinker.wavemessaging.server;
 
-import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.model.ZkServerInfo;
+import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.utils.JsonUtils;
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
@@ -28,4 +28,27 @@ public class ZkBrokerUtils {
     public static boolean isClientIdFromSDK(){
         return false;
     }
+
+
+    /**
+     * set clientNum, handlerNum, handler is also a client
+     *
+     * @param host
+     * @param port
+     */
+    public static void setZkServerInfo(String host, int port, int numOfHandlers, int numOfSdks) {
+        //Presuming node's state change is not concurrent, Locks is considered in future
+        String path = new StringBuilder(32).append(Constants.ZK_BROKER_BASE_PATH)
+                .append(Constants.SIGN_SLASH )
+                .append(host)
+                .append(Constants.SIGN_COLON)
+                .append(port).toString();
+
+        ZkServerInfo zkServerInfo = new ZkServerInfo();
+        zkServerInfo.setClientNum(numOfSdks);
+        zkServerInfo.setHandlerNum(numOfHandlers);
+        ZkCommonUtils.set(path, JsonUtils.objectToString(zkServerInfo));
+    }
+
+
 }

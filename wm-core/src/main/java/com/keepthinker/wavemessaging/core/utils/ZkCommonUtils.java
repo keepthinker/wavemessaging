@@ -1,8 +1,6 @@
 package com.keepthinker.wavemessaging.core.utils;
 
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
-import com.keepthinker.wavemessaging.core.ClientType;
-import com.keepthinker.wavemessaging.core.model.ZkServerInfo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
@@ -192,33 +190,7 @@ public class ZkCommonUtils {
         }
     }
 
-    /**
-     * increase clientNum, handlerNum, handler is also a client
-     *
-     * @param host
-     * @param port
-     */
-    public static void increaseZkServerInfo(String host, int port, ClientType type) {
-        //Presuming node's state change is not concurrent, Locks is considered in future
-        String path = Constants.ZK_BROKER_BASE_PATH
-                + Constants.SIGN_SLASH + host + Constants.SIGN_COLON + port;
-        String info = ZkCommonUtils.get(path);
-        ZkServerInfo zkServerInfo;
-        if (StringUtils.isNotBlank(info)) {
-            zkServerInfo = JsonUtils.stringToObject(info, ZkServerInfo.class);
-            zkServerInfo.setClientNum(zkServerInfo.getClientNum() + 1);
-            if (type == ClientType.HANDLER) {
-                zkServerInfo.setHandlerNum(zkServerInfo.getHandlerNum() + 1);
-            }
-        } else {
-            zkServerInfo = new ZkServerInfo();
-            zkServerInfo.setClientNum(1);
-            if (type == ClientType.HANDLER) {
-                zkServerInfo.setHandlerNum(1);
-            }
-        }
-        ZkCommonUtils.set(path, JsonUtils.objectToString(zkServerInfo));
-    }
+
 
     /**
      * /foo/bar/foo1 --> foo1

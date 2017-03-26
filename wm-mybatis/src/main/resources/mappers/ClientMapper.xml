@@ -12,8 +12,21 @@
     <select id="select" resultMap="resultMap">
         select
         <include refid="fullFields"/>
-        from client_info where id = #{id} limit 1
+        from client_info where id = #{id}
     </select>
+
+    <select id="selectByClientId" resultMap="resultMap">
+        select
+        <include refid="fullFields"/>
+        from client_info where client_id = #{clientId}
+    </select>
+
+    <select id="selectByUsername" resultMap="resultMap">
+        select
+        <include refid="fullFields"/>
+        from client_info where username = #{username}
+    </select>
+
 
     <select id="delete">
 		delete from client_info where id = #{id}

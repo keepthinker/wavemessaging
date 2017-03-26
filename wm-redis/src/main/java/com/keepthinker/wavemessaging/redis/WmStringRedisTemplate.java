@@ -49,6 +49,12 @@ public class WmStringRedisTemplate {
         return result;
     }
 
+    public boolean exists(String key){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        boolean result = jedis.exists(key);
+        return result;
+    }
+
     /**
      * @param num the number to be added
      * @return size after increase

@@ -18,21 +18,23 @@ public class WmpDecoder extends ReplayingDecoder {
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         try {
-            int method = in.readByte();
+            byte firstByte = in.readByte();
+            int version = (firstByte & 0xF0) >> 4;
+            int method = firstByte & 0x0F;
             WmpMessageMethod wmpMethod = WmpMessageMethod.toEnum(method);
             switch (wmpMethod) {
                 case CONNECT:
-                    out.add(decodeConnectMessage(in, wmpMethod));
+                    out.add(decodeConnectMessage(in, version));
                     break;
                 case CONNACK:
-                    out.add(decodeConnAckMessage(in, wmpMethod));
+                    out.add(decodeConnAckMessage(in, version));
                     break;
 
                 case PINGREQ:
-                    out.add(new WmpPingReqMessage());
+                    out.add(new WmpPingReqMessage(version));
                     break;
                 case PINGRESP:
-                    out.add(new WmpPingRespMessage());
+                    out.add(new WmpPingRespMessage(version));
                     break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
@@ -43,9 +45,10 @@ public class WmpDecoder extends ReplayingDecoder {
 
     }
 
-    private WmpConnectMessage decodeConnectMessage(ByteBuf in, WmpMessageMethod wmpMethod){
+    private WmpConnectMessage decodeConnectMessage(ByteBuf in, int version){
         WmpConnectMessage message = new WmpConnectMessage();
-        message.setMethod(wmpMethod);
+        message.setVersion(version);
+
         int bodySize = in.readInt();
         byte[] bytes = new byte[bodySize];
         in.readBytes(bytes);
@@ -60,9 +63,10 @@ public class WmpDecoder extends ReplayingDecoder {
 
     }
 
-    private WmpConnAckMessage decodeConnAckMessage(ByteBuf in, WmpMessageMethod wmpMethod){
+    private WmpConnAckMessage decodeConnAckMessage(ByteBuf in, int version){
         WmpConnAckMessage message = new WmpConnAckMessage();
-        message.setMethod(wmpMethod);
+        message.setVersion(version);
+
         int bodySize = in.readInt();
         byte[] bytes = new byte[bodySize];
         in.readBytes(bytes);

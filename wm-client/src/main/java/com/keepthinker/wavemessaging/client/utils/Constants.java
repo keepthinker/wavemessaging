@@ -4,4 +4,6 @@ public class Constants {
     public static final String DEFAULT_CHARSET = "UTF-8";
 
     public static final String MIME_TYPE_APPLICATION_JSON = "application/json;charset=utf-8";
+
+    public static final int WMP_VERSION = PropertiesUtils.getInt("wmp.version");
 }

@@ -8,4 +8,5 @@ public class ClassloaderUtils {
         return Thread.currentThread().getContextClassLoader().
                 getResourceAsStream(relativePath);
     }
+
 }

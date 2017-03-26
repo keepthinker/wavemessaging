@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.client;
 
+import com.keepthinker.wavemessaging.client.utils.Constants;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 
@@ -11,6 +12,7 @@ public class ClientUtils {
                 .setClientId(clientIdentifier).setToken(token).build();
 
         WmpConnectMessage message = new WmpConnectMessage();
+        message.setVersion(Constants.WMP_VERSION);
         message.setBody(body);
         return message;
     }

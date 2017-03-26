@@ -70,10 +70,11 @@ public class ServerStartup {
             // Bind and start to accept incoming connections.
             ChannelFuture f = b.bind(port);
 
-            ZkBrokerUtils.registerBroker(port);
-
             f.sync(); // (7)
+
             LOGGER.info("Broker has started with port {}", port);
+
+            ZkBrokerUtils.registerBroker(port);
             // Wait until the server socket is closed.
             // In this example, this does not happen, but you can do that to gracefully
             // shut down your server.

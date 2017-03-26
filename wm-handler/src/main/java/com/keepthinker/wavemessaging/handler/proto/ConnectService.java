@@ -1,7 +1,7 @@
 package com.keepthinker.wavemessaging.handler.proto;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
-import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.utils.WmpActionLogger;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.utils.HandlerUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
@@ -35,21 +35,24 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
 
         String clientId = messageBody.getClientId();
 
-        redisTemplate.get(RedisUtils.getClientIdKey(clientId));
-        String tokenRedis = redisTemplate.hget(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_TOKEN);
-
-        String responseClientId = Constants.CLIENT_ID_PREFIX_HANDLER + clientId;
-        if (tokenRedis != null && tokenRedis.equals(messageBody.getToken())) {
-
-            WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(responseClientId,
-                    WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
-            ctx.writeAndFlush(response);
-
-        } else {
-            WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(responseClientId,
+        try {
+            String tokenRedis = redisTemplate.hget(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_TOKEN);
+            if (tokenRedis != null && tokenRedis.equals(messageBody.getToken())) {
+                WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
+                        WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
+                ctx.writeAndFlush(response);
+                WmpActionLogger.connect(msg.getBody().getClientId(), msg.getVersion());
+            } else {
+                WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
+                        WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);
+                ctx.writeAndFlush(response);
+                LOGGER.warn("rejected token({}) with identifier({})", messageBody.getToken(), clientId);
+            }
+        }catch(Exception e){
+            LOGGER.error("unexpected error|{}|{}", clientId, e);
+            WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
                     WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);
             ctx.writeAndFlush(response);
-            LOGGER.warn("rejected token({}) with identifier({})", messageBody.getToken(), clientId);
         }
     }
 }

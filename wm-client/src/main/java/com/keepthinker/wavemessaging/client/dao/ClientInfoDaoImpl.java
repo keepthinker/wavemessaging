@@ -1,6 +1,7 @@
 package com.keepthinker.wavemessaging.client.dao;
 
 import com.keepthinker.wavemessaging.client.utils.ClassloaderUtils;
+import com.keepthinker.wavemessaging.client.utils.WmUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,7 @@ public class ClientInfoDaoImpl implements ClientInfoDao {
     private Properties prop = new Properties();
 
     public ClientInfoDaoImpl() throws IOException {
+        new File(WmUtils.getAbsolutePath(DATA_FILE)).createNewFile();
         prop.load(ClassloaderUtils.getInputStreamFromClasspath(DATA_FILE));
     }
 

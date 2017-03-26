@@ -43,7 +43,6 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {
-        LOGGER.info("messageType: " + msg.getMethod());
         WmpMessageProtos.WmpConnectMessageBody payload = msg.getBody();
         LOGGER.info("payload: " + payload);
         String clientIdStr = payload.getClientId();
@@ -52,7 +51,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
                 handleHandlerConnect(ctx, msg);
             } else {
                 if(StringUtils.isNumeric(clientIdStr)){
-                    handlerSdkConnect(ctx, msg);
+                    handleSdkConnect(ctx, msg);
                 }else{
                     LOGGER.warn("Client() is not valid.", clientIdStr);
                 }
@@ -74,21 +73,20 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
     }
 
     private void rejectId(ChannelHandlerContext ctx, String clientId) {
-        WmpConnAckMessage connAckMessage = WmpUtils.CONNECTION_REFUSED_IDENTIFIER_REJECTED_MESSAGE;
+        WmpConnAckMessage connAckMessage = WmpUtils.CONNECTION_REFUSED_CLIENT_ID_REJECTED_MESSAGE;
         ctx.writeAndFlush(connAckMessage);
         LOGGER.warn("rejected identifier: " + clientId);
     }
 
-    private void handlerSdkConnect(ChannelHandlerContext ctx, WmpConnectMessage msg) {
+    private void handleSdkConnect(ChannelHandlerContext ctx, WmpConnectMessage msg) {
         String clientId = msg.getBody().getClientId();
-        long clientIdLong;
         try {
-            clientIdLong = Long.parseLong(clientId);
+            Long.parseLong(clientId);
         } catch (Exception e) {
             rejectId(ctx, clientId);
             return;
         }
-        sdkChannelManager.put(clientIdLong, ctx.channel());
+        sdkChannelManager.putChannel(clientId, ctx.channel());
         handlerChannelManager.get(clientId).writeAndFlush(msg);
 
     }

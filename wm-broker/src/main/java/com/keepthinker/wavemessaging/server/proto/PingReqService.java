@@ -9,8 +9,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+/**
+ * Created by keepthinker on 2017/3/26.
+ */
 @Service
 public class PingReqService implements ProtocolService<WmpPingReqMessage> {
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
@@ -18,5 +22,4 @@ public class PingReqService implements ProtocolService<WmpPingReqMessage> {
         LOGGER.info("receive ping request|{}", WmUtils.getChannelRemoteAddress(ctx.channel()));
         ctx.channel().writeAndFlush(WmpUtils.PINGRESP);
     }
-
 }

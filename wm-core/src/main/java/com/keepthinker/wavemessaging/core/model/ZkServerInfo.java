@@ -1,23 +1,27 @@
 package com.keepthinker.wavemessaging.core.model;
 
 public class ZkServerInfo {
-    private int handlerNum;
-    private int clientNum;
+    private int numOfSdkChannels;
+    private int numOfHandlerChannels;
 
-    public int getHandlerNum() {
-        return handlerNum;
+    public int getNumOfSdkChannels() {
+        return numOfSdkChannels;
     }
 
-    public void setHandlerNum(int handlerNum) {
-        this.handlerNum = handlerNum;
+    public void setNumOfSdkChannels(int numOfSdkChannels) {
+        this.numOfSdkChannels = numOfSdkChannels;
     }
 
-    public int getClientNum() {
-        return clientNum;
+    public int getNumOfHandlerChannels() {
+        return numOfHandlerChannels;
     }
 
-    public void setClientNum(int clientNum) {
-        this.clientNum = clientNum;
+    public void setNumOfHandlerChannels(int numOfHandlerChannels) {
+        this.numOfHandlerChannels = numOfHandlerChannels;
+    }
+
+    public int getTotalNumOfChannels() {
+        return numOfSdkChannels + numOfHandlerChannels;
     }
 
 }

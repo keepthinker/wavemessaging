@@ -12,6 +12,8 @@ public class Main {
         Iterator<String> str = map.values().iterator();
 
         System.out.println(map);
+
+        WmpActionLogger.connect("123", 123);
     }
 
 }

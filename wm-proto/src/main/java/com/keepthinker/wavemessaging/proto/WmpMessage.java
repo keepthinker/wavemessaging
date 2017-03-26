@@ -7,14 +7,17 @@ public class WmpMessage {
 
     protected WmpMessageMethod method;
 
+    protected int version;
+
     public WmpMessageMethod getMethod() {
         return method;
     }
 
-    protected void setMethod(WmpMessageMethod method) {
-        this.method = method;
+    public int getVersion() {
+        return version;
     }
 
-
-
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

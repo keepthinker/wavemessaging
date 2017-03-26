@@ -19,8 +19,8 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        LOGGER.debug(msg);
         WmpMessage m = (WmpMessage) msg;
+        LOGGER.debug("message from server|{}|{}", m.getMethod(), m.getVersion());
         ProtocolService<WmpMessage> service = serviceContainer.get(m.getMethod());
         service.handle(ctx, m);
     }

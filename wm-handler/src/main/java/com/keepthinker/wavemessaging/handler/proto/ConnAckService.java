@@ -5,7 +5,6 @@ import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.utils.ZkHanlderUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,17 +22,14 @@ public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
     @Autowired
     private ChannelHolder channelHolder;
 
-    @Autowired
-    private WmStringRedisTemplate redisTemplate;
-
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnAckMessage msg) {
         if(msg.getBody().getReturnCode() == WmpMessageProtos.WmpConnectReturnCode.ACCEPTED) {
             ZkHanlderUtils.registerReceiver();
             channelHolder.add(ctx.channel());
-            LOGGER.info("connect to broker successfully|{}|{}", msg.getMethod(), msg.getBody());
+            LOGGER.info("connect to broker successfully|{}|{}|{}", msg.getMethod(), msg.getVersion(), msg.getBody());
         }else{
-            LOGGER.error("can't connect to broker|{}|{}", msg.getMethod(), msg.getBody());
+            LOGGER.error("can't connect to broker|{}|{}|{}", msg.getMethod(), msg.getVersion(), msg.getBody());
         }
     }
 }

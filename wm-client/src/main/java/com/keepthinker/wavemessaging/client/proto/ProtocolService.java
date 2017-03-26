@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.client;
+package com.keepthinker.wavemessaging.client.proto;
 
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import io.netty.channel.ChannelHandlerContext;

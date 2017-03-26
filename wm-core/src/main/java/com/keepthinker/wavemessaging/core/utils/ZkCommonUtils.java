@@ -45,6 +45,21 @@ public class ZkCommonUtils {
         }
     }
 
+    public static Stat setIfExsited(String path, String data){
+        Stat stat;
+        try {
+            stat = CURATOR_FRAMEWORK.checkExists().forPath(path);
+            if (stat != null) {
+              return set(path, data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
     public static boolean delete(String path) {
         try {
             CURATOR_FRAMEWORK.delete().forPath(path);
@@ -155,7 +170,7 @@ public class ZkCommonUtils {
                         listener.removed(event);
                         break;
                     default:
-                        LOGGER.warn("zookeeper event type not recognized");
+                        LOGGER.warn("zookeeper event type not recognized|{}", event);
                         break;
                 }
             }

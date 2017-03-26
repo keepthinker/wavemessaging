@@ -5,7 +5,8 @@ package com.keepthinker.wavemessaging.proto;
  */
 public class WmpPingReqMessage extends WmpMessage{
 
-    public WmpPingReqMessage() {
+    public WmpPingReqMessage(int version) {
         super.method = WmpMessageMethod.PINGREQ;
+        super.version = version;
     }
 }

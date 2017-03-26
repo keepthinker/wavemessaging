@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.webapi;
 
+import com.keepthinker.wavemessaging.core.utils.CryptoUtils;
 import com.keepthinker.wavemessaging.dao.ClientInfoMapper;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -15,5 +16,8 @@ public class MybatisTest {
     public void testSelect() {
         ClientInfoMapper clientInfoMapper = context.getBean(ClientInfoMapper.class);
         System.out.println(clientInfoMapper.select(29));
+        System.out.println(clientInfoMapper.selectByUsername(CryptoUtils.hash("username1")));
     }
+
+
 }

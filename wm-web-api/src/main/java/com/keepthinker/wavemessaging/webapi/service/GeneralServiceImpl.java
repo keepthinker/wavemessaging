@@ -10,6 +10,7 @@ import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
 import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
 import com.keepthinker.wavemessaging.webapi.model.RegisterResult;
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.ShardedJedisPipeline;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -43,14 +46,8 @@ public class GeneralServiceImpl implements GeneralService {
             clientInfoMapper.insert(clientInfo);
             result.setClientId(clientInfo.getClientId());
 
-            ShardedJedisPipeline pipeline = redisTemplate.getShardedJedisPool().getResource().pipelined();
-            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_ACCESS_TIME, Long.toString(new Date().getTime()));
-            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_USERNAME, clientInfo.getUsername());
-            pipeline.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_PASSWORD, clientInfo.getPassword());
-			String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
-			pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientId));
+            saveClientInfoToRedis(clientInfo);
 
-            pipeline.sync();
             result.setSuccess(true);
         } catch (Exception e) {
             //usually because of same record(username or clientId) in db
@@ -60,12 +57,32 @@ public class GeneralServiceImpl implements GeneralService {
         return result;
     }
 
+    private void saveClientInfoToRedis(ClientInfo clientInfo){
+        ShardedJedisPipeline pipeline = redisTemplate.getShardedJedisPool().getResource().pipelined();
+
+        Map<String, String> map = new HashMap<>();
+        map.put(RedisUtils.CI_ACCESS_TIME, Long.toString(new Date().getTime()));
+        map.put(RedisUtils.CI_USERNAME, clientInfo.getUsername());
+        map.put(RedisUtils.CI_PASSWORD, clientInfo.getPassword());
+        pipeline.hmset(RedisUtils.getClientIdKey(clientInfo.getClientId()), map);
+
+        String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
+        pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientInfo.getClientId()));
+
+        pipeline.sync();
+    }
+
     @Override
     public LoginResult login(LoginInfo loginInfo) {
         String token = UUID.randomUUID().toString();
         String clientId = redisTemplate.hget(RedisUtils.getUsernameKey(CryptoUtils.hash(loginInfo.getUsername())), RedisUtils.UN_CLIENT_ID);
+        if(StringUtils.isBlank(clientId)) {
+            ClientInfo clientInfo = clientInfoMapper.selectByUsername(CryptoUtils.hash(loginInfo.getUsername()));
+            saveClientInfoToRedis(clientInfo);
+            clientId = String.valueOf(clientInfo.getClientId());
+        }
         redisTemplate.hset(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_TOKEN, token);
-        LoginResult result = new LoginResult(token);
+        LoginResult result = new LoginResult(clientId, token);
         return result;
     }
 

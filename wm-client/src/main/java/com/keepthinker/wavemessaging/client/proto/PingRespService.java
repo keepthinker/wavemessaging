@@ -1,5 +1,6 @@
-package com.keepthinker.wavemessaging.client;
+package com.keepthinker.wavemessaging.client.proto;
 
+import com.keepthinker.wavemessaging.client.utils.WmUtils;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +13,7 @@ public class PingRespService implements ProtocolService<WmpMessage> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpMessage msg) {
-        LOGGER.info(msg.getMethod());
+        LOGGER.info("receive PINGRESP reponse from server|{}", WmUtils.getChannelRemoteAddress(ctx.channel()));
     }
 
 }

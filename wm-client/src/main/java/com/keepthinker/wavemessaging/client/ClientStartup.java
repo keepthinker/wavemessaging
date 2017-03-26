@@ -15,6 +15,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -120,6 +121,12 @@ public class ClientStartup {
             // and ensure it is fully consumed
             RegisterResponse registerResponse = JsonUtils.streamToObject(entity.getContent(), RegisterResponse.class);
             if (registerResponse.getData() != null) {
+
+                if(StringUtils.isNotBlank(registerResponse.getErrorCode())){
+                    LOGGER.error("register failed|{}", registerResponse);
+                    return false;
+                }
+
                 long clientId = registerResponse.getData();
                 ClientInfo clientInfo = new ClientInfo();
                 clientInfo.setClientId(clientId);

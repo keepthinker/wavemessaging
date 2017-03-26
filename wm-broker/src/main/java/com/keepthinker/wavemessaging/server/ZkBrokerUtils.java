@@ -25,11 +25,6 @@ public class ZkBrokerUtils {
                 JsonUtils.objectToString(zkServerInfo));
     }
 
-    public static boolean isClientIdFromSDK(){
-        return false;
-    }
-
-
     /**
      * set clientNum, handlerNum, handler is also a client
      *
@@ -45,9 +40,9 @@ public class ZkBrokerUtils {
                 .append(port).toString();
 
         ZkServerInfo zkServerInfo = new ZkServerInfo();
-        zkServerInfo.setClientNum(numOfSdks);
-        zkServerInfo.setHandlerNum(numOfHandlers);
-        ZkCommonUtils.set(path, JsonUtils.objectToString(zkServerInfo));
+        zkServerInfo.setNumOfSdkChannels(numOfSdks);
+        zkServerInfo.setNumOfHandlerChannels(numOfHandlers);
+        ZkCommonUtils.setIfExsited(path, JsonUtils.objectToString(zkServerInfo));
     }
 
 

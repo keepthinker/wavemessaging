@@ -36,7 +36,7 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
         WmpMessageProtos.WmpConnectMessageBody wmpConnectMessage = msg.getBody();
         int bodySize = wmpConnectMessage.getSerializedSize();
         ByteBuf byteBuffer = byteBufAllocator.buffer(methodSize + bodySize);
-        byteBuffer.writeByte(msg.getMethod().getCode());
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
         byteBuffer.writeInt(bodySize);
         byteBuffer.writeBytes(wmpConnectMessage.toByteArray());
         return byteBuffer;
@@ -47,7 +47,7 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
         WmpMessageProtos.WmpConnAckMessageBody wmpConnackMessage = msg.getBody();
         int bodySize = wmpConnackMessage.getSerializedSize();
         ByteBuf byteBuffer = byteBufAllocator.buffer(methodSize + bodySize);
-        byteBuffer.writeByte(msg.getMethod().getCode());
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
         byteBuffer.writeInt(bodySize);
         byteBuffer.writeBytes(wmpConnackMessage.toByteArray());
         return byteBuffer;
@@ -56,14 +56,14 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
     private ByteBuf encodePingReqMessage(ByteBufAllocator byteBufAllocator, WmpPingReqMessage msg) {
         int methodSize = 1;
         ByteBuf byteBuffer = byteBufAllocator.buffer(methodSize);
-        byteBuffer.writeByte(msg.getMethod().getCode());
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
         return byteBuffer;
     }
 
     private ByteBuf encodePingRespMessage(ByteBufAllocator byteBufAllocator, WmpPingRespMessage msg) {
         int methodSize = 1;
         ByteBuf byteBuffer = byteBufAllocator.buffer(methodSize);
-        byteBuffer.writeByte(msg.getMethod().getCode());
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
         return byteBuffer;
     }
 }

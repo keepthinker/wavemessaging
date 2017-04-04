@@ -1,16 +1,39 @@
 1. ClientId
-"ci"
+hash
+"ci:${clientId}"
     accessTime
     username
     password
     token //  when accessTime minus now is less then 2 days' time, remove it.
 
 2. Username
-"un"
+hash
+"un:${usernameHash}"
 
 
-3. statistics
+3. Statistics
 "generalStatistics"
     sdkSize
     handlerSize
+
+4. Client Message Sending
+hash
+"cms:${clientId}"
+    "mid:${messageId}"
+
+5. Message Info
+hash
+"mi:${messageId}"
+    content
+    expireTime
+
+6: Client Message Sending
+list
+"cms:${clientId}"
+    "${messageId}", "${messageId}"...
+
+7: Client Message Waiting
+"cmw:${clientId}"
+    "${messageId}", "${messageId}"...
+
 

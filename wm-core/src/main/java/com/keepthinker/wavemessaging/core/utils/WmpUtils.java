@@ -26,4 +26,12 @@ public class WmpUtils {
         WmpConnAckMessage connAckMessage = new WmpConnAckMessage(messageBody);
         return connAckMessage;
     }
+
+    public static WmpDisConnectMessage createDisConnectMessage(String clientId){
+        WmpDisConnectMessage message = new WmpDisConnectMessage();
+        WmpDisConnectMessageBody body = WmpDisConnectMessageBody.newBuilder()
+                .setClientId(clientId).build();
+        message.setBody(body);
+        return message;
+    }
 }

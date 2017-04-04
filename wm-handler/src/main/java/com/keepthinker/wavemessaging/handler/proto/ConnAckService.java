@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
-    private static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private ChannelHolder channelHolder;

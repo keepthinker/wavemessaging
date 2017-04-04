@@ -24,3 +24,31 @@ enum WmpConnectReturnCode {
     /** server is busy or not able to provide service*/
     REFUSED_SERVER_UNAVAILABLE = 4;
 }
+
+message WmpPublishMessageBody {
+    string content = 1;
+    /** clientId or topic name, if many elements, separated by coma(,) */
+    string target = 2;
+    /** one or many --> a clientId or a topic contains many clientIds */
+    TargeType targetType = 3;
+    /** message from where to where*/
+    Direction direction = 4;
+}
+
+/** a chat group or a client tag or other self defined group */
+enum TargeType {
+    /** one client */
+    CLIENT_ID = 0;
+    TOPIC_GENERAL = 1;
+}
+
+enum Direction {
+    /** message going to client sdk */
+    TO_CLIENT_SDK = 0;
+    /** message going to handler */
+    TO_SERVER_HANDLER = 1;
+}
+
+message WmpDisConnectMessageBody {
+    string clientId = 1;
+}

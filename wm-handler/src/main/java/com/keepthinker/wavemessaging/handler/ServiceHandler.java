@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 @Sharable
 @Service
 public class ServiceHandler extends ChannelInboundHandlerAdapter {
+
     private static final Logger LOGGER = LogManager.getLogger();
+
     @Autowired
     private WmpServiceContainer serviceContainer;
 

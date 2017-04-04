@@ -8,7 +8,7 @@ import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.redis.RedisUtils;
-import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
+import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,13 +20,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ConnectService implements ProtocolService<WmpConnectMessage> {
-    private static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private ChannelHolder holder;
 
     @Autowired
-    private WmStringRedisTemplate redisTemplate;
+    private WmStringShardRedisTemplate redisTemplate;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {
@@ -36,11 +36,12 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
         String clientId = messageBody.getClientId();
 
         try {
-            String tokenRedis = redisTemplate.hget(RedisUtils.getClientIdKey(clientId), RedisUtils.CI_TOKEN);
+            String tokenRedis = redisTemplate.hget(RedisUtils.getClientKey(clientId), RedisUtils.CLIENT_TOKEN);
             if (tokenRedis != null && tokenRedis.equals(messageBody.getToken())) {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
                         WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
                 ctx.writeAndFlush(response);
+                redisTemplate.hset(RedisUtils.getClientKey(messageBody.getClientId()), RedisUtils.CLIENT_CONNECTION_STATUS, "1");
                 WmpActionLogger.connect(msg.getBody().getClientId(), msg.getVersion());
             } else {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,

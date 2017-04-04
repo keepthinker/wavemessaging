@@ -8,9 +8,20 @@ import java.util.Date;
  * Created by keepthinker on 2017/3/26.
  */
 public class ChannelInfo {
+
+    private String clientId;
+
     private Channel channel;
 
     private Date accessTime;
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
     public Channel getChannel() {
         return channel;

@@ -155,6 +155,230 @@ public final class WmpMessageProtos {
     // @@protoc_insertion_point(enum_scope:tutorial.WmpConnectReturnCode)
   }
 
+  /**
+   * <pre>
+   ** a chat group or a client tag or other self defined group 
+   * </pre>
+   *
+   * Protobuf enum {@code tutorial.TargeType}
+   */
+  public enum TargeType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <pre>
+     ** one client 
+     * </pre>
+     *
+     * <code>CLIENT_ID = 0;</code>
+     */
+    CLIENT_ID(0),
+    /**
+     * <code>TOPIC_GENERAL = 1;</code>
+     */
+    TOPIC_GENERAL(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     ** one client 
+     * </pre>
+     *
+     * <code>CLIENT_ID = 0;</code>
+     */
+    public static final int CLIENT_ID_VALUE = 0;
+    /**
+     * <code>TOPIC_GENERAL = 1;</code>
+     */
+    public static final int TOPIC_GENERAL_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static TargeType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static TargeType forNumber(int value) {
+      switch (value) {
+        case 0: return CLIENT_ID;
+        case 1: return TOPIC_GENERAL;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<TargeType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        TargeType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<TargeType>() {
+            public TargeType findValueByNumber(int number) {
+              return TargeType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final TargeType[] VALUES = values();
+
+    public static TargeType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private TargeType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:tutorial.TargeType)
+  }
+
+  /**
+   * Protobuf enum {@code tutorial.Direction}
+   */
+  public enum Direction
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <pre>
+     ** message going to client sdk 
+     * </pre>
+     *
+     * <code>TO_CLIENT_SDK = 0;</code>
+     */
+    TO_CLIENT_SDK(0),
+    /**
+     * <pre>
+     ** message going to handler 
+     * </pre>
+     *
+     * <code>TO_SERVER_HANDLER = 1;</code>
+     */
+    TO_SERVER_HANDLER(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <pre>
+     ** message going to client sdk 
+     * </pre>
+     *
+     * <code>TO_CLIENT_SDK = 0;</code>
+     */
+    public static final int TO_CLIENT_SDK_VALUE = 0;
+    /**
+     * <pre>
+     ** message going to handler 
+     * </pre>
+     *
+     * <code>TO_SERVER_HANDLER = 1;</code>
+     */
+    public static final int TO_SERVER_HANDLER_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Direction valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Direction forNumber(int value) {
+      switch (value) {
+        case 0: return TO_CLIENT_SDK;
+        case 1: return TO_SERVER_HANDLER;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Direction>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Direction> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Direction>() {
+            public Direction findValueByNumber(int number) {
+              return Direction.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.getDescriptor().getEnumTypes().get(2);
+    }
+
+    private static final Direction[] VALUES = values();
+
+    public static Direction valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Direction(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:tutorial.Direction)
+  }
+
   public interface WmpConnectMessageBodyOrBuilder extends
       // @@protoc_insertion_point(interface_extends:tutorial.WmpConnectMessageBody)
       com.google.protobuf.MessageOrBuilder {
@@ -1390,6 +1614,1441 @@ public final class WmpMessageProtos {
 
   }
 
+  public interface WmpPublishMessageBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:tutorial.WmpPublishMessageBody)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string content = 1;</code>
+     */
+    java.lang.String getContent();
+    /**
+     * <code>optional string content = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentBytes();
+
+    /**
+     * <pre>
+     ** clientId or topic name, if many elements, separated by coma(,) 
+     * </pre>
+     *
+     * <code>optional string target = 2;</code>
+     */
+    java.lang.String getTarget();
+    /**
+     * <pre>
+     ** clientId or topic name, if many elements, separated by coma(,) 
+     * </pre>
+     *
+     * <code>optional string target = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTargetBytes();
+
+    /**
+     * <pre>
+     ** one or many --&gt; a clientId or a topic contains many clientIds 
+     * </pre>
+     *
+     * <code>optional .tutorial.TargeType targetType = 3;</code>
+     */
+    int getTargetTypeValue();
+    /**
+     * <pre>
+     ** one or many --&gt; a clientId or a topic contains many clientIds 
+     * </pre>
+     *
+     * <code>optional .tutorial.TargeType targetType = 3;</code>
+     */
+    com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType getTargetType();
+
+    /**
+     * <pre>
+     ** message from where to where
+     * </pre>
+     *
+     * <code>optional .tutorial.Direction direction = 4;</code>
+     */
+    int getDirectionValue();
+    /**
+     * <pre>
+     ** message from where to where
+     * </pre>
+     *
+     * <code>optional .tutorial.Direction direction = 4;</code>
+     */
+    com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection();
+  }
+  /**
+   * Protobuf type {@code tutorial.WmpPublishMessageBody}
+   */
+  public  static final class WmpPublishMessageBody extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:tutorial.WmpPublishMessageBody)
+      WmpPublishMessageBodyOrBuilder {
+    // Use WmpPublishMessageBody.newBuilder() to construct.
+    private WmpPublishMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private WmpPublishMessageBody() {
+      content_ = "";
+      target_ = "";
+      targetType_ = 0;
+      direction_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private WmpPublishMessageBody(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              content_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              target_ = s;
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+
+              targetType_ = rawValue;
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+
+              direction_ = rawValue;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.class, com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.Builder.class);
+    }
+
+    public static final int CONTENT_FIELD_NUMBER = 1;
+    private volatile java.lang.Object content_;
+    /**
+     * <code>optional string content = 1;</code>
+     */
+    public java.lang.String getContent() {
+      java.lang.Object ref = content_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        content_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string content = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentBytes() {
+      java.lang.Object ref = content_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        content_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TARGET_FIELD_NUMBER = 2;
+    private volatile java.lang.Object target_;
+    /**
+     * <pre>
+     ** clientId or topic name, if many elements, separated by coma(,) 
+     * </pre>
+     *
+     * <code>optional string target = 2;</code>
+     */
+    public java.lang.String getTarget() {
+      java.lang.Object ref = target_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        target_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     ** clientId or topic name, if many elements, separated by coma(,) 
+     * </pre>
+     *
+     * <code>optional string target = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTargetBytes() {
+      java.lang.Object ref = target_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        target_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TARGETTYPE_FIELD_NUMBER = 3;
+    private int targetType_;
+    /**
+     * <pre>
+     ** one or many --&gt; a clientId or a topic contains many clientIds 
+     * </pre>
+     *
+     * <code>optional .tutorial.TargeType targetType = 3;</code>
+     */
+    public int getTargetTypeValue() {
+      return targetType_;
+    }
+    /**
+     * <pre>
+     ** one or many --&gt; a clientId or a topic contains many clientIds 
+     * </pre>
+     *
+     * <code>optional .tutorial.TargeType targetType = 3;</code>
+     */
+    public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType getTargetType() {
+      com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.valueOf(targetType_);
+      return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.UNRECOGNIZED : result;
+    }
+
+    public static final int DIRECTION_FIELD_NUMBER = 4;
+    private int direction_;
+    /**
+     * <pre>
+     ** message from where to where
+     * </pre>
+     *
+     * <code>optional .tutorial.Direction direction = 4;</code>
+     */
+    public int getDirectionValue() {
+      return direction_;
+    }
+    /**
+     * <pre>
+     ** message from where to where
+     * </pre>
+     *
+     * <code>optional .tutorial.Direction direction = 4;</code>
+     */
+    public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
+      com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
+      return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getContentBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, content_);
+      }
+      if (!getTargetBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, target_);
+      }
+      if (targetType_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.CLIENT_ID.getNumber()) {
+        output.writeEnum(3, targetType_);
+      }
+      if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
+        output.writeEnum(4, direction_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getContentBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, content_);
+      }
+      if (!getTargetBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, target_);
+      }
+      if (targetType_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.CLIENT_ID.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, targetType_);
+      }
+      if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, direction_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody)) {
+        return super.equals(obj);
+      }
+      com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody other = (com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody) obj;
+
+      boolean result = true;
+      result = result && getContent()
+          .equals(other.getContent());
+      result = result && getTarget()
+          .equals(other.getTarget());
+      result = result && targetType_ == other.targetType_;
+      result = result && direction_ == other.direction_;
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + CONTENT_FIELD_NUMBER;
+      hash = (53 * hash) + getContent().hashCode();
+      hash = (37 * hash) + TARGET_FIELD_NUMBER;
+      hash = (53 * hash) + getTarget().hashCode();
+      hash = (37 * hash) + TARGETTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + targetType_;
+      hash = (37 * hash) + DIRECTION_FIELD_NUMBER;
+      hash = (53 * hash) + direction_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code tutorial.WmpPublishMessageBody}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:tutorial.WmpPublishMessageBody)
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBodyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.class, com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.Builder.class);
+      }
+
+      // Construct using com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        content_ = "";
+
+        target_ = "";
+
+        targetType_ = 0;
+
+        direction_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody getDefaultInstanceForType() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.getDefaultInstance();
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody build() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody buildPartial() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody(this);
+        result.content_ = content_;
+        result.target_ = target_;
+        result.targetType_ = targetType_;
+        result.direction_ = direction_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody) {
+          return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody other) {
+        if (other == com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.getDefaultInstance()) return this;
+        if (!other.getContent().isEmpty()) {
+          content_ = other.content_;
+          onChanged();
+        }
+        if (!other.getTarget().isEmpty()) {
+          target_ = other.target_;
+          onChanged();
+        }
+        if (other.targetType_ != 0) {
+          setTargetTypeValue(other.getTargetTypeValue());
+        }
+        if (other.direction_ != 0) {
+          setDirectionValue(other.getDirectionValue());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object content_ = "";
+      /**
+       * <code>optional string content = 1;</code>
+       */
+      public java.lang.String getContent() {
+        java.lang.Object ref = content_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          content_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentBytes() {
+        java.lang.Object ref = content_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          content_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string content = 1;</code>
+       */
+      public Builder setContent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        content_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string content = 1;</code>
+       */
+      public Builder clearContent() {
+        
+        content_ = getDefaultInstance().getContent();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string content = 1;</code>
+       */
+      public Builder setContentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        content_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object target_ = "";
+      /**
+       * <pre>
+       ** clientId or topic name, if many elements, separated by coma(,) 
+       * </pre>
+       *
+       * <code>optional string target = 2;</code>
+       */
+      public java.lang.String getTarget() {
+        java.lang.Object ref = target_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          target_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       ** clientId or topic name, if many elements, separated by coma(,) 
+       * </pre>
+       *
+       * <code>optional string target = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTargetBytes() {
+        java.lang.Object ref = target_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          target_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       ** clientId or topic name, if many elements, separated by coma(,) 
+       * </pre>
+       *
+       * <code>optional string target = 2;</code>
+       */
+      public Builder setTarget(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        target_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** clientId or topic name, if many elements, separated by coma(,) 
+       * </pre>
+       *
+       * <code>optional string target = 2;</code>
+       */
+      public Builder clearTarget() {
+        
+        target_ = getDefaultInstance().getTarget();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** clientId or topic name, if many elements, separated by coma(,) 
+       * </pre>
+       *
+       * <code>optional string target = 2;</code>
+       */
+      public Builder setTargetBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        target_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int targetType_ = 0;
+      /**
+       * <pre>
+       ** one or many --&gt; a clientId or a topic contains many clientIds 
+       * </pre>
+       *
+       * <code>optional .tutorial.TargeType targetType = 3;</code>
+       */
+      public int getTargetTypeValue() {
+        return targetType_;
+      }
+      /**
+       * <pre>
+       ** one or many --&gt; a clientId or a topic contains many clientIds 
+       * </pre>
+       *
+       * <code>optional .tutorial.TargeType targetType = 3;</code>
+       */
+      public Builder setTargetTypeValue(int value) {
+        targetType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** one or many --&gt; a clientId or a topic contains many clientIds 
+       * </pre>
+       *
+       * <code>optional .tutorial.TargeType targetType = 3;</code>
+       */
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType getTargetType() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.valueOf(targetType_);
+        return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       ** one or many --&gt; a clientId or a topic contains many clientIds 
+       * </pre>
+       *
+       * <code>optional .tutorial.TargeType targetType = 3;</code>
+       */
+      public Builder setTargetType(com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargeType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        targetType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** one or many --&gt; a clientId or a topic contains many clientIds 
+       * </pre>
+       *
+       * <code>optional .tutorial.TargeType targetType = 3;</code>
+       */
+      public Builder clearTargetType() {
+        
+        targetType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int direction_ = 0;
+      /**
+       * <pre>
+       ** message from where to where
+       * </pre>
+       *
+       * <code>optional .tutorial.Direction direction = 4;</code>
+       */
+      public int getDirectionValue() {
+        return direction_;
+      }
+      /**
+       * <pre>
+       ** message from where to where
+       * </pre>
+       *
+       * <code>optional .tutorial.Direction direction = 4;</code>
+       */
+      public Builder setDirectionValue(int value) {
+        direction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** message from where to where
+       * </pre>
+       *
+       * <code>optional .tutorial.Direction direction = 4;</code>
+       */
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
+        return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       ** message from where to where
+       * </pre>
+       *
+       * <code>optional .tutorial.Direction direction = 4;</code>
+       */
+      public Builder setDirection(com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        direction_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** message from where to where
+       * </pre>
+       *
+       * <code>optional .tutorial.Direction direction = 4;</code>
+       */
+      public Builder clearDirection() {
+        
+        direction_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:tutorial.WmpPublishMessageBody)
+    }
+
+    // @@protoc_insertion_point(class_scope:tutorial.WmpPublishMessageBody)
+    private static final com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody();
+    }
+
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<WmpPublishMessageBody>
+        PARSER = new com.google.protobuf.AbstractParser<WmpPublishMessageBody>() {
+      public WmpPublishMessageBody parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new WmpPublishMessageBody(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<WmpPublishMessageBody> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WmpPublishMessageBody> getParserForType() {
+      return PARSER;
+    }
+
+    public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface WmpDisConnectMessageBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:tutorial.WmpDisConnectMessageBody)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string clientId = 1;</code>
+     */
+    java.lang.String getClientId();
+    /**
+     * <code>optional string clientId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getClientIdBytes();
+  }
+  /**
+   * Protobuf type {@code tutorial.WmpDisConnectMessageBody}
+   */
+  public  static final class WmpDisConnectMessageBody extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:tutorial.WmpDisConnectMessageBody)
+      WmpDisConnectMessageBodyOrBuilder {
+    // Use WmpDisConnectMessageBody.newBuilder() to construct.
+    private WmpDisConnectMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private WmpDisConnectMessageBody() {
+      clientId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private WmpDisConnectMessageBody(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              clientId_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.class, com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.Builder.class);
+    }
+
+    public static final int CLIENTID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object clientId_;
+    /**
+     * <code>optional string clientId = 1;</code>
+     */
+    public java.lang.String getClientId() {
+      java.lang.Object ref = clientId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clientId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clientId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClientIdBytes() {
+      java.lang.Object ref = clientId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getClientIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, clientId_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getClientIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, clientId_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody)) {
+        return super.equals(obj);
+      }
+      com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody other = (com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody) obj;
+
+      boolean result = true;
+      result = result && getClientId()
+          .equals(other.getClientId());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
+      hash = (53 * hash) + getClientId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code tutorial.WmpDisConnectMessageBody}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:tutorial.WmpDisConnectMessageBody)
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBodyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.class, com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.Builder.class);
+      }
+
+      // Construct using com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        clientId_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody getDefaultInstanceForType() {
+        return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.getDefaultInstance();
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody build() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody buildPartial() {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody(this);
+        result.clientId_ = clientId_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody) {
+          return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody other) {
+        if (other == com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.getDefaultInstance()) return this;
+        if (!other.getClientId().isEmpty()) {
+          clientId_ = other.clientId_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object clientId_ = "";
+      /**
+       * <code>optional string clientId = 1;</code>
+       */
+      public java.lang.String getClientId() {
+        java.lang.Object ref = clientId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          clientId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clientId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClientIdBytes() {
+        java.lang.Object ref = clientId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clientId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clientId = 1;</code>
+       */
+      public Builder setClientId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        clientId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clientId = 1;</code>
+       */
+      public Builder clearClientId() {
+        
+        clientId_ = getDefaultInstance().getClientId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clientId = 1;</code>
+       */
+      public Builder setClientIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        clientId_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:tutorial.WmpDisConnectMessageBody)
+    }
+
+    // @@protoc_insertion_point(class_scope:tutorial.WmpDisConnectMessageBody)
+    private static final com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody();
+    }
+
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<WmpDisConnectMessageBody>
+        PARSER = new com.google.protobuf.AbstractParser<WmpDisConnectMessageBody>() {
+      public WmpDisConnectMessageBody parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new WmpDisConnectMessageBody(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<WmpDisConnectMessageBody> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<WmpDisConnectMessageBody> getParserForType() {
+      return PARSER;
+    }
+
+    public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_tutorial_WmpConnectMessageBody_descriptor;
   private static final 
@@ -1400,6 +3059,16 @@ public final class WmpMessageProtos {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_tutorial_WmpConnAckMessageBody_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tutorial_WmpPublishMessageBody_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1413,13 +3082,20 @@ public final class WmpMessageProtos {
       "ctMessageBody\022\020\n\010clientId\030\001 \001(\t\022\r\n\005token" +
       "\030\002 \001(\t\"]\n\025WmpConnAckMessageBody\022\020\n\010clien" +
       "tId\030\001 \001(\t\0222\n\nreturnCode\030\003 \001(\0162\036.tutorial" +
-      ".WmpConnectReturnCode*\254\001\n\024WmpConnectRetu" +
-      "rnCode\022\014\n\010ACCEPTED\020\000\022)\n%REFUSED_UNACCEPT" +
-      "ABLE_PROTOCOL_VERSION\020\001\022\037\n\033REFUSED_IDENT" +
-      "IFIER_REJECTED\020\002\022\032\n\026REFUSED_NOT_AUTHORIZ" +
-      "ED\020\003\022\036\n\032REFUSED_SERVER_UNAVAILABLE\020\004B7\n#" +
-      "com.keepthinker.wavemessaging.protoB\020Wmp",
-      "MessageProtosb\006proto3"
+      ".WmpConnectReturnCode\"\211\001\n\025WmpPublishMess" +
+      "ageBody\022\017\n\007content\030\001 \001(\t\022\016\n\006target\030\002 \001(\t" +
+      "\022\'\n\ntargetType\030\003 \001(\0162\023.tutorial.TargeTyp" +
+      "e\022&\n\tdirection\030\004 \001(\0162\023.tutorial.Directio" +
+      "n\",\n\030WmpDisConnectMessageBody\022\020\n\010clientI" +
+      "d\030\001 \001(\t*\254\001\n\024WmpConnectReturnCode\022\014\n\010ACCE",
+      "PTED\020\000\022)\n%REFUSED_UNACCEPTABLE_PROTOCOL_" +
+      "VERSION\020\001\022\037\n\033REFUSED_IDENTIFIER_REJECTED" +
+      "\020\002\022\032\n\026REFUSED_NOT_AUTHORIZED\020\003\022\036\n\032REFUSE" +
+      "D_SERVER_UNAVAILABLE\020\004*-\n\tTargeType\022\r\n\tC" +
+      "LIENT_ID\020\000\022\021\n\rTOPIC_GENERAL\020\001*5\n\tDirecti" +
+      "on\022\021\n\rTO_CLIENT_SDK\020\000\022\025\n\021TO_SERVER_HANDL" +
+      "ER\020\001B7\n#com.keepthinker.wavemessaging.pr" +
+      "otoB\020WmpMessageProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1445,6 +3121,18 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tutorial_WmpConnAckMessageBody_descriptor,
         new java.lang.String[] { "ClientId", "ReturnCode", });
+    internal_static_tutorial_WmpPublishMessageBody_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tutorial_WmpPublishMessageBody_descriptor,
+        new java.lang.String[] { "Content", "Target", "TargetType", "Direction", });
+    internal_static_tutorial_WmpDisConnectMessageBody_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_tutorial_WmpDisConnectMessageBody_descriptor,
+        new java.lang.String[] { "ClientId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -6,7 +6,7 @@ import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
+import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
 import com.keepthinker.wavemessaging.server.SDKChannelManager;
 import com.keepthinker.wavemessaging.server.StatisticsService;
@@ -39,7 +39,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
     private SDKChannelManager sdkChannelManager;
 
     @Resource
-    private WmStringRedisTemplate redisTemplate;
+    private WmStringShardRedisTemplate redisTemplate;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {

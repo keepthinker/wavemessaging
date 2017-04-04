@@ -13,6 +13,7 @@ public class HandlerStartup {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         SpringUtils.setContext(context);
         ZkHanlderUtils.watchZkBrokers();
+        LOGGER.info("the handler get started");
     }
 
 }

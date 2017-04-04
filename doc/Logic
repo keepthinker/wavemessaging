@@ -1,6 +1,6 @@
 every client info is cached in redis.
 client id generated when client who is valid to register.
-generate a token for a pair of username and password.
+generate a token for a pair of username and password after login.
 
 
 sdk client login server with username + password, server response with a unique token.
@@ -9,10 +9,16 @@ sdk client connect server with clientId + token
 
 Handler behaved like a sdk-client. process msg dispatched by broker, return message with the same request method and result data.
 
-Broker behaved like a judge. It dispatches sdk request to handler, and receives handler's reponse as a confirmation of a sdk request success or failure. 
+Broker behaved like a judge. It dispatches sdk request to handler, and receives handler's response as a confirmation of a sdk request success or failure.
 
 change the original meaning of protocal in handler.
 
 statistics:
     handler size, sdk size, broker size,
     the number of message per day or per hour or per minute or per second.
+
+publishing:
+    publish but not puback
+    publish but not online
+    if online which means connected, first publish sending message then publish all waiting messages
+

@@ -1,4 +1,4 @@
-import com.keepthinker.wavemessaging.redis.WmStringRedisTemplate;
+import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +24,7 @@ public class RedisTest {
             System.out.println(jedis.del("key" + i));
             jedis.close();
         }
-        WmStringRedisTemplate wmtringRedisTemplate = context.getBean("wmStringRedisTemplate", WmStringRedisTemplate.class);
+        WmStringShardRedisTemplate wmtringRedisTemplate = context.getBean("wmStringRedisTemplate", WmStringShardRedisTemplate.class);
 
         for (int i = 0; i < 100; i++) {
             System.out.println(wmtringRedisTemplate.set("key" + i, "value" + i));

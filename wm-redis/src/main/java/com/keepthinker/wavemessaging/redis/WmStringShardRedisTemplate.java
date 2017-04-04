@@ -3,7 +3,9 @@ package com.keepthinker.wavemessaging.redis;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
-public class WmStringRedisTemplate {
+import java.util.Map;
+
+public class WmStringShardRedisTemplate {
     private ShardedJedisPool shardedJedisPool;
 
     public ShardedJedisPool getShardedJedisPool() {
@@ -48,6 +50,14 @@ public class WmStringRedisTemplate {
         jedis.close();
         return result;
     }
+
+    public String hmset(String key, Map<String, String> map){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        String result = jedis.hmset(key, map);
+        jedis.close();
+        return result;
+    }
+
 
     public boolean exists(String key){
         ShardedJedis jedis = shardedJedisPool.getResource();

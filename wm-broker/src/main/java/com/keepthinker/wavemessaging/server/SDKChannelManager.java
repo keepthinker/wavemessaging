@@ -27,6 +27,7 @@ public class SDKChannelManager {
 
         ChannelInfo channelInfo = new ChannelInfo();
         channelInfo.setAccessTime(new Date());
+        channelInfo.setClientId(clientId);
         CHANNEL_CHANNELINFO.put(channel, channelInfo);
     }
 

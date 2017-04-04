@@ -9,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+import static com.keepthinker.wavemessaging.proto.WmpMessageProtos.*;
+
 /**
  * Created by keepthinker on 2017/3/13.
  */
@@ -36,6 +38,9 @@ public class WmpDecoder extends ReplayingDecoder {
                 case PINGRESP:
                     out.add(new WmpPingRespMessage(version));
                     break;
+                case DISCONNECT:
+                    out.add(decodeDisConnect(in, version));
+                    break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
             }
@@ -43,6 +48,23 @@ public class WmpDecoder extends ReplayingDecoder {
             LOGGER.error("unknow error in decoding message", e);
         }
 
+    }
+
+    private WmpDisConnectMessage decodeDisConnect(ByteBuf in, int version){
+        WmpDisConnectMessage message = new WmpDisConnectMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpDisConnectMessageBody body = WmpDisConnectMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        } catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding connect messsage body",  e);
+            return null;
+        }
     }
 
     private WmpConnectMessage decodeConnectMessage(ByteBuf in, int version){
@@ -53,11 +75,11 @@ public class WmpDecoder extends ReplayingDecoder {
         byte[] bytes = new byte[bodySize];
         in.readBytes(bytes);
         try {
-            WmpMessageProtos.WmpConnectMessageBody body = WmpMessageProtos.WmpConnectMessageBody.parseFrom(bytes);
+            WmpConnectMessageBody body = WmpConnectMessageBody.parseFrom(bytes);
             message.setBody(body);
             return message;
         } catch (InvalidProtocolBufferException e) {
-            LOGGER.error("error in decoding connect messsage ",  e);
+            LOGGER.error("error in decoding connect messsage body",  e);
             return null;
         }
 
@@ -71,13 +93,31 @@ public class WmpDecoder extends ReplayingDecoder {
         byte[] bytes = new byte[bodySize];
         in.readBytes(bytes);
         try {
-            WmpMessageProtos.WmpConnAckMessageBody body = WmpMessageProtos.WmpConnAckMessageBody.parseFrom(bytes);
+            WmpConnAckMessageBody body = WmpConnAckMessageBody.parseFrom(bytes);
             message.setBody(body);
             return message;
         } catch (InvalidProtocolBufferException e) {
-            LOGGER.error("error in decoding connack messsage ",  e);
+            LOGGER.error("error in decoding connack messsage body ",  e);
             return null;
         }
+    }
+
+    private WmpPublishMessage decodePublishMessage(ByteBuf in, int version){
+        WmpPublishMessage message = new WmpPublishMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpPublishMessageBody body = WmpPublishMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding publish messsage body",  e);
+            return null;
+        }
+
     }
 
 }

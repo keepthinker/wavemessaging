@@ -2,13 +2,14 @@ package com.keepthinker.wavemessaging.server.proto;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
-import com.keepthinker.wavemessaging.server.SDKChannelManager;
+import com.keepthinker.wavemessaging.server.SdkChannelManager;
 import com.keepthinker.wavemessaging.server.StatisticsService;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang.StringUtils;
@@ -36,7 +37,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
     private HandlerChannelMananger handlerChannelManager;
 
     @Resource
-    private SDKChannelManager sdkChannelManager;
+    private SdkChannelManager sdkChannelManager;
 
     @Resource
     private WmStringShardRedisTemplate redisTemplate;
@@ -87,6 +88,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
             return;
         }
         sdkChannelManager.putChannel(clientId, ctx.channel());
+        msg.setBody(msg.getBody().toBuilder().setBrokerAddress(WmUtils.getChannelLocalAddress(ctx.channel())).build());;
         handlerChannelManager.get(clientId).writeAndFlush(msg);
 
     }

@@ -59,7 +59,7 @@ public class WmUtils {
 
                     String tempAddr = addr.getHostAddress();
 
-                    if (isIpv4Addr(tempAddr) == false) { // ignore ipv6
+                    if (!isIpv4Addr(tempAddr)) { // ignore ipv6
                         continue;
                     }
                     if (SUBNET_INFO != null) {
@@ -82,11 +82,43 @@ public class WmUtils {
                 }
             }
         } catch (SocketException e1) {
-            LOGGER.error("error in getting borker ip", e1);
+            LOGGER.error("error in getting borker intranet ip", e1);
             throw new RuntimeException(e1);
         }
-        LOGGER.error("error in getting borker ip");
+        LOGGER.error("error in getting borker intranet ip");
         throw new RuntimeException();
+    }
+
+    public static String getIPV4Public() {
+        Enumeration<NetworkInterface> n;
+        try {
+            n = NetworkInterface.getNetworkInterfaces();
+            for (; n.hasMoreElements(); ) {
+                NetworkInterface e = n.nextElement();
+
+                Enumeration<InetAddress> a = e.getInetAddresses();
+                for (; a.hasMoreElements(); ) {
+                    InetAddress addr = a.nextElement();
+                    String tempAddr = addr.getHostAddress();
+                    LOGGER.debug(tempAddr);
+                    if (!isIpv4Addr(tempAddr)) { // ignore ipv6
+                        continue;
+                    }
+
+                    if  (!(addr.isSiteLocalAddress()
+                            || addr.isLoopbackAddress()
+                            || addr.getHostAddress().contains(":")
+                            )){
+                        return tempAddr;
+                    }
+                }
+            }
+        } catch (SocketException e1) {
+            LOGGER.error("error in getting borker public ip", e1);
+            return null;
+        }
+        LOGGER.error("error in getting borker public ip");
+        return null;
     }
 
     public static boolean isIpv4Addr(final String ip) {
@@ -103,6 +135,15 @@ public class WmUtils {
         if(address != null) {
             return address.getHostName() + ":" +  address.getPort();
         }else {
+            return null;
+        }
+    }
+
+    public static String getChannelLocalAddress(Channel channel){
+        InetSocketAddress address = (InetSocketAddress)channel.localAddress();
+        if(address != null){
+            return address.getHostName() + ":" + address.getPort();
+        }else{
             return null;
         }
     }

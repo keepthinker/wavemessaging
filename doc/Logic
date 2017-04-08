@@ -11,7 +11,8 @@ Handler behaved like a sdk-client. process msg dispatched by broker, return mess
 
 Broker behaved like a judge. It dispatches sdk request to handler, and receives handler's response as a confirmation of a sdk request success or failure.
 
-change the original meaning of protocal in handler.
+A sdk client connects to a broker.
+A handler store mapping relation between key(internet ip) and broker-handler channel.
 
 statistics:
     handler size, sdk size, broker size,

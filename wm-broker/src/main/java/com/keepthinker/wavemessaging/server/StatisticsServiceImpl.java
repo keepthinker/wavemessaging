@@ -14,7 +14,7 @@ public class StatisticsServiceImpl implements StatisticsService{
     private HandlerChannelMananger  handlerChannelMananger;
 
     @Autowired
-    private SDKChannelManager sdkChannelManager;
+    private SdkChannelManager sdkChannelManager;
 
     @Autowired
     private ServerStartup serverStartup;

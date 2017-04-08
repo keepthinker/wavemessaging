@@ -14,6 +14,8 @@ public class RedisUtils {
     /** 0: disconnected, 1: online*/
     public static String CLIENT_CONNECTION_STATUS = "connectionStatus";
     public static String CLIENT_DISCONNECT_TIME = "disconnectTime";
+    public static final String CLIENT_BROKER_PUBLIC_ADDRESS = "brokerPublicAddress";
+    public static final String CLIENT_BROKER_PRIVATE_ADDRESS = "brokerPrivateAddress";
 
     /**
      * Hash: Usernam -- ${field} --> value
@@ -49,4 +51,14 @@ public class RedisUtils {
     public static String getMessageKey(long msgId){
         return MESSAGE_PREFIX + msgId;
     }
+
+    public static String getClientMessageSendingKey(long msgId){
+        return CLIENT_MESSAGE_SENDING_PREFIX + msgId;
+    }
+
+    public static String getClientMessageWaitingKey(long msgId){
+        return CLIENT_MESSAGE_WAITING_PREFIX + msgId;
+    }
+
+
 }

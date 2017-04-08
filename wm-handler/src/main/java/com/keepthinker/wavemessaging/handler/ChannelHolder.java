@@ -7,15 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ChannelHolder {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private List<Channel> handlerBrokerChannels = new ArrayList<>();
+
+    private Map<String, Channel> brokerAddressChannelMap = new HashMap<>();
 
     public List<Channel> getHandlerBrokerChannels() {
         return handlerBrokerChannels;
@@ -27,6 +27,8 @@ public class ChannelHolder {
             String host = socketAddress.getHostName();
             int port = socketAddress.getPort();
             handlerBrokerChannels.add(channel);
+            brokerAddressChannelMap.put(WmUtils.getChannelRemoteAddress(channel), channel);
+
             LOGGER.info("Add a channel whose host is {}, and port is {}", host, port);
         }
     }
@@ -50,6 +52,10 @@ public class ChannelHolder {
         synchronized (handlerBrokerChannels) {
             return WmUtils.clearInvalidChannel(handlerBrokerChannels);
         }
+    }
+
+    public Channel getChannel(String brokerPrivateAddress){
+        return brokerAddressChannelMap.get(brokerPrivateAddress);
     }
 
 }

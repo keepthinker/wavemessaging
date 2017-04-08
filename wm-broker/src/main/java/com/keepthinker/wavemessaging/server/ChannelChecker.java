@@ -13,7 +13,7 @@ public class ChannelChecker {
     private HandlerChannelMananger handlerChannelMananger;
 
     @Autowired
-    private SDKChannelManager sdkChannelManager;
+    private SdkChannelManager sdkChannelManager;
 
     public void clearInvalid() {
 

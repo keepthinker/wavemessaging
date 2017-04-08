@@ -34,7 +34,7 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
     private WmpServiceContainer serviceContainer;
 
     @Resource
-    private SDKChannelManager sdkChannelManager;
+    private SdkChannelManager sdkChannelManager;
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {

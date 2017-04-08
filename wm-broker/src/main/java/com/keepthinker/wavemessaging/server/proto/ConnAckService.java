@@ -4,7 +4,7 @@ import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.server.SDKChannelManager;
+import com.keepthinker.wavemessaging.server.SdkChannelManager;
 import com.keepthinker.wavemessaging.server.model.ChannelInfo;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -20,7 +20,7 @@ import java.util.Date;
 public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
 
     @Resource
-    private SDKChannelManager sdkChannelManager;
+    private SdkChannelManager sdkChannelManager;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnAckMessage msg) {

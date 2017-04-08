@@ -8,6 +8,7 @@ option java_outer_classname = "WmpMessageProtos";
 message WmpConnectMessageBody {
   string clientId = 1;
   string token = 2;
+  string brokerAddress = 3;
 }
 
 message WmpConnAckMessageBody {
@@ -30,13 +31,13 @@ message WmpPublishMessageBody {
     /** clientId or topic name, if many elements, separated by coma(,) */
     string target = 2;
     /** one or many --> a clientId or a topic contains many clientIds */
-    TargeType targetType = 3;
+    TargetType targetType = 3;
     /** message from where to where*/
     Direction direction = 4;
 }
 
 /** a chat group or a client tag or other self defined group */
-enum TargeType {
+enum TargetType {
     /** one client */
     CLIENT_ID = 0;
     TOPIC_GENERAL = 1;

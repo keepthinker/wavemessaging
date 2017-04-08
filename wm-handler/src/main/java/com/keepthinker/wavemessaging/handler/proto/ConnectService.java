@@ -1,6 +1,7 @@
 package com.keepthinker.wavemessaging.handler.proto;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpActionLogger;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.utils.HandlerUtils;
@@ -41,7 +42,12 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
                         WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
                 ctx.writeAndFlush(response);
-                redisTemplate.hset(RedisUtils.getClientKey(messageBody.getClientId()), RedisUtils.CLIENT_CONNECTION_STATUS, "1");
+
+                String clientKey = RedisUtils.getClientKey(messageBody.getClientId());
+                redisTemplate.hset(clientKey, RedisUtils.CLIENT_CONNECTION_STATUS, "1");
+                redisTemplate.hset(clientKey, RedisUtils.CLIENT_BROKER_PUBLIC_ADDRESS, messageBody.getBrokerAddress());
+                redisTemplate.hset(clientKey, RedisUtils.CLIENT_BROKER_PRIVATE_ADDRESS, WmUtils.getChannelRemoteAddress(ctx.channel()));
+
                 WmpActionLogger.connect(msg.getBody().getClientId(), msg.getVersion());
             } else {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,

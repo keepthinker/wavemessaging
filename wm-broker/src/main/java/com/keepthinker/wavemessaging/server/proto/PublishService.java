@@ -62,9 +62,9 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
     }
 
     private void handlePublishToClient(WmpPublishMessage publishMessage){
-        String[] clientIds = StringUtils.split(publishMessage.getBody().getTarget(),',');
-        if(clientIds.length >= 1 && StringUtils.isNotBlank(clientIds[0]) && StringUtils.isNumeric(clientIds[0])) {
-            Channel channel = sdkChannelManager.getChannel(clientIds[0]);
+        String clientId = publishMessage.getBody().getTarget();
+        if(StringUtils.isNotBlank(clientId)) {
+            Channel channel = sdkChannelManager.getChannel(clientId);
             if(channel != null && channel.isActive()) {
                 channel.writeAndFlush(publishMessage);
             }else{

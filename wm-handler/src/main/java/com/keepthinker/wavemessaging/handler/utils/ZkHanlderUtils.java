@@ -2,11 +2,11 @@ package com.keepthinker.wavemessaging.handler.utils;
 
 import com.keepthinker.wavemessaging.core.ChildrenChangeListener;
 import com.keepthinker.wavemessaging.core.utils.Constants;
+import com.keepthinker.wavemessaging.core.utils.SpringUtils;
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.ZkCommonUtils;
 import com.keepthinker.wavemessaging.handler.ChannelCreater;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
-import com.keepthinker.wavemessaging.handler.SpringUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import io.netty.channel.Channel;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;

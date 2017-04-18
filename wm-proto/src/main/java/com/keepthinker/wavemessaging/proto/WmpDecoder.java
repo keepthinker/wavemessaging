@@ -31,7 +31,6 @@ public class WmpDecoder extends ReplayingDecoder {
                 case CONNACK:
                     out.add(decodeConnAckMessage(in, version));
                     break;
-
                 case PINGREQ:
                     out.add(new WmpPingReqMessage(version));
                     break;
@@ -39,7 +38,13 @@ public class WmpDecoder extends ReplayingDecoder {
                     out.add(new WmpPingRespMessage(version));
                     break;
                 case DISCONNECT:
-                    out.add(decodeDisConnect(in, version));
+                    out.add(decodeDisConnectMessage(in, version));
+                    break;
+                case PUBLISH:
+                    out.add(decodePublishMessage(in, version));
+                    break;
+                case PUBACK:
+                    out.add(decodePubAckMessage(in, version));
                     break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
@@ -50,7 +55,7 @@ public class WmpDecoder extends ReplayingDecoder {
 
     }
 
-    private WmpDisConnectMessage decodeDisConnect(ByteBuf in, int version){
+    private WmpDisConnectMessage decodeDisConnectMessage(ByteBuf in, int version){
         WmpDisConnectMessage message = new WmpDisConnectMessage();
         message.setVersion(version);
 
@@ -111,6 +116,24 @@ public class WmpDecoder extends ReplayingDecoder {
         in.readBytes(bytes);
         try {
             WmpPublishMessageBody body = WmpPublishMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding publish messsage body",  e);
+            return null;
+        }
+
+    }
+
+    private WmpPubAckMessage decodePubAckMessage(ByteBuf in, int version){
+        WmpPubAckMessage message = new WmpPubAckMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpPubAckMessageBody body = WmpPubAckMessageBody.parseFrom(bytes);
             message.setBody(body);
             return message;
         }catch (InvalidProtocolBufferException e) {

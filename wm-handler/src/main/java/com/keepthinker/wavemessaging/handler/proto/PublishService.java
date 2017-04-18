@@ -1,12 +1,18 @@
 package com.keepthinker.wavemessaging.handler.proto;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
+import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.MessageIdGenerator;
+import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.ClientMessageSendingNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.ClientMessageWaitingNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.MessageInfoNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.redis.RedisUtils;
+import com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate;
+import com.keepthinker.wavemessaging.nosql.redis.model.MessageInfo;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.proto.WmpPublishMessage;
-import com.keepthinker.wavemessaging.redis.RedisUtils;
-import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang.StringUtils;
@@ -16,8 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by keepthinker on 2017/4/4.
@@ -29,6 +33,16 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
 
     @Autowired
     private MessageIdGenerator messageIdGenerator;
+
+    @Autowired
+    private MessageInfoNoSqlDao messageInfoCacheDao;
+
+    @Autowired
+    private ClientInfoNoSqlDao clientInfoCacheDao;
+
+    @Autowired
+    private ClientMessageSendingNoSqlDao cmSendingNoSqlDao;
+    private ClientMessageWaitingNoSqlDao cmWaitingNoSqlDao;
 
     @Autowired
     private WmStringShardRedisTemplate shardRedisTemplate;
@@ -57,21 +71,32 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         for(int i = 0; i < clientIds.length; i++){
             //record message info in redis and mysql
             long newMsgId = messageIdGenerator.generate();
-            Map<String, String> map = new HashMap<>();
-            map.put(RedisUtils.MESSAGE_ID, String.valueOf(newMsgId));
-            map.put(RedisUtils.MESSAGE_CONTENT, body.getContent());
-            map.put(RedisUtils.MESSAGE_CREATE_TIME, String.valueOf(new Date().getTime()));
-            shardRedisTemplate.hmset(RedisUtils.getMessageKey(newMsgId), map);
+
+            MessageInfo messageInfo = new MessageInfo();
+            messageInfo.setId(newMsgId);
+            messageInfo.setContent(body.getContent());
+            messageInfo.setCreateTime(new Date());
+            messageInfo.setTimeout(Constants.MESSAGE_DEFAULT_TIMEOUT);
+            messageInfoCacheDao.save(messageInfo);
 
             //send if online
-            shardRedisTemplate.set(RedisUtils.getClientMessageSendingKey(newMsgId), String.valueOf(newMsgId));
-            String brokerPrivateAddress = shardRedisTemplate.hget(RedisUtils.getClientKey(clientIds[i]), RedisUtils.CLIENT_BROKER_PRIVATE_ADDRESS);
-            Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
-
-            msg.setBody(body.toBuilder().setTarget(clientIds[i]).build());
-            brokerChannel.writeAndFlush(msg);
-            //set in sending cache or append to waiting list if not online
-
+            boolean isSet =  cmSendingNoSqlDao.setNotExist(clientIds[i], String.valueOf(newMsgId));
+            if(isSet) {
+                String brokerPrivateAddress = clientInfoCacheDao.getBrokerPrivateAddress(RedisUtils.getClientKey(clientIds[i]));
+                Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
+                WmpMessageProtos.WmpPublishMessageBody newBody = body.toBuilder()
+                        .setTarget(clientIds[i])
+                        .setMessageId(messageInfo.getId())
+                        .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
+                        .build();
+                msg.setBody(newBody);
+                if(clientInfoCacheDao.getConnectionStatus(clientIds[i]) ==
+                        Constants.CONNECTION_STATUTS_ONLINE) {
+                    brokerChannel.writeAndFlush(msg);
+                }
+            }else {
+                cmWaitingNoSqlDao.enqueue(clientIds[i], messageInfo.getId());
+            }
         }
     }
 }

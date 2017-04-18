@@ -28,7 +28,7 @@ ext {
 }
 dependencies {
 
-    compile project(':wm-redis')
+    compile project(':wm-nosql')
     compile project(':wm-mybatis')
     compile project(':wm-core')
 

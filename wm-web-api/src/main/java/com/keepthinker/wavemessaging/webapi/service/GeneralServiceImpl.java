@@ -4,8 +4,7 @@ import com.keepthinker.wavemessaging.core.utils.CryptoUtils;
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.dao.ClientInfoMapper;
 import com.keepthinker.wavemessaging.dao.model.ClientInfo;
-import com.keepthinker.wavemessaging.redis.RedisUtils;
-import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
+import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
 import com.keepthinker.wavemessaging.webapi.model.LoginInfo;
 import com.keepthinker.wavemessaging.webapi.model.LoginResult;
 import com.keepthinker.wavemessaging.webapi.model.RegisterInfo;
@@ -16,11 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import redis.clients.jedis.ShardedJedisPipeline;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -31,7 +26,7 @@ public class GeneralServiceImpl implements GeneralService {
     private ClientInfoMapper clientInfoMapper;
 
     @Autowired
-    private WmStringShardRedisTemplate redisTemplate;
+    private ClientInfoNoSqlDao clientInfoCacheDao;
 
     @Transactional
     @Override
@@ -58,30 +53,23 @@ public class GeneralServiceImpl implements GeneralService {
     }
 
     private void saveClientInfoToRedis(ClientInfo clientInfo){
-        ShardedJedisPipeline pipeline = redisTemplate.getShardedJedisPool().getResource().pipelined();
-
-        Map<String, String> map = new HashMap<>();
-        map.put(RedisUtils.CLIENT_ACCESS_TIME, Long.toString(new Date().getTime()));
-        map.put(RedisUtils.CLIENT_USERNAME, clientInfo.getUsername());
-        map.put(RedisUtils.CLIENT_PASSWORD, clientInfo.getPassword());
-        pipeline.hmset(RedisUtils.getClientKey(clientInfo.getClientId()), map);
-
-        String username = RedisUtils.getUsernameKey(clientInfo.getUsername());
-        pipeline.hset(username, RedisUtils.UN_CLIENT_ID, Long.toString(clientInfo.getClientId()));
-
-        pipeline.sync();
+        com.keepthinker.wavemessaging.nosql.redis.model.ClientInfo clientInfoRedis = new com.keepthinker.wavemessaging.nosql.redis.model.ClientInfo();
+        clientInfoRedis.setClientId(clientInfo.getClientId());
+        clientInfoRedis.setUsername(clientInfo.getUsername());
+        clientInfoRedis.setPassword(clientInfo.getPassword());
+        clientInfoCacheDao.save(clientInfoRedis);
     }
 
     @Override
     public LoginResult login(LoginInfo loginInfo) {
         String token = UUID.randomUUID().toString();
-        String clientId = redisTemplate.hget(RedisUtils.getUsernameKey(CryptoUtils.hash(loginInfo.getUsername())), RedisUtils.UN_CLIENT_ID);
+        String clientId = clientInfoCacheDao.getClientId(CryptoUtils.hash(loginInfo.getUsername()));
         if(StringUtils.isBlank(clientId)) {
             ClientInfo clientInfo = clientInfoMapper.selectByUsername(CryptoUtils.hash(loginInfo.getUsername()));
             saveClientInfoToRedis(clientInfo);
             clientId = String.valueOf(clientInfo.getClientId());
         }
-        redisTemplate.hset(RedisUtils.getClientKey(clientId), RedisUtils.CLIENT_TOKEN, token);
+        clientInfoCacheDao.setToken(clientId, token);
         LoginResult result = new LoginResult(clientId, token);
         return result;
     }

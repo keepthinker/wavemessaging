@@ -10,6 +10,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * thread safe class
+ */
 @Service
 public class HandlerChannelMananger {
     private final List<Channel> HANDLER_CHANNELS = new ArrayList<>();
@@ -36,6 +39,7 @@ public class HandlerChannelMananger {
         }
     }
 
+
     public int size() {
         return HANDLER_CHANNELS.size();
     }
@@ -47,6 +51,15 @@ public class HandlerChannelMananger {
             return HANDLER_CHANNELS.get(hashValue % HANDLER_CHANNELS.size());
         } finally {
             r.unlock();
+        }
+    }
+
+    public boolean remove(Channel channel){
+        w.lock();
+        try{
+            return HANDLER_CHANNELS.remove(channel);
+        } finally {
+            w.unlock();
         }
     }
 

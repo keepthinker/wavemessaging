@@ -1,6 +1,6 @@
 package com.keepthinker.wavemessaging.webapi;
 
-import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
+import com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

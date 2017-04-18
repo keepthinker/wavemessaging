@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.redis;
+package com.keepthinker.wavemessaging.nosql.redis;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.apache.logging.log4j.LogManager;

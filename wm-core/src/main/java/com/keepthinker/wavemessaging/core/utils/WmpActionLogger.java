@@ -12,7 +12,10 @@ public class WmpActionLogger {
     private static final Logger CLIENT_LOGGER = LogManager.getLogger("client");
 
     public static void connect(String clientId, int version){
-        CLIENT_LOGGER.trace("CONNECT|{}|{}", clientId, version);
+        CLIENT_LOGGER.trace("CONNECT|clientId:{}|version:{}", clientId, version);
     }
 
+    public void puback(String clientId, long messageId) {
+        CLIENT_LOGGER.trace("PUBACK|clientId:{}|messageId:{}", clientId, messageId);
+    }
 }

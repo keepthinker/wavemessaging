@@ -1,6 +1,7 @@
 package com.keepthinker.wavemessaging.handler;
 
 import com.keepthinker.wavemessaging.core.ProtocolService;
+import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -25,6 +26,12 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
         LOGGER.debug("message from server|{}|{}", m.getMethod(), m.getVersion());
         ProtocolService<WmpMessage> service = serviceContainer.get(m.getMethod());
         service.handle(ctx, m);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        LOGGER.error("exception caught|remoteAddress:{}|cause:{}", WmUtils.getChannelRemoteAddress(ctx.channel()), cause);
+        ctx.close();
     }
 
 }

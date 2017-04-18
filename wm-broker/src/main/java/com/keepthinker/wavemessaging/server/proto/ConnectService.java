@@ -7,7 +7,7 @@ import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate;
+import com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
 import com.keepthinker.wavemessaging.server.SdkChannelManager;
 import com.keepthinker.wavemessaging.server.StatisticsService;

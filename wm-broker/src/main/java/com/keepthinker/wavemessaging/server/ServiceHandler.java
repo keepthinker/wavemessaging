@@ -47,11 +47,16 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 
-        ChannelInfo channelInfo = sdkChannelManager.getChannelInfo(ctx.channel());
-        LOGGER.debug("channel inactive|remoteAddress:{}|clientId:{}", WmUtils.getChannelRemoteAddress(ctx.channel()), channelInfo.getClientId() );
-
-        handlerChannelManager.get(channelInfo.getClientId()).writeAndFlush
-                (WmpUtils.createDisConnectMessage(channelInfo.getClientId()));
+        ChannelInfo channelInfoSdk = sdkChannelManager.getChannelInfo(ctx.channel());
+        if(channelInfoSdk != null) {
+            LOGGER.debug("channel inactive|remoteAddress:{}|clientId:{}", WmUtils.getChannelRemoteAddress(ctx.channel()), channelInfoSdk.getClientId());
+            sdkChannelManager.remove(channelInfoSdk.getClientId());
+            handlerChannelManager.get(channelInfoSdk.getClientId()).writeAndFlush
+                    (WmpUtils.createDisConnectMessage(channelInfoSdk.getClientId()));
+            return;
+        }
+        LOGGER.debug("channel inactive|remoteAddress:{}", WmUtils.getChannelRemoteAddress(ctx.channel()));
+        handlerChannelManager.remove(ctx.channel());
     }
 
     @Override

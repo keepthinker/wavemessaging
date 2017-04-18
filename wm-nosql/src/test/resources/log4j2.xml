@@ -2,7 +2,7 @@
 <Configuration status="warn" name="MyApp" packages="">
     <Appenders>
         <RollingRandomAccessFile name="RollingRandomAccessFile"
-                                 fileName="logs/wm-redis.log"
+                                 fileName="logs/wm-nosql.log"
                                  filePattern="logs/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>

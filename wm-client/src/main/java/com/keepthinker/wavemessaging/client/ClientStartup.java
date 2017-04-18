@@ -5,6 +5,7 @@ import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
 import com.keepthinker.wavemessaging.client.model.LoginResponse;
 import com.keepthinker.wavemessaging.client.model.RegisterResponse;
+import com.keepthinker.wavemessaging.client.model.ServerConfig;
 import com.keepthinker.wavemessaging.client.utils.JsonUtils;
 import com.keepthinker.wavemessaging.client.utils.PropertiesUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
@@ -46,31 +47,32 @@ public class ClientStartup {
 
     private Bootstrap b;
 
-    private String host;
-    private int port;
+    private ServerConfig serverConfig;
 
     @Autowired
     private ClientInfoDao clientInfoDao;
 
-    public ClientStartup(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public ClientStartup(){
+
     }
 
-    public String getHost() {
-        return host;
+
+    public ClientStartup(String host, int port) {
+        ServerConfig serverConfig = new ServerConfig();
+        serverConfig.setHost(host);
+        serverConfig.setPort(port);
+    }
+
+    public void setServerConfig(ServerConfig serverConfig){
+        this.serverConfig = serverConfig;
     }
 
     public void setHost(String host) {
-        this.host = host;
-    }
-
-    public int getPort() {
-        return port;
+        this.serverConfig.setHost(host);
     }
 
     public void setPort(int port) {
-        this.port = port;
+        this.serverConfig.setPort(port);
     }
 
     /**
@@ -146,11 +148,24 @@ public class ClientStartup {
         }
     }
 
+    private void checkConfig(){
+        if(serverConfig == null){
+            throw new RuntimeException("serverConfig is null");
+        }
+        if(serverConfig.getHost() == null){
+            throw new RuntimeException("serverConfig's host is invalid|" + serverConfig.getHost());
+        }
+        if(serverConfig.getPort() <= 0){
+            throw new RuntimeException("serverConfig's port is invalid" + serverConfig.getPort());
+        }
+    }
     /**
      * register --> connect --> ping
      * mock a user's operation
      */
     public void start() {
+
+        checkConfig();
 
         if (!register()) {
             LOGGER.error("failed in initializing register operation");
@@ -217,7 +232,7 @@ public class ClientStartup {
     public Channel tcpConnect() {
         ChannelFuture f;
         try {
-            f = b.connect(host, port).sync();
+            f = b.connect(serverConfig.getHost(), serverConfig.getPort()).sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return null;

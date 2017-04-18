@@ -1,4 +1,4 @@
-package com.keepthinker.wavemessaging.redis;
+package com.keepthinker.wavemessaging.nosql.redis;
 
 public class RedisUtils {
 
@@ -31,9 +31,10 @@ public class RedisUtils {
     public static String MESSAGE_ID = "messageId";
     public static String MESSAGE_CONTENT = "content";
     public static final String MESSAGE_CREATE_TIME = "createTime";
+    public static final String MESSAGE_TIMEOUT = "timeout";
 
-    private static String CLIENT_MESSAGE_SENDING_PREFIX = "ms:";
-    private static String CLIENT_MESSAGE_WAITING_PREFIX = "mw:";
+    private static String CLIENT_MESSAGE_SENDING_PREFIX = "cms:";
+    private static String CLIENT_MESSAGE_WAITING_PREFIX = "cmw:";
 
 
     public static String getClientKey(long clientId) {
@@ -52,12 +53,12 @@ public class RedisUtils {
         return MESSAGE_PREFIX + msgId;
     }
 
-    public static String getClientMessageSendingKey(long msgId){
-        return CLIENT_MESSAGE_SENDING_PREFIX + msgId;
+    public static String getClientMessageSendingKey(String clientId){
+        return CLIENT_MESSAGE_SENDING_PREFIX + clientId;
     }
 
-    public static String getClientMessageWaitingKey(long msgId){
-        return CLIENT_MESSAGE_WAITING_PREFIX + msgId;
+    public static String getClientMessageWaitingKey(String clientId){
+        return CLIENT_MESSAGE_WAITING_PREFIX + clientId;
     }
 
 

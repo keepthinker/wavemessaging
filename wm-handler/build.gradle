@@ -1,7 +1,7 @@
 dependencies {
 
     compile project(':wm-core')
-    compile project(':wm-redis')
+    compile project(':wm-nosql')
 
     compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
     compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"

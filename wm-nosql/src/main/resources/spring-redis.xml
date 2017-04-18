@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxTotal" value="${redis.pool.maxTotal}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"/>
+        <property name="minIdle" value="${redis.pool.minIdle}"/>
+    </bean>
+
+    <bean id="shardedJedisPool" class="com.keepthinker.wavemessaging.nosql.redis.ShardedJedisPoolFactory">
+        <property name="hostPorts" value="${redis.shard.hostPorts}"/>
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
+
+    <bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate">
+        <property name="shardedJedisPool" ref="shardedJedisPool"/>
+    </bean>
+
+    <bean id="msgIdGenConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${redis.msgid1.host}" p:port="${redis.msgid1.port}" p:pool-config-ref="poolConfig">
+    </bean>
+
+    <bean id="msgIdGenRedisTemplate1" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory"   ref="msgIdGenConnectionFactory" />
+    </bean>
+
+</beans> 

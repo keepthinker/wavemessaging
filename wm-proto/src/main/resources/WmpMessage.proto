@@ -27,13 +27,20 @@ enum WmpConnectReturnCode {
 }
 
 message WmpPublishMessageBody {
-    string content = 1;
+    int64 messageId = 1;
+    string content = 2;
     /** clientId or topic name, if many elements, separated by coma(,) */
-    string target = 2;
+    string target = 3;
     /** one or many --> a clientId or a topic contains many clientIds */
-    TargetType targetType = 3;
+    TargetType targetType = 4;
     /** message from where to where*/
-    Direction direction = 4;
+    Direction direction = 5;
+}
+
+message WmpPubAckMessageBody {
+    int64 messageId = 1;
+    string clientId = 2;
+
 }
 
 /** a chat group or a client tag or other self defined group */

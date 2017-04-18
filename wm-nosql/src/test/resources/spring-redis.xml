@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
 
-   <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <context:component-scan base-package="com.keepthinker.wavemessaging"/>
+    <context:property-placeholder location="classpath*:config/redis.properties" ignore-unresolvable="true"/>
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.pool.maxIdle}"/>
         <property name="maxTotal" value="${redis.pool.maxTotal}"/>
         <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}"/>
         <property name="minIdle" value="${redis.pool.minIdle}"/>
     </bean>
 
-    <bean id="shardedJedisPool" class="com.keepthinker.wavemessaging.redis.ShardedJedisPoolFactory">
+    <bean id="shardedJedisPool" class="com.keepthinker.wavemessaging.nosql.redis.ShardedJedisPoolFactory">
         <property name="hostPorts" value="${redis.shard.hostPorts}"/>
         <property name="poolConfig" ref="poolConfig"/>
     </bean>
 
-    <bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.redis.WmStringShardRedisTemplate">
+    <bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate">
         <property name="shardedJedisPool" ref="shardedJedisPool"/>
     </bean>
 

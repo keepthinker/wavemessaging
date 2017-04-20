@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ClientMessageWaitingRedisDaoImpl implements ClientMessageWaitingNoSqlDao {
     @Autowired
-    private WmStringShardRedisTemplate shardRedisTemplate;
+    private WmShardRedisTemplate shardRedisTemplate;
 
     @Override
     public void enqueue(String clientId, long messageId) {
@@ -16,7 +16,12 @@ public class ClientMessageWaitingRedisDaoImpl implements ClientMessageWaitingNoS
     }
 
     @Override
-    public long dequeue(String clientId) {
-        return Long.valueOf(shardRedisTemplate.rpop(RedisUtils.getClientMessageWaitingKey(clientId)));
+    public Long dequeue(String clientId) {
+        String messageId = shardRedisTemplate.rpop(RedisUtils.getClientMessageWaitingKey(clientId));
+        if(messageId == null){
+            return null;
+        }else {
+            return Long.valueOf(messageId);
+        }
     }
 }

@@ -21,4 +21,6 @@ public class Constants {
 
     public static int CONNECTION_STATUTS_ONLINE = 1;
     public static int CONNECTION_STATUTS_DISCONNECTED = 0;
+
+    public static int WMP_VERSION = 1;
 }

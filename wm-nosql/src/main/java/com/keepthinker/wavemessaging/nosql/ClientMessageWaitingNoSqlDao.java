@@ -7,5 +7,5 @@ public interface ClientMessageWaitingNoSqlDao {
 
     void enqueue(String clientId, long messageId);
 
-    long dequeue(String clientId);
+    Long dequeue(String clientId);
 }

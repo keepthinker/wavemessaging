@@ -18,7 +18,7 @@ import java.util.Map;
 public class ClientInfoRedisDaoImpl implements ClientInfoNoSqlDao {
 
     @Autowired
-    private WmStringShardRedisTemplate shardRedisTemplate;
+    private WmShardRedisTemplate shardRedisTemplate;
 
     @Override
     public void save(ClientInfo clientInfo) {

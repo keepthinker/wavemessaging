@@ -9,7 +9,7 @@ import com.keepthinker.wavemessaging.nosql.ClientMessageSendingNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.ClientMessageWaitingNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.MessageInfoNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.redis.RedisUtils;
-import com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate;
+import com.keepthinker.wavemessaging.nosql.redis.WmShardRedisTemplate;
 import com.keepthinker.wavemessaging.nosql.redis.model.MessageInfo;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.proto.WmpPublishMessage;
@@ -35,17 +35,17 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
     private MessageIdGenerator messageIdGenerator;
 
     @Autowired
-    private MessageInfoNoSqlDao messageInfoCacheDao;
+    private MessageInfoNoSqlDao messageInfoNoSqlDao;
 
     @Autowired
-    private ClientInfoNoSqlDao clientInfoCacheDao;
+    private ClientInfoNoSqlDao clientInfoNoSqlDao;
 
     @Autowired
     private ClientMessageSendingNoSqlDao cmSendingNoSqlDao;
     private ClientMessageWaitingNoSqlDao cmWaitingNoSqlDao;
 
     @Autowired
-    private WmStringShardRedisTemplate shardRedisTemplate;
+    private WmShardRedisTemplate shardRedisTemplate;
 
     @Autowired
     private ChannelHolder channelHolder;
@@ -77,21 +77,21 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
             messageInfo.setContent(body.getContent());
             messageInfo.setCreateTime(new Date());
             messageInfo.setTimeout(Constants.MESSAGE_DEFAULT_TIMEOUT);
-            messageInfoCacheDao.save(messageInfo);
+            messageInfoNoSqlDao.save(messageInfo);
 
             //send if online
             boolean isSet =  cmSendingNoSqlDao.setNotExist(clientIds[i], String.valueOf(newMsgId));
             if(isSet) {
-                String brokerPrivateAddress = clientInfoCacheDao.getBrokerPrivateAddress(RedisUtils.getClientKey(clientIds[i]));
-                Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
-                WmpMessageProtos.WmpPublishMessageBody newBody = body.toBuilder()
-                        .setTarget(clientIds[i])
-                        .setMessageId(messageInfo.getId())
-                        .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
-                        .build();
-                msg.setBody(newBody);
-                if(clientInfoCacheDao.getConnectionStatus(clientIds[i]) ==
-                        Constants.CONNECTION_STATUTS_ONLINE) {
+                if(clientInfoNoSqlDao.getConnectionStatus(clientIds[i]) == Constants.CONNECTION_STATUTS_ONLINE){
+                    String brokerPrivateAddress = clientInfoNoSqlDao.getBrokerPrivateAddress(RedisUtils.getClientKey(clientIds[i]));
+                    Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
+                    WmpMessageProtos.WmpPublishMessageBody newBody = body.toBuilder()
+                            .setTarget(clientIds[i])
+                            .setMessageId(messageInfo.getId())
+                            .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
+                            .build();
+                    msg.setBody(newBody);
+                    messageInfoNoSqlDao.savePublishMessageBody(newBody);
                     brokerChannel.writeAndFlush(msg);
                 }
             }else {

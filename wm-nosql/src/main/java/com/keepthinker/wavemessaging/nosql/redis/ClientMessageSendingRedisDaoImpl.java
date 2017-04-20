@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ClientMessageSendingRedisDaoImpl implements ClientMessageSendingNoSqlDao {
     @Autowired
-    private WmStringShardRedisTemplate shardRedisTemplate;
+    private WmShardRedisTemplate shardRedisTemplate;
 
     @Override
     public boolean setNotExist(String clientId, String messageId) {

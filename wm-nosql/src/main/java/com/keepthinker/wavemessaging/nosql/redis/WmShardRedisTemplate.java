@@ -2,10 +2,13 @@ package com.keepthinker.wavemessaging.nosql.redis;
 
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.util.SafeEncoder;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class WmStringShardRedisTemplate {
+public class WmShardRedisTemplate {
     private ShardedJedisPool shardedJedisPool;
 
     public ShardedJedisPool getShardedJedisPool() {
@@ -51,9 +54,23 @@ public class WmStringShardRedisTemplate {
         return reply;
     }
 
+    public Long hset(String key, String field, byte[] value) {
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Long reply = jedis.hset(SafeEncoder.encode(key), SafeEncoder.encode(field), value);
+        jedis.close();
+        return reply;
+    }
+
     public String hget(String key, String field) {
         ShardedJedis jedis = shardedJedisPool.getResource();
         String result = jedis.hget(key, field);
+        jedis.close();
+        return result;
+    }
+
+    public byte[] hgetByte(String key, String field) {
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        byte[] result = jedis.hget(SafeEncoder.encode(key), SafeEncoder.encode(field));
         jedis.close();
         return result;
     }
@@ -63,6 +80,16 @@ public class WmStringShardRedisTemplate {
         String result = jedis.hmset(key, map);
         jedis.close();
         return result;
+    }
+
+    public Map<String, String> hmget(String key, String... fields){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        List<String> result =  jedis.hmget(key, fields);
+        Map<String, String> map = new HashMap<>();
+        for(int i = 0; i < fields.length; i++){
+            map.put(fields[i], result.get(i));
+        }
+        return map;
     }
 
 
@@ -92,7 +119,7 @@ public class WmStringShardRedisTemplate {
 
     public String rpop(String key) {
         ShardedJedis jedis = shardedJedisPool.getResource();
-        String result = jedis.lpop(key);
+        String result = jedis.rpop(key);
         jedis.close();
         return result;
     }

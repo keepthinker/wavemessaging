@@ -17,7 +17,7 @@
         <property name="poolConfig" ref="poolConfig"/>
     </bean>
 
-    <bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.nosql.redis.WmStringShardRedisTemplate">
+    <bean id="wmStringRedisTemplate" class="com.keepthinker.wavemessaging.nosql.redis.WmShardRedisTemplate">
         <property name="shardedJedisPool" ref="shardedJedisPool"/>
     </bean>
 

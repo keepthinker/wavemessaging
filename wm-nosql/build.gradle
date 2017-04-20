@@ -3,6 +3,7 @@ ext {
     jedisVersion = '2.9.0'
 }
 dependencies {
+    compile project(':wm-proto')
     compile "org.springframework.data:spring-data-redis:${springDataRedisVersion}"
     compile "redis.clients:jedis:${jedisVersion}"
 }

@@ -3,9 +3,7 @@ package com.keepthinker.wavemessaging.server;
 import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageMethod;
-import com.keepthinker.wavemessaging.server.proto.ConnAckService;
-import com.keepthinker.wavemessaging.server.proto.ConnectService;
-import com.keepthinker.wavemessaging.server.proto.PingReqService;
+import com.keepthinker.wavemessaging.server.proto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -36,6 +34,8 @@ public class WmpServiceContainer {
         services.put(WmpMessageMethod.PINGREQ, context.getBean(PingReqService.class));
         services.put(WmpMessageMethod.CONNECT, context.getBean(ConnectService.class));
         services.put(WmpMessageMethod.CONNACK, context.getBean(ConnAckService.class));
+        services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
+        services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
     }
 
 }

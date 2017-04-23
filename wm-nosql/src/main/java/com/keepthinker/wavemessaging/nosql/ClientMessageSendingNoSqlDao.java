@@ -5,9 +5,9 @@ package com.keepthinker.wavemessaging.nosql;
  */
 public interface ClientMessageSendingNoSqlDao {
 
-    boolean setNotExist(String clientId, String messageId);
+    boolean setNotExist(String clientId, long messageId);
 
-    String get(String clientId);
+    Long get(String clientId);
 
     Long delete(String clientId);
 }

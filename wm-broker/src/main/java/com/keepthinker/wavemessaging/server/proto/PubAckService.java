@@ -8,12 +8,14 @@ import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
  * Created by keepthinker on 2017/4/16.
  */
+@Service
 public class PubAckService implements ProtocolService<WmpPubAckMessage> {
 
     private static final Logger LOGGER = LogManager.getLogger();

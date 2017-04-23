@@ -3,7 +3,7 @@ package com.keepthinker.wavemessaging.proto;
 /**
  * Created by keepthinker on 2017/4/4.
  */
-public class WmpDisConnectMessage extends WmpMessage{
+public class WmpDisconnectMessage extends WmpMessage{
 
     private WmpMessageProtos.WmpDisConnectMessageBody body;
 
@@ -15,7 +15,7 @@ public class WmpDisConnectMessage extends WmpMessage{
         this.body = body;
     }
 
-    public WmpDisConnectMessage() {
+    public WmpDisconnectMessage() {
         super.method = WmpMessageMethod.DISCONNECT;
     }
 }

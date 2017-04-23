@@ -87,6 +87,11 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
             rejectId(ctx, clientId);
             return;
         }
+        if(handlerChannelManager.size() == 0) {
+            LOGGER.warn("no available handler");
+            ctx.close();
+            return;
+        }
         sdkChannelManager.putChannel(clientId, ctx.channel());
         msg.setBody(msg.getBody().toBuilder().setBrokerAddress(WmUtils.getChannelLocalAddress(ctx.channel())).build());;
         handlerChannelManager.get(clientId).writeAndFlush(msg);

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Created by keepthinker on 2017/4/9.
  */
 @Component
-public class SendMessageAction {
+public class MessageAction {
 
     private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger();
 

@@ -1,8 +1,6 @@
 package com.keepthinker.wavemessaging.client;
 
-import com.keepthinker.wavemessaging.client.proto.ConnAckService;
-import com.keepthinker.wavemessaging.client.proto.PingRespService;
-import com.keepthinker.wavemessaging.client.proto.ProtocolService;
+import com.keepthinker.wavemessaging.client.proto.*;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,8 @@ public class WmpServiceContainer {
     public void init() {
         services.put(WmpMessageMethod.PINGRESP, context.getBean(PingRespService.class));
         services.put(WmpMessageMethod.CONNACK, context.getBean(ConnAckService.class));
+        services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
+        services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
     }
 
 }

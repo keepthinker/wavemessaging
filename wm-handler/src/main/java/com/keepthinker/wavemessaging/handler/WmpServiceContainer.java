@@ -33,11 +33,12 @@ public class WmpServiceContainer {
 
     @PostConstruct
     public void init() {
-        services.put(WmpMessageMethod.PINGRESP, context.getBean(PingRespService.class));
         services.put(WmpMessageMethod.CONNECT, context.getBean(ConnectService.class));
         services.put(WmpMessageMethod.CONNACK, context.getBean(ConnAckService.class));
+        services.put(WmpMessageMethod.DISCONNECT, context.getBean((DisconnectService.class)));
+        services.put(WmpMessageMethod.PINGRESP, context.getBean(PingRespService.class));
         services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
-        services.put(WmpMessageMethod.DISCONNECT, context.getBean((DisConnectService.class)));
+        services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
     }
 
 }

@@ -18,7 +18,7 @@ public class RedisMessageIdGenerator implements MessageIdGenerator{
     @Override
     public long generate() {
         RedisConnection redisConnection = msgIdGen.getConnectionFactory().getConnection();
-        long msgId = msgIdGen.getConnectionFactory().getConnection().incr("id.gen".getBytes());
+        long msgId = redisConnection.incr("id.gen".getBytes());
         redisConnection.close();
         return msgId;
     }

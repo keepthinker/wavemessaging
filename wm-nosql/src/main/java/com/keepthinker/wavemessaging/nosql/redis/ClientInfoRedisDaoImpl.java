@@ -5,6 +5,7 @@ import com.keepthinker.wavemessaging.nosql.redis.model.ClientInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPipeline;
 
 import java.util.Date;
@@ -22,7 +23,8 @@ public class ClientInfoRedisDaoImpl implements ClientInfoNoSqlDao {
 
     @Override
     public void save(ClientInfo clientInfo) {
-        ShardedJedisPipeline pipeline = shardRedisTemplate.getShardedJedisPool().getResource().pipelined();
+        ShardedJedis jedis = shardRedisTemplate.getShardedJedisPool().getResource();
+        ShardedJedisPipeline pipeline = jedis.pipelined();
 
         Map<String, String> map = new HashMap<>();
         if(StringUtils.isNotBlank(clientInfo.getUsername())) {
@@ -50,6 +52,7 @@ public class ClientInfoRedisDaoImpl implements ClientInfoNoSqlDao {
         pipeline.hmset(RedisUtils.getClientKey(clientInfo.getClientId()), map);
 
         pipeline.sync();
+        jedis.close();
     }
 
     public String getClientId(String usernameHash){

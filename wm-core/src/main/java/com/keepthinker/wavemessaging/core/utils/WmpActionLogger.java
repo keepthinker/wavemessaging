@@ -15,7 +15,7 @@ public class WmpActionLogger {
         CLIENT_LOGGER.trace("CONNECT|clientId:{}|version:{}", clientId, version);
     }
 
-    public void puback(String clientId, long messageId) {
+    public static void puback(String clientId, long messageId) {
         CLIENT_LOGGER.trace("PUBACK|clientId:{}|messageId:{}", clientId, messageId);
     }
 }

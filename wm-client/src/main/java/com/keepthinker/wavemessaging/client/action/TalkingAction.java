@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 public class TalkingAction {
 
     @Autowired
-    private SendMessageAction sendMessageAction;
+    private MessageAction messageAction;
 
     public void say(){
-        sendMessageAction.sendMessageToItself("Hello, I am talking to myself");
+        messageAction.sendMessageToItself("Hello, I am talking to myself");
     }
 }

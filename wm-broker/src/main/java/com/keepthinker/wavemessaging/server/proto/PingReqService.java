@@ -5,6 +5,7 @@ import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpPingReqMessage;
 import com.keepthinker.wavemessaging.server.SdkChannelManager;
+import com.keepthinker.wavemessaging.server.model.ChannelInfo;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +29,10 @@ public class PingReqService implements ProtocolService<WmpPingReqMessage> {
     public void handle(ChannelHandlerContext ctx, WmpPingReqMessage msg) {
         LOGGER.info("receive ping request|{}", WmUtils.getChannelRemoteAddress(ctx.channel()));
         ctx.channel().writeAndFlush(WmpUtils.PINGRESP);
-        sdkChannelManager.getChannelInfo(ctx.channel()).setAccessTime(new Date());
+
+        ChannelInfo channelInfo = sdkChannelManager.getChannelInfo(ctx.channel());
+        if(channelInfo != null){ //only do for sdk client channel
+            channelInfo.setAccessTime(new Date());
+        }
     }
 }

@@ -29,8 +29,8 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
             out.add(encodeConnecMessage(allocator, (WmpConnectMessage)msg));
         } else if (msg instanceof WmpConnAckMessage) {
             out.add(encodeConnAckMessage(allocator, (WmpConnAckMessage)msg));
-        } else if (msg instanceof WmpDisConnectMessage){
-            out.add(encodeDisConnectMessage(allocator, (WmpDisConnectMessage)msg));
+        } else if (msg instanceof WmpDisconnectMessage){
+            out.add(encodeDisConnectMessage(allocator, (WmpDisconnectMessage)msg));
         }  else if (msg instanceof WmpPingReqMessage) {
             out.add(encodePingReqMessage(allocator, (WmpPingReqMessage)msg));
         } else if (msg instanceof WmpPingRespMessage) {
@@ -62,7 +62,7 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
         return byteBuffer;
     }
 
-    private ByteBuf encodeDisConnectMessage(ByteBufAllocator byteBufAllocator, WmpDisConnectMessage msg){
+    private ByteBuf encodeDisConnectMessage(ByteBufAllocator byteBufAllocator, WmpDisconnectMessage msg){
         WmpDisConnectMessageBody body = msg.getBody();
         int bodySize = body.getSerializedSize();
         ByteBuf byteBuf = byteBufAllocator.buffer(METHOD_SIZE + bodySize);

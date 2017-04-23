@@ -2,10 +2,12 @@ package com.keepthinker.wavemessaging.nosql.redis;
 
 import com.keepthinker.wavemessaging.nosql.ClientMessageWaitingNoSqlDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by keepthinker on 2017/4/18.
  */
+@Repository
 public class ClientMessageWaitingRedisDaoImpl implements ClientMessageWaitingNoSqlDao {
     @Autowired
     private WmShardRedisTemplate shardRedisTemplate;

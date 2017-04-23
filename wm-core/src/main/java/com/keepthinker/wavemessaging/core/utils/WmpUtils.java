@@ -24,14 +24,16 @@ public class WmpUtils {
         WmpConnAckMessageBody messageBody = WmpConnAckMessageBody
                 .newBuilder().setReturnCode(returnCode).build();
         WmpConnAckMessage connAckMessage = new WmpConnAckMessage(messageBody);
+        connAckMessage.setVersion(Constants.WMP_VERSION);
         return connAckMessage;
     }
 
-    public static WmpDisConnectMessage createDisConnectMessage(String clientId){
-        WmpDisConnectMessage message = new WmpDisConnectMessage();
+    public static WmpDisconnectMessage createDisConnectMessage(String clientId){
+        WmpDisconnectMessage message = new WmpDisconnectMessage();
         WmpDisConnectMessageBody body = WmpDisConnectMessageBody.newBuilder()
                 .setClientId(clientId).build();
         message.setBody(body);
+        message.setVersion(Constants.WMP_VERSION);
         return message;
     }
 }

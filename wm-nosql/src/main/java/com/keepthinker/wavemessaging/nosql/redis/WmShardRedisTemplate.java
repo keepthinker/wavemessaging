@@ -89,6 +89,7 @@ public class WmShardRedisTemplate {
         for(int i = 0; i < fields.length; i++){
             map.put(fields[i], result.get(i));
         }
+        jedis.close();
         return map;
     }
 
@@ -96,6 +97,7 @@ public class WmShardRedisTemplate {
     public boolean exists(String key) {
         ShardedJedis jedis = shardedJedisPool.getResource();
         boolean result = jedis.exists(key);
+        jedis.close();
         return result;
     }
 

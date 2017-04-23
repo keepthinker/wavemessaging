@@ -5,11 +5,12 @@ import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpActionLogger;
 import com.keepthinker.wavemessaging.handler.utils.HandlerUtils;
+import com.keepthinker.wavemessaging.handler.utils.MessagePublishHelper;
+import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.redis.model.ClientInfo;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
-import com.keepthinker.wavemessaging.nosql.redis.model.ClientInfo;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +25,11 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
-    private ClientInfoNoSqlDao clientInfoCacheDao;
+    private ClientInfoNoSqlDao clientInfoNoSqlDao;
+
+    @Autowired
+    private MessagePublishHelper messagePublishHelper;
+
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {
@@ -34,7 +39,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
         String clientId = messageBody.getClientId();
 
         try {
-            String tokenRedis = clientInfoCacheDao.getToken(clientId);
+            String tokenRedis = clientInfoNoSqlDao.getToken(clientId);
             if (tokenRedis != null && tokenRedis.equals(messageBody.getToken())) {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
                         WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
@@ -45,9 +50,11 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
                 clientInfo.setConnectionStatus(Constants.CONNECTION_STATUTS_ONLINE);
                 clientInfo.setBrokerPrivateAddress(WmUtils.getChannelRemoteAddress(ctx.channel()));
                 clientInfo.setBrokerPublicAddress(messageBody.getBrokerAddress());
-                clientInfoCacheDao.save(clientInfo);
+                clientInfoNoSqlDao.save(clientInfo);
 
                 WmpActionLogger.connect(msg.getBody().getClientId(), msg.getVersion());
+               messagePublishHelper.findAvailableMessageToSend(clientId);
+
             } else {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
                         WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);
@@ -61,4 +68,6 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
             ctx.writeAndFlush(response);
         }
     }
+
+
 }

@@ -16,6 +16,6 @@ public class WmpPubAckMessage extends WmpMessage{
     }
 
     public WmpPubAckMessage(){
-        super.method = WmpMessageMethod.PUBLISH;
+        super.method = WmpMessageMethod.PUBACK;
     }
 }

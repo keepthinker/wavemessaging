@@ -12,7 +12,7 @@
     <context:property-placeholder location="wm.properties"/>
     <task:scheduled-tasks scheduler="qbScheduler">
         <task:scheduled ref="pingTimedTask" method="ping"
-                        cron="0/${ping.time.interval} * * * * ?"/>
+                        cron="0 0 1 * * ?"/>
         <task:scheduled ref="channelChecker" method="clearInvalid"
                         cron="0/${channel.check.interval} * * * * ?"/>
     </task:scheduled-tasks>

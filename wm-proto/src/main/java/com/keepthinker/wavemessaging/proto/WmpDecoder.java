@@ -55,8 +55,8 @@ public class WmpDecoder extends ReplayingDecoder {
 
     }
 
-    private WmpDisConnectMessage decodeDisConnectMessage(ByteBuf in, int version){
-        WmpDisConnectMessage message = new WmpDisConnectMessage();
+    private WmpDisconnectMessage decodeDisConnectMessage(ByteBuf in, int version){
+        WmpDisconnectMessage message = new WmpDisconnectMessage();
         message.setVersion(version);
 
         int bodySize = in.readInt();

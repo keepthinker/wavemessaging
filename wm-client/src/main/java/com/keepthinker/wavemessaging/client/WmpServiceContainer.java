@@ -33,6 +33,7 @@ public class WmpServiceContainer {
         services.put(WmpMessageMethod.CONNACK, context.getBean(ConnAckService.class));
         services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
         services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
+        services.put(WmpMessageMethod.SUBACK, context.getBean(SubAckService.class));
     }
 
 }

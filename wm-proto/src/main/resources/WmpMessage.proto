@@ -13,26 +13,16 @@ message WmpConnectMessageBody {
 
 message WmpConnAckMessageBody {
   string clientId = 1;
-  WmpConnectReturnCode returnCode = 3;
-}
-
-enum WmpConnectReturnCode {
-    ACCEPTED = 0;
-    REFUSED_UNACCEPTABLE_PROTOCOL_VERSION  = 1;
-    REFUSED_IDENTIFIER_REJECTED = 2;
-    /** not login or error token */
-    REFUSED_NOT_AUTHORIZED = 3;
-    /** server is busy or not able to provide service*/
-    REFUSED_SERVER_UNAVAILABLE = 4;
+  ConnectReturnCode returnCode = 2;
 }
 
 message WmpPublishMessageBody {
     int64 messageId = 1;
     string content = 2;
-    /** clientId or topic name, if many elements, separated by coma(,) */
-    string target = 3;
     /** one or many --> a clientId or a topic contains many clientIds */
-    TargetType targetType = 4;
+    TargetType targetType = 3;
+    /** clientId or topic name, if many elements, separated by coma(,) */
+    string target = 4;
     /** message from where to where*/
     Direction direction = 5;
 }
@@ -41,6 +31,36 @@ message WmpPubAckMessageBody {
     int64 messageId = 1;
     string clientId = 2;
 
+}
+
+message WmpSubscribeMessageBody {
+    string clientId = 1;
+    /** unique subscribe id for the clientId to differentiate different subscribe action*/
+    int32 subscribeId = 2;
+    TargetType targetType = 3;
+    repeated string topics = 4;
+
+}
+
+message WmpSubAckMessageBody {
+    string clientId = 1;
+    /** unique subscribe id for the clientId to differentiate different subscribe action*/
+    int32 subscribeId = 2;
+    SubscribeReturnCode returnCode = 3;
+}
+
+message WmpDisConnectMessageBody {
+    string clientId = 1;
+}
+
+enum ConnectReturnCode {
+    ACCEPTED = 0;
+    REFUSED_UNACCEPTABLE_PROTOCOL_VERSION  = 1;
+    REFUSED_IDENTIFIER_REJECTED = 2;
+    /** not login or error token */
+    REFUSED_NOT_AUTHORIZED = 3;
+    /** server is busy or not able to provide service*/
+    REFUSED_SERVER_UNAVAILABLE = 4;
 }
 
 /** a chat group or a client tag or other self defined group */
@@ -57,6 +77,8 @@ enum Direction {
     TO_SERVER_HANDLER = 1;
 }
 
-message WmpDisConnectMessageBody {
-    string clientId = 1;
+enum SubscribeReturnCode {
+    SUCCESS = 0;
+    FAILURE = 1;
 }
+

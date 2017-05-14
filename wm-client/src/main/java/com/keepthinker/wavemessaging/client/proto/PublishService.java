@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Created by keepthinker on 2017/4/21.
  */
 @Service
-public class PublishService implements ProtocolService<WmpPublishMessage>   {
+public class PublishService implements ProtocolService<WmpPublishMessage> {
 
     @Autowired
     private ClientInfoDao clientInfoDao;

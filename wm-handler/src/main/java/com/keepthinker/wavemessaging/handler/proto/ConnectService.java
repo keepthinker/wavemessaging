@@ -42,7 +42,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
             String tokenRedis = clientInfoNoSqlDao.getToken(clientId);
             if (tokenRedis != null && tokenRedis.equals(messageBody.getToken())) {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
-                        WmpMessageProtos.WmpConnectReturnCode.ACCEPTED);
+                        WmpMessageProtos.ConnectReturnCode.ACCEPTED);
                 ctx.writeAndFlush(response);
 
                 ClientInfo clientInfo = new ClientInfo();
@@ -57,14 +57,14 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
 
             } else {
                 WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
-                        WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);
+                        WmpMessageProtos.ConnectReturnCode.REFUSED_NOT_AUTHORIZED);
                 ctx.writeAndFlush(response);
                 LOGGER.warn("rejected token({}) with identifier({})", messageBody.getToken(), clientId);
             }
         }catch(Exception e){
             LOGGER.error("unexpected error|{}|{}", clientId, e);
             WmpConnAckMessage response = HandlerUtils.createSdkConnAckResultMessage(clientId,
-                    WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED);
+                    WmpMessageProtos.ConnectReturnCode.REFUSED_NOT_AUTHORIZED);
             ctx.writeAndFlush(response);
         }
     }

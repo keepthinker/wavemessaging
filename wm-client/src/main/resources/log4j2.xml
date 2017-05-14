@@ -23,13 +23,10 @@
             <AppenderRef ref="STDOUT"/>
         </Root>
         <Logger name="io.netty" level="info">
-            <AppenderRef ref="STDOUT"/>
         </Logger>
         <Logger name="org.springframework" level="info">
-            <AppenderRef ref="STDOUT"/>
         </Logger>
         <Logger name="org.apache" level="info">
-            <AppenderRef ref="STDOUT"/>
         </Logger>
     </Loggers>
 </Configuration>

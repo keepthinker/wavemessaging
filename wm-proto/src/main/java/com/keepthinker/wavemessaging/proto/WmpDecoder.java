@@ -46,6 +46,12 @@ public class WmpDecoder extends ReplayingDecoder {
                 case PUBACK:
                     out.add(decodePubAckMessage(in, version));
                     break;
+                case SUBSCRIBE:
+                    out.add(decodeSubscribeMessage(in, version));
+                    break;
+                case SUBACK:
+                    out.add(decodeSubAckMessage(in, version));
+                    break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
             }
@@ -67,7 +73,7 @@ public class WmpDecoder extends ReplayingDecoder {
             message.setBody(body);
             return message;
         } catch (InvalidProtocolBufferException e) {
-            LOGGER.error("error in decoding connect messsage body",  e);
+            LOGGER.error("error in decoding disconnect messsage body",  e);
             return null;
         }
     }
@@ -137,10 +143,44 @@ public class WmpDecoder extends ReplayingDecoder {
             message.setBody(body);
             return message;
         }catch (InvalidProtocolBufferException e) {
-            LOGGER.error("error in decoding publish messsage body",  e);
+            LOGGER.error("error in decoding puback messsage body",  e);
             return null;
         }
+    }
 
+    private WmpSubscribeMessage decodeSubscribeMessage(ByteBuf in, int version){
+        WmpSubscribeMessage message = new WmpSubscribeMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpSubscribeMessageBody body = WmpSubscribeMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding subscribe messsage body",  e);
+            return null;
+        }
+    }
+
+
+    private WmpSubAckMessage decodeSubAckMessage(ByteBuf in, int version){
+        WmpSubAckMessage message = new WmpSubAckMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpSubAckMessageBody body = WmpSubAckMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding suback messsage body",  e);
+            return null;
+        }
     }
 
 }

@@ -39,6 +39,7 @@ public class WmpServiceContainer {
         services.put(WmpMessageMethod.PINGRESP, context.getBean(PingRespService.class));
         services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
         services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
+        services.put(WmpMessageMethod.SUBSCRIBE, context.getBean(SubscribeService.class));
     }
 
 }

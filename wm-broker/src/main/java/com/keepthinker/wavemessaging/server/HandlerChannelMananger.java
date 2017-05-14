@@ -47,8 +47,12 @@ public class HandlerChannelMananger {
     public Channel get(String clientId) {
         r.lock();
         try {
+            int size = HANDLER_CHANNELS.size();
+            if(size == 0){
+                return null;
+            }
             int hashValue = hash(clientId);
-            return HANDLER_CHANNELS.get(hashValue % HANDLER_CHANNELS.size());
+            return HANDLER_CHANNELS.get(hashValue % size);
         } finally {
             r.unlock();
         }

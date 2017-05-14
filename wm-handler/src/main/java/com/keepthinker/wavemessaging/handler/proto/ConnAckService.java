@@ -24,7 +24,7 @@ public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnAckMessage msg) {
-        if(msg.getBody().getReturnCode() == WmpMessageProtos.WmpConnectReturnCode.ACCEPTED) {
+        if(msg.getBody().getReturnCode() == WmpMessageProtos.ConnectReturnCode.ACCEPTED) {
             ZkHanlderUtils.registerReceiver();
             channelHolder.add(ctx.channel());
             LOGGER.info("connect to broker successfully|{}|{}|{}", msg.getMethod(), msg.getVersion(), msg.getBody());

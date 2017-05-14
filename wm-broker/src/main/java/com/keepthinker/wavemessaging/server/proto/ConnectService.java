@@ -7,10 +7,10 @@ import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpConnAckMessage;
 import com.keepthinker.wavemessaging.proto.WmpConnectMessage;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
-import com.keepthinker.wavemessaging.nosql.redis.WmShardRedisTemplate;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
 import com.keepthinker.wavemessaging.server.SdkChannelManager;
 import com.keepthinker.wavemessaging.server.StatisticsService;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -38,9 +38,6 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
 
     @Resource
     private SdkChannelManager sdkChannelManager;
-
-    @Resource
-    private WmShardRedisTemplate redisTemplate;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnectMessage msg) {
@@ -94,7 +91,12 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
         }
         sdkChannelManager.putChannel(clientId, ctx.channel());
         msg.setBody(msg.getBody().toBuilder().setBrokerAddress(WmUtils.getChannelLocalAddress(ctx.channel())).build());;
-        handlerChannelManager.get(clientId).writeAndFlush(msg);
+        Channel channel = handlerChannelManager.get(clientId);
+        if(channel != null && channel.isActive()) {
+            channel .writeAndFlush(msg);
+        }else{
+            LOGGER.error("channel is null or inactive|channel:{}", channel);
+        }
 
     }
 }

@@ -30,7 +30,7 @@ public class HandlerUtils {
      * @param clientId
      * @return
      */
-    public static WmpConnAckMessage createSdkConnAckResultMessage(String clientId, WmpMessageProtos.WmpConnectReturnCode returnCode) {
+    public static WmpConnAckMessage createSdkConnAckResultMessage(String clientId, WmpMessageProtos.ConnectReturnCode returnCode) {
         WmpConnAckMessage wmpConnAckMessage = new WmpConnAckMessage();
         WmpMessageProtos.WmpConnAckMessageBody messageBody = WmpMessageProtos.WmpConnAckMessageBody.newBuilder()
                 .setClientId(clientId).setReturnCode(returnCode).build();

@@ -8,12 +8,11 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.keepthinker.wavemessaging"/>
-    <context:property-placeholder location="classpath:wm.properties,classpath*:config/redis.properties"/>
+    <context:property-placeholder location="classpath:wm.properties"/>
 
     <bean id="serverStartup" class="com.keepthinker.wavemessaging.server.ServerStartup">
         <constructor-arg name="port" value="${server.port}"/>
     </bean>
 
     <import resource="spring-quartz.xml"/>
-    <import resource="classpath*:spring-redis.xml"/>
 </beans>

@@ -27,8 +27,12 @@ public class PubAckService implements ProtocolService<WmpPubAckMessage> {
     public void handle(ChannelHandlerContext ctx, WmpPubAckMessage msg) {
          String clientId = msg.getBody().getClientId();
          if(StringUtils.isNotBlank(clientId) && StringUtils.isNumeric(clientId)) {
-            Channel channel = handlerChannelManager.get(clientId);
-            channel.writeAndFlush(msg);
+             Channel channel = handlerChannelManager.get(clientId);
+             if(channel != null && channel.isActive()) {
+                 channel .writeAndFlush(msg);
+             }else{
+                 LOGGER.error("channel is null or inactive|channel:{}", channel);
+             }
         }else{
             LOGGER.warn("illegal client id|{}", msg.getBody().getClientId());
         }

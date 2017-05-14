@@ -5,6 +5,7 @@ import com.keepthinker.wavemessaging.core.utils.WmUtils;
 import com.keepthinker.wavemessaging.core.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
 import com.keepthinker.wavemessaging.server.model.ChannelInfo;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -51,8 +52,13 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
         if(channelInfoSdk != null) {
             LOGGER.debug("channel inactive|remoteAddress:{}|clientId:{}", WmUtils.getChannelRemoteAddress(ctx.channel()), channelInfoSdk.getClientId());
             sdkChannelManager.remove(channelInfoSdk.getClientId());
-            handlerChannelManager.get(channelInfoSdk.getClientId()).writeAndFlush
-                    (WmpUtils.createDisConnectMessage(channelInfoSdk.getClientId()));
+            Channel channel = handlerChannelManager.get(channelInfoSdk.getClientId());
+            if(channel != null && channel.isActive()) {
+                channel.writeAndFlush
+                        (WmpUtils.createDisConnectMessage(channelInfoSdk.getClientId()));
+            }else{
+                LOGGER.error("channel is null or inactive|channel:{}", channel);
+            }
             return;
         }
         LOGGER.debug("channel inactive|remoteAddress:{}", WmUtils.getChannelRemoteAddress(ctx.channel()));

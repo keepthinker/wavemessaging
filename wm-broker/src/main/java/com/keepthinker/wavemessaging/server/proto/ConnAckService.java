@@ -25,15 +25,15 @@ public class ConnAckService implements ProtocolService<WmpConnAckMessage> {
     @Override
     public void handle(ChannelHandlerContext ctx, WmpConnAckMessage msg) {
         Channel channel = sdkChannelManager.getChannel(msg.getBody().getClientId());
-        if(msg.getBody().getReturnCode() == WmpMessageProtos.WmpConnectReturnCode.ACCEPTED) {
+        if(msg.getBody().getReturnCode() == WmpMessageProtos.ConnectReturnCode.ACCEPTED) {
             ChannelInfo info = sdkChannelManager.getChannelInfo(channel);
             info.setAccessTime(new Date());
             channel.writeAndFlush(WmpUtils.CONNACK_ACCEPTED_MESSAGE);
 
         }else{
-            if(msg.getBody().getReturnCode() == WmpMessageProtos.WmpConnectReturnCode.REFUSED_NOT_AUTHORIZED) {
+            if(msg.getBody().getReturnCode() == WmpMessageProtos.ConnectReturnCode.REFUSED_NOT_AUTHORIZED) {
                 channel.writeAndFlush(WmpUtils.CONNACK_REFUSED_INVALID_CLIENT_ID_OR_TOKEN_MESSAGE);
-            }else if(msg.getBody().getReturnCode() == WmpMessageProtos.WmpConnectReturnCode.REFUSED_IDENTIFIER_REJECTED){
+            }else if(msg.getBody().getReturnCode() == WmpMessageProtos.ConnectReturnCode.REFUSED_IDENTIFIER_REJECTED){
                 channel.writeAndFlush((WmpUtils.CONNECTION_REFUSED_CLIENT_ID_REJECTED_MESSAGE));
             }else{
                 channel.writeAndFlush(WmpUtils.CONNACK_REFUSED_INVALID_CLIENT_ID_OR_TOKEN_MESSAGE);

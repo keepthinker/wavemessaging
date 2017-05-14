@@ -39,6 +39,10 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
             out.add(endodePublishMessage(allocator, (WmpPublishMessage)msg));
         }else if (msg instanceof  WmpPubAckMessage) {
             out.add(endodePubAckMessage(allocator, (WmpPubAckMessage) msg));
+        }else if (msg instanceof  WmpSubscribeMessage) {
+            out.add(encodeSubscribeMessage(allocator, (WmpSubscribeMessage) msg));
+        }else if (msg instanceof  WmpSubAckMessage) {
+            out.add(encodeSubAckMessage(allocator, (WmpSubAckMessage) msg));
         }
     }
 
@@ -103,4 +107,25 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
         byteBuffer.writeBytes(body.toByteArray());
         return byteBuffer;
     }
+
+    private ByteBuf encodeSubscribeMessage(ByteBufAllocator byteBufAllocator, WmpSubscribeMessage msg){
+        WmpSubscribeMessageBody body = msg.getBody();
+        int bodySize = body.getSerializedSize();
+        ByteBuf byteBuffer = byteBufAllocator.buffer(METHOD_SIZE + bodySize);
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
+        byteBuffer.writeInt(bodySize);
+        byteBuffer.writeBytes(body.toByteArray());
+        return byteBuffer;
+    }
+
+    private ByteBuf encodeSubAckMessage(ByteBufAllocator byteBufAllocator, WmpSubAckMessage msg){
+        WmpSubAckMessageBody body = msg.getBody();
+        int bodySize = body.getSerializedSize();
+        ByteBuf byteBuffer = byteBufAllocator.buffer(METHOD_SIZE + bodySize);
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
+        byteBuffer.writeInt(bodySize);
+        byteBuffer.writeBytes(body.toByteArray());
+        return byteBuffer;
+    }
+
 }

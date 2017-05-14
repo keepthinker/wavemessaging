@@ -7,35 +7,39 @@ public class RedisUtils {
     /**
      * Hash: ClientId -- ${field} --> value
      */
-    public static String CLIENT_USERNAME = "username";
-    public static String CLIENT_PASSWORD = "password";
-    public static String CLIENT_TOKEN = "token";
-    public static String CLIENT_ACCESS_TIME = "accessTime";
+    public static final String CLIENT_USERNAME = "username";
+    public static final String CLIENT_PASSWORD = "password";
+    public static final String CLIENT_TOKEN = "token";
+    public static final String CLIENT_ACCESS_TIME = "accessTime";
     /** 0: disconnected, 1: online*/
-    public static String CLIENT_CONNECTION_STATUS = "connectionStatus";
-    public static String CLIENT_DISCONNECT_TIME = "disconnectTime";
+    public static final String CLIENT_CONNECTION_STATUS = "connectionStatus";
+    public static final String CLIENT_DISCONNECT_TIME = "disconnectTime";
     public static final String CLIENT_BROKER_PUBLIC_ADDRESS = "brokerPublicAddress";
     public static final String CLIENT_BROKER_PRIVATE_ADDRESS = "brokerPrivateAddress";
 
     /**
      * Hash: Usernam -- ${field} --> value
      */
-    public static String UN_PASSWORD = CLIENT_PASSWORD;
-    public static String UN_CLIENT_ID = "clientId";
+    public static final String UN_PASSWORD = CLIENT_PASSWORD;
+    public static final String UN_CLIENT_ID = "clientId";
 
-    public static String GENERAL_STATISTICS = "generalStatistics";
-//    public static String GENERAL_STATISTICS_SDK_SIZE = "sdkSize";
-//    public static String GENERAL_STATISTICS_HANDLER_SIZE = "handlerSize";
+    public static final String GENERAL_STATISTICS = "generalStatistics";
+//    public static final String GENERAL_STATISTICS_SDK_SIZE = "sdkSize";
+//    public static final String GENERAL_STATISTICS_HANDLER_SIZE = "handlerSize";
 
-    private static String MESSAGE_PREFIX = "msg:";
-    public static String MESSAGE_ID = "messageId";
-    public static String MESSAGE_CONTENT = "content";
+    private static final String MESSAGE_PREFIX = "msg:";
+    public static final String MESSAGE_ID = "messageId";
+    public static final String MESSAGE_CONTENT = "content";
     public static final String MESSAGE_CREATE_TIME = "createTime";
     public static final String MESSAGE_TIMEOUT = "timeout";
     public static final String MESSAGE_PUBLISH_BODY = "publishBody";
 
-    private static String CLIENT_MESSAGE_SENDING_PREFIX = "cms:";
-    private static String CLIENT_MESSAGE_WAITING_PREFIX = "cmw:";
+    private static final String CLIENT_MESSAGE_SENDING_PREFIX = "cms:";
+    private static final String CLIENT_MESSAGE_WAITING_PREFIX = "cmw:";
+
+    private static final String TOPIC_GENERAL_PREFIX = "topic:general:";
+    /** scatter topic clientIds to different bucket */
+    private static final int TOPIC_BUCKET_SIZE = 128;
 
 
     public static String getClientKey(long clientId) {
@@ -62,5 +66,13 @@ public class RedisUtils {
         return CLIENT_MESSAGE_WAITING_PREFIX + clientId;
     }
 
+
+    public static String getTopicGeneralPrefix(String topicGeneral, long clientId) {
+        return new StringBuilder(64)
+                .append(TOPIC_GENERAL_PREFIX)
+                .append(topicGeneral)
+                .append(":")
+                .append(clientId % TOPIC_BUCKET_SIZE).toString();
+    }
 
 }

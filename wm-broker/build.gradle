@@ -9,7 +9,6 @@ dispatch subscribe, unsubscribe, publish, puback to other service.
 dependencies {
 
     compile project(':wm-core')
-    compile project(':wm-nosql')
     compile project(':wm-proto')
 
     compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"

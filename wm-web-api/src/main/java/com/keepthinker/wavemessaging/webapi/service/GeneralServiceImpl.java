@@ -26,7 +26,7 @@ public class GeneralServiceImpl implements GeneralService {
     private ClientInfoMapper clientInfoMapper;
 
     @Autowired
-    private ClientInfoNoSqlDao clientInfoCacheDao;
+    private ClientInfoNoSqlDao clientInfoNoSqlDao;
 
     @Transactional
     @Override
@@ -57,19 +57,19 @@ public class GeneralServiceImpl implements GeneralService {
         clientInfoRedis.setClientId(clientInfo.getClientId());
         clientInfoRedis.setUsername(clientInfo.getUsername());
         clientInfoRedis.setPassword(clientInfo.getPassword());
-        clientInfoCacheDao.save(clientInfoRedis);
+        clientInfoNoSqlDao.save(clientInfoRedis);
     }
 
     @Override
     public LoginResult login(LoginInfo loginInfo) {
         String token = UUID.randomUUID().toString();
-        String clientId = clientInfoCacheDao.getClientId(CryptoUtils.hash(loginInfo.getUsername()));
+        String clientId = clientInfoNoSqlDao.getClientId(CryptoUtils.hash(loginInfo.getUsername()));
         if(StringUtils.isBlank(clientId)) {
             ClientInfo clientInfo = clientInfoMapper.selectByUsername(CryptoUtils.hash(loginInfo.getUsername()));
             saveClientInfoToRedis(clientInfo);
             clientId = String.valueOf(clientInfo.getClientId());
         }
-        clientInfoCacheDao.setToken(clientId, token);
+        clientInfoNoSqlDao.setToken(clientId, token);
         LoginResult result = new LoginResult(clientId, token);
         return result;
     }

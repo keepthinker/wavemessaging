@@ -54,7 +54,11 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         String[] clientIds = StringUtils.split(publishMessage.getBody().getTarget(),',');
         if(clientIds.length >= 1 && StringUtils.isNotBlank(clientIds[0]) && StringUtils.isNumeric(clientIds[0])) {
             Channel channel = handlerChannelManager.get(clientIds[0]);
-            channel.writeAndFlush(publishMessage);
+            if(channel != null && channel.isActive()) {
+                channel .writeAndFlush(publishMessage);
+            }else{
+                LOGGER.error("channel is null or inactive|channel:{}", channel);
+            }
         }else{
             LOGGER.warn("illegal client id|{}", publishMessage.getBody().getTarget());
         }

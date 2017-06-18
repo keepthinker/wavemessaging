@@ -43,6 +43,10 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
             out.add(encodeSubscribeMessage(allocator, (WmpSubscribeMessage) msg));
         }else if (msg instanceof  WmpSubAckMessage) {
             out.add(encodeSubAckMessage(allocator, (WmpSubAckMessage) msg));
+        }else if (msg instanceof  WmpUnsubscribeMessage) {
+            out.add(encodeUnsubscribeMessage(allocator, (WmpUnsubscribeMessage) msg));
+        }else if (msg instanceof WmpUnsubAckMessage) {
+            out.add(encodeUnsubackMessage(allocator, (WmpUnsubAckMessage)msg));
         }
     }
 
@@ -120,6 +124,26 @@ public class WmpEncoder extends MessageToMessageEncoder<WmpMessage> {
 
     private ByteBuf encodeSubAckMessage(ByteBufAllocator byteBufAllocator, WmpSubAckMessage msg){
         WmpSubAckMessageBody body = msg.getBody();
+        int bodySize = body.getSerializedSize();
+        ByteBuf byteBuffer = byteBufAllocator.buffer(METHOD_SIZE + bodySize);
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
+        byteBuffer.writeInt(bodySize);
+        byteBuffer.writeBytes(body.toByteArray());
+        return byteBuffer;
+    }
+
+    private ByteBuf encodeUnsubscribeMessage(ByteBufAllocator byteBufAllocator, WmpUnsubscribeMessage msg){
+        WmpUnsubscribeMessageBody body = msg.getBody();
+        int bodySize = body.getSerializedSize();
+        ByteBuf byteBuffer = byteBufAllocator.buffer(METHOD_SIZE + bodySize);
+        byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);
+        byteBuffer.writeInt(bodySize);
+        byteBuffer.writeBytes(body.toByteArray());
+        return byteBuffer;
+    }
+
+    private ByteBuf encodeUnsubackMessage(ByteBufAllocator byteBufAllocator, WmpUnsubAckMessage msg){
+        WmpUnsubAckMessageBody body = msg.getBody();
         int bodySize = body.getSerializedSize();
         ByteBuf byteBuffer = byteBufAllocator.buffer(METHOD_SIZE + bodySize);
         byteBuffer.writeByte(msg.getMethod().getCode() | msg.getVersion() << 4);

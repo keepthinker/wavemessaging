@@ -48,7 +48,7 @@ public class ConcurrentTool {
                     10L, TimeUnit.MINUTES,
                     concurrentTool.blockingQueue,
                     new ExceptionLogThreadFactory(),
-                    new AbortAndLogPolicy(concurrentTool.threadRejectedListener));
+                    new DiscardAndLogPolicy(concurrentTool.threadRejectedListener));
             return concurrentTool;
         }
 
@@ -86,25 +86,20 @@ public class ConcurrentTool {
         return blockingQueue.size() < maxWorkQueueSize;
     }
 
-    private static class AbortAndLogPolicy implements RejectedExecutionHandler{
+    private static class DiscardAndLogPolicy implements RejectedExecutionHandler{
 
         private ThreadRejectedListener threadRejectedListener;
 
-        public AbortAndLogPolicy(ThreadRejectedListener threadAbortListeners){
+        public DiscardAndLogPolicy(ThreadRejectedListener threadAbortListeners){
             this.threadRejectedListener = threadAbortListeners;
         }
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            RejectedExecutionException exception =  new RejectedExecutionException("Task " + r.toString() +
-                    " rejected from " +
-                    executor.toString());
-            LOGGER.error("Thread pool executor is full and can't accept more task", exception);
-
+            LOGGER.error("Thread pool executor is full and can't accept more task");
             if(threadRejectedListener != null) {
                 threadRejectedListener.abortEvent(r);
             }
-            throw exception;
         }
     }
 

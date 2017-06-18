@@ -5,6 +5,7 @@ package com.keepthinker.wavemessaging.nosql;
  */
 public interface TopicNoSqlDao {
 
-    Long save(String topicKey, String clientId);
+    Long save(String topicKey, String... clientId);
 
+    Long delete(String topicKey, String... clientId);
 }

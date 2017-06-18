@@ -1,5 +1,6 @@
 package com.keepthinker.wavemessaging.server.proto;
 
+import com.google.protobuf.ProtocolStringList;
 import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.proto.WmpSubscribeMessage;
 import com.keepthinker.wavemessaging.server.HandlerChannelMananger;
@@ -25,7 +26,9 @@ public class SubscribeService implements ProtocolService<WmpSubscribeMessage>{
     @Override
     public void handle(ChannelHandlerContext ctx, WmpSubscribeMessage msg) {
         String clientId = msg.getBody().getClientId();
-        if(StringUtils.isNotBlank(clientId) && StringUtils.isNumeric(clientId)) {
+        ProtocolStringList list =  msg.getBody().getTopicsList();
+        if(StringUtils.isNotBlank(clientId) && StringUtils.isNumeric(clientId)
+                && list.size() > 0) {
             Channel channel = handlerChannelManager.get(clientId);
             if(channel != null && channel.isActive()) {
                 channel .writeAndFlush(msg);

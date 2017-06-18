@@ -1,14 +1,46 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'idea'
+
+version = '1.0'
+war.baseName = 'wm-client'
+
+ext {
+    tomcatVersion = '7.0.59'
+}
+
 dependencies {
 
     compile project(':wm-proto')
 
     compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
     compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"
+
     compile "org.springframework:spring-context-support:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-orm:${springVersion}"
+
+    compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+
+
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${jacksonVersion}"
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${jacksonVersion}"
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${jacksonVersion}"
     compile group: 'commons-net', name: 'commons-net', version: '3.5'
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: "${protobufVersion}"
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }

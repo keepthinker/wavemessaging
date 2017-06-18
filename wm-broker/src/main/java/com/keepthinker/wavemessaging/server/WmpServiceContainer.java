@@ -38,6 +38,8 @@ public class WmpServiceContainer {
         services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
         services.put(WmpMessageMethod.SUBSCRIBE, context.getBean(SubscribeService.class));
         services.put(WmpMessageMethod.SUBACK, context.getBean(SubAckService.class));
+        services.put(WmpMessageMethod.UNSUBSCRIBE, context.getBean(UnsubscribeService.class));
+        services.put(WmpMessageMethod.UNSUBACK, context.getBean(UnsubAckService.class));
     }
 
 }

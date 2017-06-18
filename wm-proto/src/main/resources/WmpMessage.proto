@@ -53,6 +53,19 @@ message WmpDisConnectMessageBody {
     string clientId = 1;
 }
 
+message WmpUnsubscribeMessageBody {
+    string clientId = 1;
+    int32 unsubscribeId = 2;
+    TargetType targetType = 3;
+    repeated string topics = 4;
+}
+
+message WmpUnsubAckMessageBody{
+    string clientId = 1;
+    int32 unsubscribeId = 2;
+    UnsubscribeReturnCode returnCode = 3;
+}
+
 enum ConnectReturnCode {
     ACCEPTED = 0;
     REFUSED_UNACCEPTABLE_PROTOCOL_VERSION  = 1;
@@ -78,7 +91,12 @@ enum Direction {
 }
 
 enum SubscribeReturnCode {
-    SUCCESS = 0;
-    FAILURE = 1;
+    SUB_SUCCESS = 0;
+    SUB_FAILURE = 1;
+}
+
+enum UnsubscribeReturnCode {
+    UNSUB_SUCCESS = 0;
+    UNSUB_FAILURE = 1;
 }
 

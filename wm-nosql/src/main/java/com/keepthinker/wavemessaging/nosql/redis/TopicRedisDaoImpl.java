@@ -14,7 +14,14 @@ public class TopicRedisDaoImpl implements TopicNoSqlDao{
     private WmShardRedisTemplate shardRedisTemplate;
 
     @Override
-    public Long save(String topicKey, String clientId) {
-        return shardRedisTemplate.hset(topicKey, clientId, "");
+    public Long save(String topicKey, String... clientId) {
+        return shardRedisTemplate.sadd(topicKey, clientId);
     }
+
+    @Override
+    public Long delete(String topicKey, String... clientId) {
+        return shardRedisTemplate.srem(topicKey, clientId);
+    }
+
+
 }

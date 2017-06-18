@@ -52,6 +52,12 @@ public class WmpDecoder extends ReplayingDecoder {
                 case SUBACK:
                     out.add(decodeSubAckMessage(in, version));
                     break;
+                case UNSUBSCRIBE:
+                    out.add(decodeUnsubscribeMessage(in, version));
+                    break;
+                case UNSUBACK:
+                    out.add(decodeUnsubAckMessage(in, version));
+                    break;
                 default:
                     LOGGER.error("method code unknow|{}", wmpMethod);
             }
@@ -165,7 +171,6 @@ public class WmpDecoder extends ReplayingDecoder {
         }
     }
 
-
     private WmpSubAckMessage decodeSubAckMessage(ByteBuf in, int version){
         WmpSubAckMessage message = new WmpSubAckMessage();
         message.setVersion(version);
@@ -179,6 +184,41 @@ public class WmpDecoder extends ReplayingDecoder {
             return message;
         }catch (InvalidProtocolBufferException e) {
             LOGGER.error("error in decoding suback messsage body",  e);
+            return null;
+        }
+    }
+
+
+    private WmpUnsubscribeMessage decodeUnsubscribeMessage(ByteBuf in, int version){
+        WmpUnsubscribeMessage message = new WmpUnsubscribeMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpUnsubscribeMessageBody body = WmpUnsubscribeMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding unsubscribe messsage body",  e);
+            return null;
+        }
+    }
+
+    private WmpUnsubAckMessage decodeUnsubAckMessage(ByteBuf in, int version){
+        WmpUnsubAckMessage message = new WmpUnsubAckMessage();
+        message.setVersion(version);
+
+        int bodySize = in.readInt();
+        byte[] bytes = new byte[bodySize];
+        in.readBytes(bytes);
+        try {
+            WmpUnsubAckMessageBody body = WmpUnsubAckMessageBody.parseFrom(bytes);
+            message.setBody(body);
+            return message;
+        }catch (InvalidProtocolBufferException e) {
+            LOGGER.error("error in decoding unsuback messsage body",  e);
             return null;
         }
     }

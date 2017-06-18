@@ -44,7 +44,7 @@ public class SubscribeService implements ProtocolService<WmpSubscribeMessage>{
                 handleTopicGeneral(body.getClientId(), body.getSubscribeId(), topics);
                 break;
             default:
-                LOGGER.error("unrecognized save target type|{}", body.getTargetType());
+                LOGGER.error("unrecognized target type|{}", body.getTargetType());
         }
     }
 
@@ -58,9 +58,9 @@ public class SubscribeService implements ProtocolService<WmpSubscribeMessage>{
 
         WmpMessageProtos.SubscribeReturnCode subscribeReturnCode;
         if(successNum >= topics.size()){
-            subscribeReturnCode = WmpMessageProtos.SubscribeReturnCode.SUCCESS;
+            subscribeReturnCode = WmpMessageProtos.SubscribeReturnCode.SUB_SUCCESS;
         }else{
-            subscribeReturnCode = WmpMessageProtos.SubscribeReturnCode.FAILURE;
+            subscribeReturnCode = WmpMessageProtos.SubscribeReturnCode.SUB_FAILURE;
         }
         WmpSubAckMessage wmpSubAckMessage = new WmpSubAckMessage();
         WmpMessageProtos.WmpSubAckMessageBody body = WmpMessageProtos.WmpSubAckMessageBody.newBuilder()

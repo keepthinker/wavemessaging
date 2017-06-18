@@ -40,6 +40,7 @@ public class WmpServiceContainer {
         services.put(WmpMessageMethod.PUBLISH, context.getBean(PublishService.class));
         services.put(WmpMessageMethod.PUBACK, context.getBean(PubAckService.class));
         services.put(WmpMessageMethod.SUBSCRIBE, context.getBean(SubscribeService.class));
+        services.put(WmpMessageMethod.UNSUBSCRIBE, context.getBean(UnsubscribeService.class));
     }
 
 }

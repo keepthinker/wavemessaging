@@ -1,3 +1,4 @@
 Use AOP to make redis dao implementation elegant. Remove duplicate close() code.
 Use thread pool in broker and handler to cache incoming WMP request to smooth request processing.
 Failover logic need to be handled in broker when the overall servers can't hold due to too much request coming.
+Periodically check the connection's validity in broker, remove and close those invalid connection.

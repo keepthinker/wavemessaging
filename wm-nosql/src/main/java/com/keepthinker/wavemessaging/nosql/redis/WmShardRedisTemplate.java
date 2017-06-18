@@ -126,4 +126,20 @@ public class WmShardRedisTemplate {
         return result;
     }
 
+    public Long sadd(String key, String... value){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Long result = jedis.sadd(key, value);
+        return result;
+
+    }
+
+
+
+    public Long srem(String key, String... value){
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Long result = jedis.srem(key, value);
+        return result;
+
+    }
+
 }

@@ -55,7 +55,7 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
                 }
             }
         }catch(Exception e){
-            LOGGER.error("error in handling connect action|{}", e);
+            LOGGER.error("error in handling connect service|{}", e);
         }
     }
 

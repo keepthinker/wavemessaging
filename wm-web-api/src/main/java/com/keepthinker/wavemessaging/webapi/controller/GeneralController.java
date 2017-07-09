@@ -63,7 +63,7 @@ public class GeneralController {
         }
     }
 
-    @RequestMapping(value = "/ip", method = RequestMethod.POST, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
+    @RequestMapping(value = "/ip", method = RequestMethod.GET, consumes = Constants.MIME_TYPE_APPLICATION_JSON)
     public
     @ResponseBody
     ResponseData getIp() {

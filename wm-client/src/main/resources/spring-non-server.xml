@@ -7,17 +7,17 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- startup the client program with java command -->
     <context:component-scan base-package="com.keepthinker.wavemessaging"/>
-    <context:property-placeholder location="classpath:wm.properties"/>
+    <context:property-placeholder location="wm.properties"/>
 
     <bean id="serverConfig" class="com.keepthinker.wavemessaging.client.model.ServerConfig">
         <property name="port" value="${server.port}"/>
         <property name="host" value="${server.host}"/>
     </bean>
 
-    <bean id="clientStartup" class="com.keepthinker.wavemessaging.client.ClientStartup" init-method="start">
+    <bean id="clientStartup" class="com.keepthinker.wavemessaging.client.ClientStartup">
         <property name="serverConfig" ref="serverConfig"/>
     </bean>
 
-    <import resource="spring-mvc.xml" />
 </beans>

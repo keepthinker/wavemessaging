@@ -3526,7 +3526,7 @@ public final class WmpMessageProtos {
 
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe action
+     ** unique subscribe id for the clientId to differentiate different subscribe service
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -3695,7 +3695,7 @@ public final class WmpMessageProtos {
     private int subscribeId_;
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe action
+     ** unique subscribe id for the clientId to differentiate different subscribe service
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4161,7 +4161,7 @@ public final class WmpMessageProtos {
       private int subscribeId_ ;
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4171,7 +4171,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4184,7 +4184,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4398,7 +4398,7 @@ public final class WmpMessageProtos {
 
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe action
+     ** unique subscribe id for the clientId to differentiate different subscribe service
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4534,7 +4534,7 @@ public final class WmpMessageProtos {
     private int subscribeId_;
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe action
+     ** unique subscribe id for the clientId to differentiate different subscribe service
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4933,7 +4933,7 @@ public final class WmpMessageProtos {
       private int subscribeId_ ;
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4943,7 +4943,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4956,7 +4956,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe action
+       ** unique subscribe id for the clientId to differentiate different subscribe service
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>

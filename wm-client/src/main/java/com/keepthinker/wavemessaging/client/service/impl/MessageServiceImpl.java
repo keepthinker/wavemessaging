@@ -1,8 +1,9 @@
-package com.keepthinker.wavemessaging.client.action;
+package com.keepthinker.wavemessaging.client.service.impl;
 
 import com.keepthinker.wavemessaging.client.ChannelHolder;
 import com.keepthinker.wavemessaging.client.dao.ClientInfo;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
+import com.keepthinker.wavemessaging.client.service.MessageService;
 import com.keepthinker.wavemessaging.client.utils.Constants;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.proto.WmpPublishMessage;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  * Created by keepthinker on 2017/4/9.
  */
 @Component
-public class MessageAction {
+public class MessageServiceImpl implements MessageService{
 
     private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger();
 

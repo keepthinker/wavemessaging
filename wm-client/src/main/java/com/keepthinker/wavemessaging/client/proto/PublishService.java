@@ -1,6 +1,6 @@
 package com.keepthinker.wavemessaging.client.proto;
 
-import com.keepthinker.wavemessaging.client.action.MessageAction;
+import com.keepthinker.wavemessaging.client.service.impl.MessageServiceImpl;
 import com.keepthinker.wavemessaging.client.dao.ClientInfoDao;
 import com.keepthinker.wavemessaging.client.utils.WmpUtils;
 import com.keepthinker.wavemessaging.proto.WmpPubAckMessage;
@@ -19,7 +19,7 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
     private ClientInfoDao clientInfoDao;
 
     @Autowired
-    private MessageAction messageAction;
+    private MessageServiceImpl messageAction;
     @Override
     public void handle(ChannelHandlerContext ctx, WmpPublishMessage msg) {
         messageAction.readMessage(msg.getBody().getContent());

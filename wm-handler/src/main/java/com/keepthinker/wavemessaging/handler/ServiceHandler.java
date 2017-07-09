@@ -31,8 +31,7 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         WmpMessage wmpMessage = (WmpMessage) msg;
         LOGGER.debug("message from server|{}|{}", wmpMessage.getMethod(), wmpMessage.getVersion());
-        ProtocolService<WmpMessage> service = serviceContainer.get(wmpMessage.getMethod());
-        concurrentTool.execute(new ChannelTask(service, ctx, wmpMessage));
+        concurrentTool.execute(new ChannelTask(serviceContainer, ctx, wmpMessage));
     }
 
     public static class ChannelTask implements Runnable{
@@ -40,7 +39,7 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
         private WmpMessage wmpMessage;
         private WmpServiceContainer serviceContainer;
 
-        public ChannelTask(ProtocolService<WmpMessage> service, ChannelHandlerContext ctx, WmpMessage msg) {
+        public ChannelTask(WmpServiceContainer serviceContainer, ChannelHandlerContext ctx, WmpMessage msg) {
             this.channelHandlerContext = ctx;
             this.wmpMessage = msg;
             this.serviceContainer = serviceContainer;

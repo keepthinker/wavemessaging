@@ -22,6 +22,7 @@ ext {
 dependencies {
 
     compile project(':wm-proto')
+    compile project(':wm-core')
 
     compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
     compile group: 'org.quartz-scheduler', name: 'quartz', version: "${quartzVersion}"

@@ -35,6 +35,8 @@ import java.io.IOException;
 
 public class ClientStartup {
 
+    volatile boolean isStarted = false;
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Autowired
@@ -165,16 +167,24 @@ public class ClientStartup {
      */
     public void start() {
 
-        checkConfig();
+        synchronized (this) {
+            if (isStarted) {
+                LOGGER.info("the client has been started");
+                return;
+            }
 
-        if (!register()) {
-            LOGGER.error("failed in initializing register operation");
+            checkConfig();
+
+            if (!register()) {
+                LOGGER.error("failed in initializing register operation");
+            }
+            login();
+            initWmpConnection();
+            channelManager.setChannel(tcpConnect());
+            wmpConnectRequest();
+
+            isStarted = true;
         }
-        login();
-        initWmpConnection();
-        channelManager.setChannel(tcpConnect());
-        wmpConnectRequest();
-
     }
 
     private boolean login(){
@@ -244,7 +254,7 @@ public class ClientStartup {
 
     public static void main(String[] args) throws Exception {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-non-server.xml");
         ClientStartup startup = context.getBean(ClientStartup.class);
 
         if (args.length == 2) {
@@ -254,18 +264,6 @@ public class ClientStartup {
             startup.setPort(port);
         }
         startup.start();
-
-//		ChannelManager manager = context.getBean(ChannelManager.class);
-//		manager.setChannel(channel);
-//		for(;;){
-//			if(channel.isActive() == false){
-//				System.out.println("cilent channel is inactive");
-//			}
-//			channel.writeAndFlush(MqttUtils.getPingReqMessage());
-//			Thread.sleep(PropertiesUtils.getInt("ping.time.interval", 10));
-//
-//		}
-//		channel.closeFuture().sync();
 
     }
 

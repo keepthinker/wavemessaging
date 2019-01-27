@@ -129,6 +129,7 @@ public class WmShardRedisTemplate {
     public Long sadd(String key, String... value){
         ShardedJedis jedis = shardedJedisPool.getResource();
         Long result = jedis.sadd(key, value);
+        jedis.close();
         return result;
 
     }
@@ -138,8 +139,15 @@ public class WmShardRedisTemplate {
     public Long srem(String key, String... value){
         ShardedJedis jedis = shardedJedisPool.getResource();
         Long result = jedis.srem(key, value);
+        jedis.close();
         return result;
 
     }
 
+    public long expire(String key, int seconds) {
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Long result = jedis.expire(key, seconds);
+        jedis.close();
+        return result;
+    }
 }

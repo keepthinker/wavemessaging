@@ -4,10 +4,7 @@ import com.keepthinker.wavemessaging.core.ProtocolService;
 import com.keepthinker.wavemessaging.core.utils.Constants;
 import com.keepthinker.wavemessaging.handler.ChannelHolder;
 import com.keepthinker.wavemessaging.handler.MessageIdGenerator;
-import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
-import com.keepthinker.wavemessaging.nosql.ClientMessageSendingNoSqlDao;
-import com.keepthinker.wavemessaging.nosql.ClientMessageWaitingNoSqlDao;
-import com.keepthinker.wavemessaging.nosql.MessageInfoNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.*;
 import com.keepthinker.wavemessaging.nosql.redis.model.MessageInfo;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.proto.WmpPublishMessage;
@@ -31,28 +28,25 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
 
     @Autowired
     private MessageIdGenerator messageIdGenerator;
-
     @Autowired
     private MessageInfoNoSqlDao messageInfoNoSqlDao;
-
     @Autowired
     private ClientInfoNoSqlDao clientInfoNoSqlDao;
-
     @Autowired
     private ClientMessageSendingNoSqlDao cmSendingNoSqlDao;
-
     @Autowired
     private ClientMessageWaitingNoSqlDao cmWaitingNoSqlDao;
-
     @Autowired
     private ChannelHolder channelHolder;
+    @Autowired
+    private TopicNoSqlDao topicNoSqlDao;
 
     @Override
     public void handle(ChannelHandlerContext ctx, WmpPublishMessage msg) {
         if(msg.getBody().getDirection() == WmpMessageProtos.Direction.TO_SERVER_HANDLER){
             switch (msg.getBody().getTargetType()){
                 case CLIENT_ID: handleClientsPublish(msg); break;
-                case TOPIC_GENERAL: break;
+                case TOPIC_GENERAL: handleTopicPublish(msg); break;
                 default:LOGGER.warn("Target  type not supported");
             }
         } else if(msg.getBody().getDirection() == WmpMessageProtos.Direction.TO_CLIENT_SDK){
@@ -62,19 +56,38 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         }
     }
 
+    private void handleTopicPublish(WmpPublishMessage msg) {
+        WmpMessageProtos.WmpPublishMessageBody body = msg.getBody();
+        String[] topics = StringUtils.split(body.getTarget(),',');
+
+        saveBasicMessageBody(body);
+
+        for(int i = 0; i < topics.length; i++){
+//            topicNoSqlDao
+        }
+
+    }
+
+    private MessageInfo saveBasicMessageBody(WmpMessageProtos.WmpPublishMessageBody body){
+        //record message info in redis and mysql
+        long newMsgId = messageIdGenerator.generate();
+
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setId(newMsgId);
+        messageInfo.setContent(body.getContent());
+        messageInfo.setCreateTime(new Date());
+        messageInfo.setTimeout(Constants.MESSAGE_DEFAULT_TIMEOUT);
+        messageInfoNoSqlDao.save(messageInfo);
+        return messageInfo;
+    }
+
     private void handleClientsPublish(WmpPublishMessage msg){
         WmpMessageProtos.WmpPublishMessageBody body = msg.getBody();
         String[] clientIds = StringUtils.split(body.getTarget(),',');
-        for(int i = 0; i < clientIds.length; i++){
-            //record message info in redis and mysql
-            long newMsgId = messageIdGenerator.generate();
 
-            MessageInfo messageInfo = new MessageInfo();
-            messageInfo.setId(newMsgId);
-            messageInfo.setContent(body.getContent());
-            messageInfo.setCreateTime(new Date());
-            messageInfo.setTimeout(Constants.MESSAGE_DEFAULT_TIMEOUT);
-            messageInfoNoSqlDao.save(messageInfo);
+        MessageInfo messageInfo = saveBasicMessageBody(body);
+
+        for(int i = 0; i < clientIds.length; i++){
 
             WmpMessageProtos.WmpPublishMessageBody newBody = body.toBuilder()
                     .setTarget(clientIds[i])

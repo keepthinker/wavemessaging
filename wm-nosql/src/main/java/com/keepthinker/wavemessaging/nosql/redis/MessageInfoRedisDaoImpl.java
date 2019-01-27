@@ -32,7 +32,9 @@ public class MessageInfoRedisDaoImpl implements MessageInfoNoSqlDao {
         map.put(RedisUtils.MESSAGE_CONTENT, messageInfo.getContent());
         map.put(RedisUtils.MESSAGE_CREATE_TIME, String.valueOf(messageInfo.getCreateTime().getTime()));
         map.put(RedisUtils.MESSAGE_TIMEOUT, String.valueOf(messageInfo.getTimeout()));
+        String messageKey = RedisUtils.getMessageKey(messageInfo.getId());
         shardRedisTemplate.hmset(RedisUtils.getMessageKey(messageInfo.getId()), map);
+        shardRedisTemplate.expire(messageKey, 24 * 3600);
     }
 
     @Override
@@ -55,5 +57,11 @@ public class MessageInfoRedisDaoImpl implements MessageInfoNoSqlDao {
                 RedisUtils.MESSAGE_PUBLISH_BODY,
                 newBody.toByteArray());
     }
+
+    @Override
+    public long expire(String key, int seconds){
+        return shardRedisTemplate.expire(key, seconds);
+    }
+
 
 }

@@ -12,4 +12,6 @@ public interface MessageInfoNoSqlDao {
     WmpPublishMessageBody getPublishMessageBody(long messageId);
 
     long savePublishMessageBody(WmpPublishMessageBody newBody);
+
+    long expire(String key, int seconds);
 }

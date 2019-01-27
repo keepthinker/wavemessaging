@@ -8,4 +8,6 @@ public interface TopicNoSqlDao {
     Long save(String topicKey, String... clientId);
 
     Long delete(String topicKey, String... clientId);
+
+    void sscanHandle(String topicKey, ScanHandler scanHandler);
 }

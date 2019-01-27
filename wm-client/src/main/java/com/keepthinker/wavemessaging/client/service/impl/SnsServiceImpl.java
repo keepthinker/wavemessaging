@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by keepthinker on 2017/4/9.
  */
-@Component("snsAction")
+@Component("snsService")
 public class SnsServiceImpl implements SnsService {
 
     @Autowired

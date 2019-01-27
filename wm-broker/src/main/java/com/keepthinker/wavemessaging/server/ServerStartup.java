@@ -65,7 +65,8 @@ public class ServerStartup {
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)          // (5)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
+                    .childOption(ChannelOption.SO_KEEPALIVE, true)
+                    .childOption(ChannelOption.TCP_NODELAY, true); // (6)
 
             // Bind and start to accept incoming connections.
             ChannelFuture f = b.bind(port);

@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/task/spring-task.xsd">
     <task:scheduled-tasks scheduler="qbScheduler">
         <task:scheduled ref="pingTimedTask" method="ping"
-                        cron="0 0 1 * * ?"/>
+                        cron="30 1/1 * * * ?"/>
         <!--<task:scheduled ref="snsService" method="say"
                         cron="0/10 * * * * ?"/>
         <task:scheduled ref="snsService" method="createTopic"

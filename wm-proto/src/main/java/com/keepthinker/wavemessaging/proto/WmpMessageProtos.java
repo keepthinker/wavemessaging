@@ -1957,11 +1957,21 @@ public final class WmpMessageProtos {
     long getMessageId();
 
     /**
-     * <code>optional string content = 2;</code>
+     * <code>optional string clientId = 2;</code>
+     */
+    java.lang.String getClientId();
+    /**
+     * <code>optional string clientId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getClientIdBytes();
+
+    /**
+     * <code>optional string content = 3;</code>
      */
     java.lang.String getContent();
     /**
-     * <code>optional string content = 2;</code>
+     * <code>optional string content = 3;</code>
      */
     com.google.protobuf.ByteString
         getContentBytes();
@@ -1971,7 +1981,7 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>optional .tutorial.TargetType targetType = 4;</code>
      */
     int getTargetTypeValue();
     /**
@@ -1979,7 +1989,7 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>optional .tutorial.TargetType targetType = 4;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType();
 
@@ -1988,7 +1998,7 @@ public final class WmpMessageProtos {
      ** clientId or topic name, if many elements, separated by coma(,) 
      * </pre>
      *
-     * <code>optional string target = 4;</code>
+     * <code>optional string target = 5;</code>
      */
     java.lang.String getTarget();
     /**
@@ -1996,7 +2006,7 @@ public final class WmpMessageProtos {
      ** clientId or topic name, if many elements, separated by coma(,) 
      * </pre>
      *
-     * <code>optional string target = 4;</code>
+     * <code>optional string target = 5;</code>
      */
     com.google.protobuf.ByteString
         getTargetBytes();
@@ -2006,7 +2016,7 @@ public final class WmpMessageProtos {
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 5;</code>
+     * <code>optional .tutorial.Direction direction = 6;</code>
      */
     int getDirectionValue();
     /**
@@ -2014,7 +2024,7 @@ public final class WmpMessageProtos {
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 5;</code>
+     * <code>optional .tutorial.Direction direction = 6;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection();
   }
@@ -2031,6 +2041,7 @@ public final class WmpMessageProtos {
     }
     private WmpPublishMessageBody() {
       messageId_ = 0L;
+      clientId_ = "";
       content_ = "";
       targetType_ = 0;
       target_ = "";
@@ -2070,22 +2081,28 @@ public final class WmpMessageProtos {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              clientId_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               content_ = s;
               break;
             }
-            case 24: {
+            case 32: {
               int rawValue = input.readEnum();
 
               targetType_ = rawValue;
               break;
             }
-            case 34: {
+            case 42: {
               java.lang.String s = input.readStringRequireUtf8();
 
               target_ = s;
               break;
             }
-            case 40: {
+            case 48: {
               int rawValue = input.readEnum();
 
               direction_ = rawValue;
@@ -2123,10 +2140,44 @@ public final class WmpMessageProtos {
       return messageId_;
     }
 
-    public static final int CONTENT_FIELD_NUMBER = 2;
+    public static final int CLIENTID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object clientId_;
+    /**
+     * <code>optional string clientId = 2;</code>
+     */
+    public java.lang.String getClientId() {
+      java.lang.Object ref = clientId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        clientId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string clientId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClientIdBytes() {
+      java.lang.Object ref = clientId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CONTENT_FIELD_NUMBER = 3;
     private volatile java.lang.Object content_;
     /**
-     * <code>optional string content = 2;</code>
+     * <code>optional string content = 3;</code>
      */
     public java.lang.String getContent() {
       java.lang.Object ref = content_;
@@ -2141,7 +2192,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string content = 2;</code>
+     * <code>optional string content = 3;</code>
      */
     public com.google.protobuf.ByteString
         getContentBytes() {
@@ -2157,14 +2208,14 @@ public final class WmpMessageProtos {
       }
     }
 
-    public static final int TARGETTYPE_FIELD_NUMBER = 3;
+    public static final int TARGETTYPE_FIELD_NUMBER = 4;
     private int targetType_;
     /**
      * <pre>
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>optional .tutorial.TargetType targetType = 4;</code>
      */
     public int getTargetTypeValue() {
       return targetType_;
@@ -2174,21 +2225,21 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>optional .tutorial.TargetType targetType = 4;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
     }
 
-    public static final int TARGET_FIELD_NUMBER = 4;
+    public static final int TARGET_FIELD_NUMBER = 5;
     private volatile java.lang.Object target_;
     /**
      * <pre>
      ** clientId or topic name, if many elements, separated by coma(,) 
      * </pre>
      *
-     * <code>optional string target = 4;</code>
+     * <code>optional string target = 5;</code>
      */
     public java.lang.String getTarget() {
       java.lang.Object ref = target_;
@@ -2207,7 +2258,7 @@ public final class WmpMessageProtos {
      ** clientId or topic name, if many elements, separated by coma(,) 
      * </pre>
      *
-     * <code>optional string target = 4;</code>
+     * <code>optional string target = 5;</code>
      */
     public com.google.protobuf.ByteString
         getTargetBytes() {
@@ -2223,14 +2274,14 @@ public final class WmpMessageProtos {
       }
     }
 
-    public static final int DIRECTION_FIELD_NUMBER = 5;
+    public static final int DIRECTION_FIELD_NUMBER = 6;
     private int direction_;
     /**
      * <pre>
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 5;</code>
+     * <code>optional .tutorial.Direction direction = 6;</code>
      */
     public int getDirectionValue() {
       return direction_;
@@ -2240,7 +2291,7 @@ public final class WmpMessageProtos {
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 5;</code>
+     * <code>optional .tutorial.Direction direction = 6;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
@@ -2262,17 +2313,20 @@ public final class WmpMessageProtos {
       if (messageId_ != 0L) {
         output.writeInt64(1, messageId_);
       }
+      if (!getClientIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientId_);
+      }
       if (!getContentBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, content_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, content_);
       }
       if (targetType_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.CLIENT_ID.getNumber()) {
-        output.writeEnum(3, targetType_);
+        output.writeEnum(4, targetType_);
       }
       if (!getTargetBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, target_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, target_);
       }
       if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
-        output.writeEnum(5, direction_);
+        output.writeEnum(6, direction_);
       }
     }
 
@@ -2285,19 +2339,22 @@ public final class WmpMessageProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, messageId_);
       }
+      if (!getClientIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientId_);
+      }
       if (!getContentBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, content_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, content_);
       }
       if (targetType_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.CLIENT_ID.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, targetType_);
+          .computeEnumSize(4, targetType_);
       }
       if (!getTargetBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, target_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, target_);
       }
       if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, direction_);
+          .computeEnumSize(6, direction_);
       }
       memoizedSize = size;
       return size;
@@ -2317,6 +2374,8 @@ public final class WmpMessageProtos {
       boolean result = true;
       result = result && (getMessageId()
           == other.getMessageId());
+      result = result && getClientId()
+          .equals(other.getClientId());
       result = result && getContent()
           .equals(other.getContent());
       result = result && targetType_ == other.targetType_;
@@ -2336,6 +2395,8 @@ public final class WmpMessageProtos {
       hash = (37 * hash) + MESSAGEID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getMessageId());
+      hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
+      hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getContent().hashCode();
       hash = (37 * hash) + TARGETTYPE_FIELD_NUMBER;
@@ -2464,6 +2525,8 @@ public final class WmpMessageProtos {
         super.clear();
         messageId_ = 0L;
 
+        clientId_ = "";
+
         content_ = "";
 
         targetType_ = 0;
@@ -2495,6 +2558,7 @@ public final class WmpMessageProtos {
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody(this);
         result.messageId_ = messageId_;
+        result.clientId_ = clientId_;
         result.content_ = content_;
         result.targetType_ = targetType_;
         result.target_ = target_;
@@ -2542,6 +2606,10 @@ public final class WmpMessageProtos {
         if (other == com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.getDefaultInstance()) return this;
         if (other.getMessageId() != 0L) {
           setMessageId(other.getMessageId());
+        }
+        if (!other.getClientId().isEmpty()) {
+          clientId_ = other.clientId_;
+          onChanged();
         }
         if (!other.getContent().isEmpty()) {
           content_ = other.content_;
@@ -2609,9 +2677,78 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      private java.lang.Object clientId_ = "";
+      /**
+       * <code>optional string clientId = 2;</code>
+       */
+      public java.lang.String getClientId() {
+        java.lang.Object ref = clientId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          clientId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string clientId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClientIdBytes() {
+        java.lang.Object ref = clientId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clientId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string clientId = 2;</code>
+       */
+      public Builder setClientId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        clientId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clientId = 2;</code>
+       */
+      public Builder clearClientId() {
+        
+        clientId_ = getDefaultInstance().getClientId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string clientId = 2;</code>
+       */
+      public Builder setClientIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        clientId_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object content_ = "";
       /**
-       * <code>optional string content = 2;</code>
+       * <code>optional string content = 3;</code>
        */
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
@@ -2626,7 +2763,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string content = 2;</code>
+       * <code>optional string content = 3;</code>
        */
       public com.google.protobuf.ByteString
           getContentBytes() {
@@ -2642,7 +2779,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string content = 2;</code>
+       * <code>optional string content = 3;</code>
        */
       public Builder setContent(
           java.lang.String value) {
@@ -2655,7 +2792,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string content = 2;</code>
+       * <code>optional string content = 3;</code>
        */
       public Builder clearContent() {
         
@@ -2664,7 +2801,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string content = 2;</code>
+       * <code>optional string content = 3;</code>
        */
       public Builder setContentBytes(
           com.google.protobuf.ByteString value) {
@@ -2684,7 +2821,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>optional .tutorial.TargetType targetType = 4;</code>
        */
       public int getTargetTypeValue() {
         return targetType_;
@@ -2694,7 +2831,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>optional .tutorial.TargetType targetType = 4;</code>
        */
       public Builder setTargetTypeValue(int value) {
         targetType_ = value;
@@ -2706,7 +2843,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>optional .tutorial.TargetType targetType = 4;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
@@ -2717,7 +2854,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>optional .tutorial.TargetType targetType = 4;</code>
        */
       public Builder setTargetType(com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType value) {
         if (value == null) {
@@ -2733,7 +2870,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>optional .tutorial.TargetType targetType = 4;</code>
        */
       public Builder clearTargetType() {
         
@@ -2748,7 +2885,7 @@ public final class WmpMessageProtos {
        ** clientId or topic name, if many elements, separated by coma(,) 
        * </pre>
        *
-       * <code>optional string target = 4;</code>
+       * <code>optional string target = 5;</code>
        */
       public java.lang.String getTarget() {
         java.lang.Object ref = target_;
@@ -2767,7 +2904,7 @@ public final class WmpMessageProtos {
        ** clientId or topic name, if many elements, separated by coma(,) 
        * </pre>
        *
-       * <code>optional string target = 4;</code>
+       * <code>optional string target = 5;</code>
        */
       public com.google.protobuf.ByteString
           getTargetBytes() {
@@ -2787,7 +2924,7 @@ public final class WmpMessageProtos {
        ** clientId or topic name, if many elements, separated by coma(,) 
        * </pre>
        *
-       * <code>optional string target = 4;</code>
+       * <code>optional string target = 5;</code>
        */
       public Builder setTarget(
           java.lang.String value) {
@@ -2804,7 +2941,7 @@ public final class WmpMessageProtos {
        ** clientId or topic name, if many elements, separated by coma(,) 
        * </pre>
        *
-       * <code>optional string target = 4;</code>
+       * <code>optional string target = 5;</code>
        */
       public Builder clearTarget() {
         
@@ -2817,7 +2954,7 @@ public final class WmpMessageProtos {
        ** clientId or topic name, if many elements, separated by coma(,) 
        * </pre>
        *
-       * <code>optional string target = 4;</code>
+       * <code>optional string target = 5;</code>
        */
       public Builder setTargetBytes(
           com.google.protobuf.ByteString value) {
@@ -2837,7 +2974,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 5;</code>
+       * <code>optional .tutorial.Direction direction = 6;</code>
        */
       public int getDirectionValue() {
         return direction_;
@@ -2847,7 +2984,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 5;</code>
+       * <code>optional .tutorial.Direction direction = 6;</code>
        */
       public Builder setDirectionValue(int value) {
         direction_ = value;
@@ -2859,7 +2996,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 5;</code>
+       * <code>optional .tutorial.Direction direction = 6;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
@@ -2870,7 +3007,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 5;</code>
+       * <code>optional .tutorial.Direction direction = 6;</code>
        */
       public Builder setDirection(com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction value) {
         if (value == null) {
@@ -2886,7 +3023,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 5;</code>
+       * <code>optional .tutorial.Direction direction = 6;</code>
        */
       public Builder clearDirection() {
         
@@ -3526,7 +3663,7 @@ public final class WmpMessageProtos {
 
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe service
+     ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -3695,7 +3832,7 @@ public final class WmpMessageProtos {
     private int subscribeId_;
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe service
+     ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4161,7 +4298,7 @@ public final class WmpMessageProtos {
       private int subscribeId_ ;
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4171,7 +4308,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4184,7 +4321,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4398,7 +4535,7 @@ public final class WmpMessageProtos {
 
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe service
+     ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4534,7 +4671,7 @@ public final class WmpMessageProtos {
     private int subscribeId_;
     /**
      * <pre>
-     ** unique subscribe id for the clientId to differentiate different subscribe service
+     ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
      * <code>optional int32 subscribeId = 2;</code>
@@ -4933,7 +5070,7 @@ public final class WmpMessageProtos {
       private int subscribeId_ ;
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4943,7 +5080,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -4956,7 +5093,7 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** unique subscribe id for the clientId to differentiate different subscribe service
+       ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
        * <code>optional int32 subscribeId = 2;</code>
@@ -7132,37 +7269,37 @@ public final class WmpMessageProtos {
       "\030\002 \001(\t\022\025\n\rbrokerAddress\030\003 \001(\t\"Z\n\025WmpConn" +
       "AckMessageBody\022\020\n\010clientId\030\001 \001(\t\022/\n\nretu" +
       "rnCode\030\002 \001(\0162\033.tutorial.ConnectReturnCod" +
-      "e\"\235\001\n\025WmpPublishMessageBody\022\021\n\tmessageId" +
-      "\030\001 \001(\003\022\017\n\007content\030\002 \001(\t\022(\n\ntargetType\030\003 " +
-      "\001(\0162\024.tutorial.TargetType\022\016\n\006target\030\004 \001(" +
-      "\t\022&\n\tdirection\030\005 \001(\0162\023.tutorial.Directio" +
-      "n\";\n\024WmpPubAckMessageBody\022\021\n\tmessageId\030\001",
-      " \001(\003\022\020\n\010clientId\030\002 \001(\t\"z\n\027WmpSubscribeMe" +
-      "ssageBody\022\020\n\010clientId\030\001 \001(\t\022\023\n\013subscribe" +
-      "Id\030\002 \001(\005\022(\n\ntargetType\030\003 \001(\0162\024.tutorial." +
-      "TargetType\022\016\n\006topics\030\004 \003(\t\"p\n\024WmpSubAckM" +
-      "essageBody\022\020\n\010clientId\030\001 \001(\t\022\023\n\013subscrib" +
-      "eId\030\002 \001(\005\0221\n\nreturnCode\030\003 \001(\0162\035.tutorial" +
-      ".SubscribeReturnCode\",\n\030WmpDisConnectMes" +
-      "sageBody\022\020\n\010clientId\030\001 \001(\t\"~\n\031WmpUnsubsc" +
-      "ribeMessageBody\022\020\n\010clientId\030\001 \001(\t\022\025\n\runs" +
-      "ubscribeId\030\002 \001(\005\022(\n\ntargetType\030\003 \001(\0162\024.t",
-      "utorial.TargetType\022\016\n\006topics\030\004 \003(\t\"v\n\026Wm" +
-      "pUnsubAckMessageBody\022\020\n\010clientId\030\001 \001(\t\022\025" +
-      "\n\runsubscribeId\030\002 \001(\005\0223\n\nreturnCode\030\003 \001(" +
-      "\0162\037.tutorial.UnsubscribeReturnCode*\251\001\n\021C" +
-      "onnectReturnCode\022\014\n\010ACCEPTED\020\000\022)\n%REFUSE" +
-      "D_UNACCEPTABLE_PROTOCOL_VERSION\020\001\022\037\n\033REF" +
-      "USED_IDENTIFIER_REJECTED\020\002\022\032\n\026REFUSED_NO" +
-      "T_AUTHORIZED\020\003\022\036\n\032REFUSED_SERVER_UNAVAIL" +
-      "ABLE\020\004*.\n\nTargetType\022\r\n\tCLIENT_ID\020\000\022\021\n\rT" +
-      "OPIC_GENERAL\020\001*5\n\tDirection\022\021\n\rTO_CLIENT",
-      "_SDK\020\000\022\025\n\021TO_SERVER_HANDLER\020\001*7\n\023Subscri" +
-      "beReturnCode\022\017\n\013SUB_SUCCESS\020\000\022\017\n\013SUB_FAI" +
-      "LURE\020\001*=\n\025UnsubscribeReturnCode\022\021\n\rUNSUB" +
-      "_SUCCESS\020\000\022\021\n\rUNSUB_FAILURE\020\001B7\n#com.kee" +
-      "pthinker.wavemessaging.protoB\020WmpMessage" +
-      "Protosb\006proto3"
+      "e\"\257\001\n\025WmpPublishMessageBody\022\021\n\tmessageId" +
+      "\030\001 \001(\003\022\020\n\010clientId\030\002 \001(\t\022\017\n\007content\030\003 \001(" +
+      "\t\022(\n\ntargetType\030\004 \001(\0162\024.tutorial.TargetT" +
+      "ype\022\016\n\006target\030\005 \001(\t\022&\n\tdirection\030\006 \001(\0162\023" +
+      ".tutorial.Direction\";\n\024WmpPubAckMessageB",
+      "ody\022\021\n\tmessageId\030\001 \001(\003\022\020\n\010clientId\030\002 \001(\t" +
+      "\"z\n\027WmpSubscribeMessageBody\022\020\n\010clientId\030" +
+      "\001 \001(\t\022\023\n\013subscribeId\030\002 \001(\005\022(\n\ntargetType" +
+      "\030\003 \001(\0162\024.tutorial.TargetType\022\016\n\006topics\030\004" +
+      " \003(\t\"p\n\024WmpSubAckMessageBody\022\020\n\010clientId" +
+      "\030\001 \001(\t\022\023\n\013subscribeId\030\002 \001(\005\0221\n\nreturnCod" +
+      "e\030\003 \001(\0162\035.tutorial.SubscribeReturnCode\"," +
+      "\n\030WmpDisConnectMessageBody\022\020\n\010clientId\030\001" +
+      " \001(\t\"~\n\031WmpUnsubscribeMessageBody\022\020\n\010cli" +
+      "entId\030\001 \001(\t\022\025\n\runsubscribeId\030\002 \001(\005\022(\n\nta",
+      "rgetType\030\003 \001(\0162\024.tutorial.TargetType\022\016\n\006" +
+      "topics\030\004 \003(\t\"v\n\026WmpUnsubAckMessageBody\022\020" +
+      "\n\010clientId\030\001 \001(\t\022\025\n\runsubscribeId\030\002 \001(\005\022" +
+      "3\n\nreturnCode\030\003 \001(\0162\037.tutorial.Unsubscri" +
+      "beReturnCode*\251\001\n\021ConnectReturnCode\022\014\n\010AC" +
+      "CEPTED\020\000\022)\n%REFUSED_UNACCEPTABLE_PROTOCO" +
+      "L_VERSION\020\001\022\037\n\033REFUSED_IDENTIFIER_REJECT" +
+      "ED\020\002\022\032\n\026REFUSED_NOT_AUTHORIZED\020\003\022\036\n\032REFU" +
+      "SED_SERVER_UNAVAILABLE\020\004*.\n\nTargetType\022\r" +
+      "\n\tCLIENT_ID\020\000\022\021\n\rTOPIC_GENERAL\020\001*5\n\tDire",
+      "ction\022\021\n\rTO_CLIENT_SDK\020\000\022\025\n\021TO_SERVER_HA" +
+      "NDLER\020\001*7\n\023SubscribeReturnCode\022\017\n\013SUB_SU" +
+      "CCESS\020\000\022\017\n\013SUB_FAILURE\020\001*=\n\025UnsubscribeR" +
+      "eturnCode\022\021\n\rUNSUB_SUCCESS\020\000\022\021\n\rUNSUB_FA" +
+      "ILURE\020\001B7\n#com.keepthinker.wavemessaging" +
+      ".protoB\020WmpMessageProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7193,7 +7330,7 @@ public final class WmpMessageProtos {
     internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tutorial_WmpPublishMessageBody_descriptor,
-        new java.lang.String[] { "MessageId", "Content", "TargetType", "Target", "Direction", });
+        new java.lang.String[] { "MessageId", "ClientId", "Content", "TargetType", "Target", "Direction", });
     internal_static_tutorial_WmpPubAckMessageBody_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_tutorial_WmpPubAckMessageBody_fieldAccessorTable = new

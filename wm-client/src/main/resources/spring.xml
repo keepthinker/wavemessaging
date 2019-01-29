@@ -20,4 +20,5 @@
     </bean>
 
     <import resource="spring-mvc.xml" />
+    <import resource="spring-quartz.xml"/>
 </beans>

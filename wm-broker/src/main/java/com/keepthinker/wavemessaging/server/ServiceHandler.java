@@ -40,7 +40,7 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         WmpMessage m = (WmpMessage) msg;
-        LOGGER.debug("message from clients|method:{}|version:{}", m.getMethod(), m.getVersion());
+        LOGGER.debug("message from remote endpoint|method:{}|version:{}", m.getMethod(), m.getVersion());
         ProtocolService<WmpMessage> service = serviceContainer.get(m.getMethod());
         service.handle(ctx, m);
     }

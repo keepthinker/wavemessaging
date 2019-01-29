@@ -32,16 +32,9 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
     @Override
     public void handle(ChannelHandlerContext ctx, WmpPublishMessage msg) {
         if(msg.getBody().getDirection() == WmpMessageProtos.Direction.TO_SERVER_HANDLER){
-            switch (msg.getBody().getTargetType()){
-                case CLIENT_ID: handleClientsPublish(msg); break;
-                case TOPIC_GENERAL: break;
-                default:LOGGER.warn("Target type not supported");
-            }
+            forwardToHandler(msg);
         } else if(msg.getBody().getDirection() == WmpMessageProtos.Direction.TO_CLIENT_SDK){
-            switch (msg.getBody().getTargetType()){
-                case CLIENT_ID: handlePublishToClient(msg); break;
-                default:LOGGER.warn("Target type not supported");
-            }
+            forwardToClient(msg);
         } else {
             LOGGER.warn("not recognized direction|{}", msg.getBody().getDirection());
         }
@@ -50,10 +43,11 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
 //        Channel handlerChannel = handlerChannelManager.get();
     }
 
-    private void handleClientsPublish(WmpPublishMessage publishMessage){
-        String[] clientIds = StringUtils.split(publishMessage.getBody().getTarget(),',');
-        if(clientIds.length >= 1 && StringUtils.isNotBlank(clientIds[0]) && StringUtils.isNumeric(clientIds[0])) {
-            Channel channel = handlerChannelManager.get(clientIds[0]);
+    private void forwardToHandler(WmpPublishMessage publishMessage){
+        String[] targetClientIds = StringUtils.split(publishMessage.getBody().getTarget(),',');
+        String clientId = publishMessage.getBody().getClientId();
+        if(targetClientIds.length >= 1 && StringUtils.isNotBlank(clientId)) {
+            Channel channel = handlerChannelManager.get(clientId);
             if(channel != null && channel.isActive()) {
                 channel .writeAndFlush(publishMessage);
             }else{
@@ -65,7 +59,7 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
 
     }
 
-    private void handlePublishToClient(WmpPublishMessage publishMessage){
+    private void forwardToClient(WmpPublishMessage publishMessage){
         String clientId = publishMessage.getBody().getTarget();
         if(StringUtils.isNotBlank(clientId)) {
             Channel channel = sdkChannelManager.getChannel(clientId);

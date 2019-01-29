@@ -18,13 +18,14 @@ message WmpConnAckMessageBody {
 
 message WmpPublishMessageBody {
     int64 messageId = 1;
-    string content = 2;
+    string clientId = 2;
+    string content = 3;
     /** one or many --> a clientId or a topic contains many clientIds */
-    TargetType targetType = 3;
+    TargetType targetType = 4;
     /** clientId or topic name, if many elements, separated by coma(,) */
-    string target = 4;
+    string target = 5;
     /** message from where to where*/
-    Direction direction = 5;
+    Direction direction = 6;
 }
 
 message WmpPubAckMessageBody {

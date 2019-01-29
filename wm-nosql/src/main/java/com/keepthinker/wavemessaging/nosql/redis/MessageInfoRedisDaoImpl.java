@@ -41,6 +41,9 @@ public class MessageInfoRedisDaoImpl implements MessageInfoNoSqlDao {
     public WmpPublishMessageBody getPublishMessageBody(long messageId) {
        byte[] publishBody = shardRedisTemplate.hgetByte(RedisUtils.getMessageKey(messageId),
                 RedisUtils.MESSAGE_PUBLISH_BODY);
+       if(publishBody == null){
+           return null;
+       }
         WmpPublishMessageBody body;
         try {
             body = WmpPublishMessageBody.parseFrom(publishBody);

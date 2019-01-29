@@ -27,14 +27,9 @@ public class MessageServiceImpl implements MessageService{
     private ClientInfoDao clientInfoDao;
 
     public void sendMessageToItself(String content){
-        Channel channel = holder.getChannel();
-
+        Channel channel = getValidChannel();
         if(channel == null){
-            LOGGER.warn("not connected to server yet");
-            return;
-        }
-        if(!channel.isActive()){
-            LOGGER.warn("it is disconnected");
+            LOGGER.error("sendMessageToItself: the channel is invalid");
             return;
         }
         ClientInfo clientInfo = clientInfoDao.get();
@@ -45,11 +40,46 @@ public class MessageServiceImpl implements MessageService{
                 .setContent(content)
                 .setDirection(WmpMessageProtos.Direction.TO_SERVER_HANDLER)
                 .setTargetType(WmpMessageProtos.TargetType.CLIENT_ID)
+                .setClientId(String.valueOf(clientInfo.getClientId()))
                 .build();
 
         publishMessage.setBody(publishMessageBody);
         channel.writeAndFlush(publishMessage);
         LOGGER.info("message is sent|", content);
+    }
+
+    public void sendMessageToGroup(String groupName, String content){
+        Channel channel = getValidChannel();
+        if(channel == null){
+            LOGGER.error("sendMessageToItself: the channel is invalid");
+            return;
+        }
+        ClientInfo clientInfo = clientInfoDao.get();
+        WmpPublishMessage publishMessage = new WmpPublishMessage();
+        publishMessage.setVersion(Constants.WMP_VERSION);
+        WmpMessageProtos.WmpPublishMessageBody publishMessageBody = WmpMessageProtos.WmpPublishMessageBody.newBuilder()
+                .setTarget(groupName)
+                .setContent(content)
+                .setDirection(WmpMessageProtos.Direction.TO_SERVER_HANDLER)
+                .setTargetType(WmpMessageProtos.TargetType.TOPIC_GENERAL)
+                .setClientId(String.valueOf(clientInfo.getClientId()))
+                .build();
+
+        publishMessage.setBody(publishMessageBody);
+        channel.writeAndFlush(publishMessage);
+        LOGGER.info("message is sent|", content);
+    }
+
+    private Channel getValidChannel(){
+        Channel channel = holder.getChannel();
+
+        if(channel != null && channel.isActive()){
+            LOGGER.warn("not connected to server yet");
+            return channel;
+        } else {
+            return null;
+        }
+
     }
 
     public void readMessage(String content){

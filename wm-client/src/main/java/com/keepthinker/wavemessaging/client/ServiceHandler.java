@@ -3,6 +3,7 @@ package com.keepthinker.wavemessaging.client;
 import com.keepthinker.wavemessaging.client.proto.ProtocolService;
 import com.keepthinker.wavemessaging.client.utils.WmUtils;
 import com.keepthinker.wavemessaging.proto.WmpMessage;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@ChannelHandler.Sharable
 @Service
 public class ServiceHandler extends ChannelInboundHandlerAdapter {
 

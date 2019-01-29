@@ -14,17 +14,20 @@ public class PingTimedTask {
     @Autowired
     private ChannelHolder channelManager;
 
+    @Autowired
+    private ClientStartup clientStartup;
+
     public void ping() {
         Channel channel = channelManager.getChannel();
         if (channel == null) {
             LOGGER.warn("channel is null, retry later");
-            return;
-        }
-        if (channel.isActive() == false) {
+            clientStartup.createWmpConnection();
+        } else if (!channel.isActive()) {
             LOGGER.warn("cilent channel is inactive");
-            return;
+            clientStartup.createWmpConnection();
+        } else {
+            channel.writeAndFlush(WmpUtils.PINGREQ);
+            LOGGER.info("send ping request to server");
         }
-        channel.writeAndFlush(WmpUtils.PINGREQ);
-        LOGGER.info("send ping request to server");
     }
 }

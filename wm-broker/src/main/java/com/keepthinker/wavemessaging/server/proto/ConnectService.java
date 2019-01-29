@@ -47,9 +47,11 @@ public class ConnectService implements ProtocolService<WmpConnectMessage> {
         try {
             if (clientIdStr.startsWith(Constants.CLIENT_ID_PREFIX_HANDLER)) {
                 handleHandlerConnect(ctx, msg);
+                LOGGER.info("connection established|handler|clientId:{}", clientIdStr);
             } else {
                 if(StringUtils.isNumeric(clientIdStr)){
                     handleSdkConnect(ctx, msg);
+                    LOGGER.info("connection established|sdk|clientId:{}", clientIdStr);
                 }else{
                     LOGGER.warn("Client() is not valid.", clientIdStr);
                 }

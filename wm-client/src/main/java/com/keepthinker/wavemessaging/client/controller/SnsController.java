@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -33,6 +34,19 @@ public class SnsController {
             return ResponseData.RESPONSE_SERVER_ERROR;
         }
     }
+
+    @RequestMapping(value = "sayToGroup", method = RequestMethod.POST)
+    public @ResponseBody ResponseData sayToGroup(@RequestParam("groupName") String groupName,
+                                                 @RequestParam("sentence") String sentence){
+        try {
+            snsService.sayToGroup(groupName, sentence);
+            return ResponseData.newSuccess("you've send \"" + groupName + "\"");
+        }catch(Exception e) {
+            LOGGER.error("unexpected error", e);
+            return ResponseData.RESPONSE_SERVER_ERROR;
+        }
+    }
+
 
     @RequestMapping(value = "createTalkGroup", method = RequestMethod.POST)
     public @ResponseBody ResponseData createTalkGroup(String groupName){

@@ -179,12 +179,17 @@ public class ClientStartup {
             }
             login();
             initWmpConnection();
-            channelManager.setChannel(tcpConnect());
-            wmpConnectRequest();
-
+            createWmpConnection();
             isStarted = true;
         }
     }
+
+    public void createWmpConnection(){
+        channelManager.setChannel(tcpConnect());
+        wmpConnectRequest();
+    }
+
+
 
     private boolean login(){
         ClientInfo clientInfo = clientInfoDao.get();

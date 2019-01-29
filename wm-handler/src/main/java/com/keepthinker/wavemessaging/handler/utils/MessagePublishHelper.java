@@ -38,6 +38,9 @@ public class MessagePublishHelper {
         Long messageId = cmSendingNoSqlDao.get(clientId);
         if(messageId != null){
             WmpMessageProtos.WmpPublishMessageBody body = messageInfoNoSqlDao.getPublishMessageBody(messageId);
+            if(body == null){
+                return;
+            }
             WmpPublishMessage msg = new WmpPublishMessage();
             msg.setVersion(Constants.WMP_VERSION);
             msg.setBody(body);
@@ -63,6 +66,9 @@ public class MessagePublishHelper {
             WmpPublishMessage publishMessage = new WmpPublishMessage();
             publishMessage.setVersion(Constants.WMP_VERSION);
             WmpMessageProtos.WmpPublishMessageBody body = messageInfoNoSqlDao.getPublishMessageBody(messageId);
+            if(body == null){
+                return;
+            }
             publishMessage.setBody(body);
             channelHolder.getChannel(clientInfoNoSqlDao.getBrokerPrivateAddress(clientId)).
                     writeAndFlush(publishMessage);

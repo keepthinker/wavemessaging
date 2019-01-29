@@ -24,12 +24,17 @@ public class SnsServiceImpl implements SnsService {
     }
 
     @Override
+    public void sayToGroup(String groupName, String sentence){
+        messageAction.sendMessageToGroup(groupName, sentence);
+    }
+
+    @Override
     public void createTalkGroup(String groupName){
         topicAction.createTopic(groupName);
     }
 
     @Override
     public void deleteTalkGroup(String groupName) {
-        topicAction.createTopic(groupName);
+        topicAction.deleteTopic(groupName);
     }
 }

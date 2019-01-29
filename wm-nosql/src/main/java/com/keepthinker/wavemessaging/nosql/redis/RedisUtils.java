@@ -39,7 +39,7 @@ public class RedisUtils {
 
     private static final String TOPIC_GENERAL_PREFIX = "topic:general:";
     /** scatter topic clientIds to different bucket */
-    private static final int TOPIC_BUCKET_SIZE = 128;
+    public static final int TOPIC_BUCKET_SIZE = 128;
 
 
     public static String getClientKey(long clientId) {

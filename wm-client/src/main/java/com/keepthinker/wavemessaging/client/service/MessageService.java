@@ -6,4 +6,6 @@ package com.keepthinker.wavemessaging.client.service;
 public interface MessageService {
 
     void sendMessageToItself(String content);
+
+    void sendMessageToGroup(String groupName, String content);
 }

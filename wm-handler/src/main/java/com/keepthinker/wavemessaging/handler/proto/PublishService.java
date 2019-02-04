@@ -62,12 +62,14 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         WmpMessageProtos.WmpPublishMessageBody body = msg.getBody();
         String[] topics = StringUtils.split(body.getTarget(),',');
 
-        MessageInfo messageInfo = saveBasicMessageBody(body);
-        WmpMessageProtos.WmpPublishMessageBody bodyToClient = msg.getBody().toBuilder()
+        MessageInfo messageInfo = saveMessageToRedis(body);
+
+        WmpMessageProtos.WmpPublishMessageBody commonBody = msg.getBody().toBuilder()
                 .setMessageId(messageInfo.getId())
                 .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
                 .build();
-        msg.setBody(bodyToClient);
+
+        msg.setBody(commonBody);
 
         for(int i = 0; i < topics.length; i++){
 
@@ -90,22 +92,13 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         @Override
         public void handle(List<String> clientIds) {
             for(String clientId : clientIds) {
-                long messageId = msg.getBody().getMessageId();
-                boolean isSet = cmSendingNoSqlDao.setNotExist(clientId, messageId);
-                if (isSet) {
-                    if (clientInfoNoSqlDao.getConnectionStatus(clientId) == Constants.CONNECTION_STATUTS_ONLINE) {
-                        String brokerPrivateAddress = clientInfoNoSqlDao.getBrokerPrivateAddress(clientId);
-                        Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
-                        brokerChannel.writeAndFlush(msg);
-                    }
-                } else {
-                    cmWaitingNoSqlDao.enqueue(clientId, messageId);
-                }
+                publish(msg, clientId);
+
             }
         }
     }
 
-    private MessageInfo saveBasicMessageBody(WmpMessageProtos.WmpPublishMessageBody body){
+    private MessageInfo saveMessageToRedis(WmpMessageProtos.WmpPublishMessageBody body){
         //record message info in redis and mysql
         long newMsgId = messageIdGenerator.generate();
 
@@ -114,38 +107,50 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
         messageInfo.setContent(body.getContent());
         messageInfo.setCreateTime(new Date());
         messageInfo.setTimeout(Constants.MESSAGE_DEFAULT_TIMEOUT);
+        messageInfo.setTargetType(body.getTargetType().getNumber());
+        messageInfo.setTarget(body.getTarget());
         messageInfoNoSqlDao.save(messageInfo);
         return messageInfo;
     }
 
-    private void handleClientsPublish(WmpPublishMessage msg){
-        WmpMessageProtos.WmpPublishMessageBody body = msg.getBody();
+    private void handleClientsPublish(WmpPublishMessage wmpPublishMessage){
+        WmpMessageProtos.WmpPublishMessageBody body = wmpPublishMessage.getBody();
         String[] clientIds = StringUtils.split(body.getTarget(),',');
 
-        MessageInfo messageInfo = saveBasicMessageBody(body);
+        MessageInfo redisMessageInfo = saveMessageToRedis(body);
+
+        WmpMessageProtos.WmpPublishMessageBody commonBody = body.toBuilder()
+                .setTargetType(WmpMessageProtos.TargetType.CLIENT_ID)
+                .setTarget("") // reduce network traffic
+                .setMessageId(redisMessageInfo.getId())
+                .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
+                .build();
+
+        wmpPublishMessage.setBody(commonBody);
 
         for(int i = 0; i < clientIds.length; i++){
 
-            WmpMessageProtos.WmpPublishMessageBody newBody = body.toBuilder()
-                    .setTargetType(WmpMessageProtos.TargetType.CLIENT_ID)
-                    .setTarget(clientIds[i])
-                    .setMessageId(messageInfo.getId())
-                    .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
-                    .build();
-            msg.setBody(newBody);
-            messageInfoNoSqlDao.savePublishMessageBody(newBody);
+            publish(wmpPublishMessage, clientIds[i]);
 
-            //send if online
-            boolean isSet =  cmSendingNoSqlDao.setNotExist(clientIds[i], messageInfo.getId());
-            if(isSet) {
-                if(clientInfoNoSqlDao.getConnectionStatus(clientIds[i]) == Constants.CONNECTION_STATUTS_ONLINE){
-                    String brokerPrivateAddress = clientInfoNoSqlDao.getBrokerPrivateAddress(clientIds[i]);
-                    Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
-                    brokerChannel.writeAndFlush(msg);
-                }
-            }else {
-                cmWaitingNoSqlDao.enqueue(clientIds[i], messageInfo.getId());
+        }
+    }
+
+    private void publish(WmpPublishMessage msg, String clientId){
+        WmpMessageProtos.WmpPublishMessageBody newBody = msg.getBody().toBuilder()
+                .setTargetClientId(clientId)
+                .build();
+        msg.setBody(newBody);
+
+        //send if online
+        boolean isSet =  cmSendingNoSqlDao.setNotExist(clientId, msg.getBody().getMessageId());
+        if(isSet) {
+            if(clientInfoNoSqlDao.getConnectionStatus(clientId) == Constants.CONNECTION_STATUTS_ONLINE){
+                String brokerPrivateAddress = clientInfoNoSqlDao.getBrokerPrivateAddress(clientId);
+                Channel brokerChannel = channelHolder.getChannel(brokerPrivateAddress);
+                brokerChannel.writeAndFlush(msg);
             }
+        }else {
+            cmWaitingNoSqlDao.enqueue(clientId, msg.getBody().getMessageId());
         }
     }
 }

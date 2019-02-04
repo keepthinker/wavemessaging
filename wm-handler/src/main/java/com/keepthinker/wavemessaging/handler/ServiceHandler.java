@@ -47,7 +47,11 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-            serviceContainer.get(wmpMessage.getMethod()).handle(channelHandlerContext, wmpMessage);
+            try {
+                serviceContainer.get(wmpMessage.getMethod()).handle(channelHandlerContext, wmpMessage);
+            } catch (Exception e){
+                LOGGER.error("unexpected error in ChannelTask", e);
+            }
         }
 
         public ChannelHandlerContext getChannelHandlerContext() {

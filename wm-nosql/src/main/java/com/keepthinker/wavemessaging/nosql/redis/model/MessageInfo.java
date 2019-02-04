@@ -9,6 +9,8 @@ public class MessageInfo {
     private long id;
     private String content;
     private long timeout;
+    private int targetType;
+    private String target;
     private Date createTime;
 
     public long getId() {
@@ -41,5 +43,21 @@ public class MessageInfo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public int getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(int targetType) {
+        this.targetType = targetType;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 }

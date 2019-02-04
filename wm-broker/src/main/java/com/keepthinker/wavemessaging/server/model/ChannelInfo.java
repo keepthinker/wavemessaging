@@ -38,4 +38,13 @@ public class ChannelInfo {
     public void setAccessTime(Date accessTime) {
         this.accessTime = accessTime;
     }
+
+    @Override
+    public String toString() {
+        return "ChannelInfo{" +
+                "clientId='" + clientId + '\'' +
+                ", channel=" + channel +
+                ", accessTime=" + accessTime +
+                '}';
+    }
 }

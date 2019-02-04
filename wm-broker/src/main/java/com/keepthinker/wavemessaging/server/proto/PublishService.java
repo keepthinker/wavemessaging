@@ -43,6 +43,7 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
 //        Channel handlerChannel = handlerChannelManager.get();
     }
 
+    /** forward to handler by source clientId hash*/
     private void forwardToHandler(WmpPublishMessage publishMessage){
         String[] targetClientIds = StringUtils.split(publishMessage.getBody().getTarget(),',');
         String clientId = publishMessage.getBody().getClientId();
@@ -51,7 +52,7 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
             if(channel != null && channel.isActive()) {
                 channel .writeAndFlush(publishMessage);
             }else{
-                LOGGER.error("channel is null or inactive|channel:{}", channel);
+                LOGGER.error("forwardToHandler|channel is null or inactive|channel:{}", channel);
             }
         }else{
             LOGGER.warn("illegal client id|{}", publishMessage.getBody().getTarget());
@@ -60,22 +61,19 @@ public class PublishService implements ProtocolService<WmpPublishMessage> {
     }
 
     private void forwardToClient(WmpPublishMessage publishMessage){
-        String clientId = publishMessage.getBody().getTarget();
+        String clientId = publishMessage.getBody().getTargetClientId();
         if(StringUtils.isNotBlank(clientId)) {
             Channel channel = sdkChannelManager.getChannel(clientId);
             if(channel != null && channel.isActive()) {
                 channel.writeAndFlush(publishMessage);
             }else{
-                LOGGER.warn("channel null or inactive|channel:{}", channel != null ?
+                LOGGER.warn("forwardToClient|channel null or inactive|channel:{}", channel != null ?
                         WmUtils.getChannelRemoteAddress(channel) : null);
             }
         }else{
             LOGGER.warn("illegal client id|{}", publishMessage.getBody().getTarget());
         }
-
     }
 
-    private void handleTopicGeneralPublish(){
 
-    }
 }

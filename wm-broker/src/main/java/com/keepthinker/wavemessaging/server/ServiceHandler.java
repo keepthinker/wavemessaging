@@ -67,7 +67,8 @@ public class ServiceHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        LOGGER.error("exception caught|remoteAddress:" + WmUtils.getChannelRemoteAddress(ctx.channel()), cause);
+        ChannelInfo channelInfo = sdkChannelManager.getChannelInfo(ctx.channel());
+        LOGGER.error("exception caught|remoteAddress:{}|channelInfo:{}|cause:{}", WmUtils.getChannelRemoteAddress(ctx.channel()), channelInfo, cause);
 //        ctx.close();
     }
 }

@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ServerStartup {
+public class BrokerStartup {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -26,14 +26,14 @@ public class ServerStartup {
     @Autowired
     private ServiceHandler serviceHandler;
 
-    public ServerStartup(int port) {
+    public BrokerStartup(int port) {
         this.port = port;
     }
 
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         SpringUtils.setContext(context);
-        ServerStartup startup = context.getBean(ServerStartup.class);
+        BrokerStartup startup = context.getBean(BrokerStartup.class);
         int port;
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);

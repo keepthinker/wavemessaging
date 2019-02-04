@@ -17,12 +17,12 @@ public class StatisticsServiceImpl implements StatisticsService{
     private SdkChannelManager sdkChannelManager;
 
     @Autowired
-    private ServerStartup serverStartup;
+    private BrokerStartup brokerStartup;
 
     public void countConnection(){
         int numOfHandlers = handlerChannelMananger.size();
         int numOfSdks = sdkChannelManager.size();
-        ZkBrokerUtils.setZkServerInfo(WmUtils.getIPV4Private(), serverStartup.getPort(), numOfHandlers, numOfSdks);
+        ZkBrokerUtils.setZkServerInfo(WmUtils.getIPV4Private(), brokerStartup.getPort(), numOfHandlers, numOfSdks);
 
     }
 }

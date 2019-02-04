@@ -3,6 +3,7 @@ package com.keepthinker.wavemessaging.nosql.redis;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.keepthinker.wavemessaging.nosql.MessageInfoNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.redis.model.MessageInfo;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,33 +33,27 @@ public class MessageInfoRedisDaoImpl implements MessageInfoNoSqlDao {
         map.put(RedisUtils.MESSAGE_CONTENT, messageInfo.getContent());
         map.put(RedisUtils.MESSAGE_CREATE_TIME, String.valueOf(messageInfo.getCreateTime().getTime()));
         map.put(RedisUtils.MESSAGE_TIMEOUT, String.valueOf(messageInfo.getTimeout()));
+        map.put(RedisUtils.MESSAGE_TARGET_TYPE, String.valueOf(messageInfo.getTargetType()));
+        map.put(RedisUtils.MESSAGE_TARGET, String.valueOf(messageInfo.getTarget()));
         String messageKey = RedisUtils.getMessageKey(messageInfo.getId());
         shardRedisTemplate.hmset(RedisUtils.getMessageKey(messageInfo.getId()), map);
         shardRedisTemplate.expire(messageKey, 24 * 3600);
     }
 
     @Override
-    public WmpPublishMessageBody getPublishMessageBody(long messageId) {
-       byte[] publishBody = shardRedisTemplate.hgetByte(RedisUtils.getMessageKey(messageId),
-                RedisUtils.MESSAGE_PUBLISH_BODY);
-       if(publishBody == null){
-           return null;
-       }
-        WmpPublishMessageBody body;
-        try {
-            body = WmpPublishMessageBody.parseFrom(publishBody);
-        } catch (InvalidProtocolBufferException e) {
-            LOGGER.error("error in parsing publish body in redis db", e);
-            throw new RuntimeException(e);
+    public MessageInfo getPartialForPublish(long messageId) {
+        Map<String, String> resultMap = shardRedisTemplate.hmget(RedisUtils.getMessageKey(messageId),
+                RedisUtils.MESSAGE_CONTENT,RedisUtils.MESSAGE_TARGET_TYPE, RedisUtils.MESSAGE_TARGET);
+        if(resultMap == null || resultMap.isEmpty()){
+            return null;
         }
-        return body;
-    }
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setId(messageId);
+        messageInfo.setContent(resultMap.get(RedisUtils.MESSAGE_CONTENT));
+        messageInfo.setTargetType(NumberUtils.toInt(resultMap.get(RedisUtils.MESSAGE_TARGET_TYPE)));
+        messageInfo.setTarget(resultMap.get(RedisUtils.MESSAGE_TARGET));
+        return messageInfo;
 
-    @Override
-    public long savePublishMessageBody(WmpPublishMessageBody newBody) {
-        return shardRedisTemplate.hset(RedisUtils.getMessageKey(newBody.getMessageId()),
-                RedisUtils.MESSAGE_PUBLISH_BODY,
-                newBody.toByteArray());
     }
 
     @Override

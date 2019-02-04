@@ -32,7 +32,8 @@ public class RedisUtils {
     public static final String MESSAGE_CONTENT = "content";
     public static final String MESSAGE_CREATE_TIME = "createTime";
     public static final String MESSAGE_TIMEOUT = "timeout";
-    public static final String MESSAGE_PUBLISH_BODY = "publishBody";
+    public static final String MESSAGE_TARGET_TYPE = "targetType";
+    public static final String MESSAGE_TARGET = "target";
 
     private static final String CLIENT_MESSAGE_SENDING_PREFIX = "cms:";
     private static final String CLIENT_MESSAGE_WAITING_PREFIX = "cmw:";

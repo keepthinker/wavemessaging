@@ -9,9 +9,7 @@ import static com.keepthinker.wavemessaging.proto.WmpMessageProtos.*;
 public interface MessageInfoNoSqlDao {
     void save(MessageInfo messageInfo);
 
-    WmpPublishMessageBody getPublishMessageBody(long messageId);
-
-    long savePublishMessageBody(WmpPublishMessageBody newBody);
+    MessageInfo getPartialForPublish(long messageId);
 
     long expire(String key, int seconds);
 }

@@ -580,31 +580,31 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
 
     /**
-     * <code>optional string token = 2;</code>
+     * <code>string token = 2;</code>
      */
     java.lang.String getToken();
     /**
-     * <code>optional string token = 2;</code>
+     * <code>string token = 2;</code>
      */
     com.google.protobuf.ByteString
         getTokenBytes();
 
     /**
-     * <code>optional string brokerAddress = 3;</code>
+     * <code>string brokerAddress = 3;</code>
      */
     java.lang.String getBrokerAddress();
     /**
-     * <code>optional string brokerAddress = 3;</code>
+     * <code>string brokerAddress = 3;</code>
      */
     com.google.protobuf.ByteString
         getBrokerAddressBytes();
@@ -616,6 +616,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpConnectMessageBody)
       WmpConnectMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpConnectMessageBody.newBuilder() to construct.
     private WmpConnectMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -629,14 +630,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpConnectMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -645,12 +651,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -669,6 +669,13 @@ public final class WmpMessageProtos {
               brokerAddress_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -677,6 +684,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -685,6 +693,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnectMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnectMessageBody_fieldAccessorTable
@@ -695,7 +704,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -710,7 +719,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -729,7 +738,7 @@ public final class WmpMessageProtos {
     public static final int TOKEN_FIELD_NUMBER = 2;
     private volatile java.lang.Object token_;
     /**
-     * <code>optional string token = 2;</code>
+     * <code>string token = 2;</code>
      */
     public java.lang.String getToken() {
       java.lang.Object ref = token_;
@@ -744,7 +753,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string token = 2;</code>
+     * <code>string token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getTokenBytes() {
@@ -763,7 +772,7 @@ public final class WmpMessageProtos {
     public static final int BROKERADDRESS_FIELD_NUMBER = 3;
     private volatile java.lang.Object brokerAddress_;
     /**
-     * <code>optional string brokerAddress = 3;</code>
+     * <code>string brokerAddress = 3;</code>
      */
     public java.lang.String getBrokerAddress() {
       java.lang.Object ref = brokerAddress_;
@@ -778,7 +787,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string brokerAddress = 3;</code>
+     * <code>string brokerAddress = 3;</code>
      */
     public com.google.protobuf.ByteString
         getBrokerAddressBytes() {
@@ -795,6 +804,7 @@ public final class WmpMessageProtos {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -804,6 +814,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -815,8 +826,10 @@ public final class WmpMessageProtos {
       if (!getBrokerAddressBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, brokerAddress_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -831,11 +844,11 @@ public final class WmpMessageProtos {
       if (!getBrokerAddressBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, brokerAddress_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -853,6 +866,7 @@ public final class WmpMessageProtos {
           .equals(other.getToken());
       result = result && getBrokerAddress()
           .equals(other.getBrokerAddress());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -862,7 +876,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + TOKEN_FIELD_NUMBER;
@@ -874,6 +888,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -933,6 +958,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -940,6 +966,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -963,6 +990,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnectMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnectMessageBody_fieldAccessorTable
@@ -985,6 +1013,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -996,15 +1025,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnectMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -1013,6 +1045,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody(this);
         result.clientId_ = clientId_;
@@ -1022,32 +1055,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody)other);
@@ -1071,14 +1111,17 @@ public final class WmpMessageProtos {
           brokerAddress_ = other.brokerAddress_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1099,7 +1142,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -1114,7 +1157,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -1130,7 +1173,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -1143,7 +1186,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -1152,7 +1195,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -1168,7 +1211,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object token_ = "";
       /**
-       * <code>optional string token = 2;</code>
+       * <code>string token = 2;</code>
        */
       public java.lang.String getToken() {
         java.lang.Object ref = token_;
@@ -1183,7 +1226,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string token = 2;</code>
+       * <code>string token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getTokenBytes() {
@@ -1199,7 +1242,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string token = 2;</code>
+       * <code>string token = 2;</code>
        */
       public Builder setToken(
           java.lang.String value) {
@@ -1212,7 +1255,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string token = 2;</code>
+       * <code>string token = 2;</code>
        */
       public Builder clearToken() {
         
@@ -1221,7 +1264,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string token = 2;</code>
+       * <code>string token = 2;</code>
        */
       public Builder setTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -1237,7 +1280,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object brokerAddress_ = "";
       /**
-       * <code>optional string brokerAddress = 3;</code>
+       * <code>string brokerAddress = 3;</code>
        */
       public java.lang.String getBrokerAddress() {
         java.lang.Object ref = brokerAddress_;
@@ -1252,7 +1295,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string brokerAddress = 3;</code>
+       * <code>string brokerAddress = 3;</code>
        */
       public com.google.protobuf.ByteString
           getBrokerAddressBytes() {
@@ -1268,7 +1311,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string brokerAddress = 3;</code>
+       * <code>string brokerAddress = 3;</code>
        */
       public Builder setBrokerAddress(
           java.lang.String value) {
@@ -1281,7 +1324,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string brokerAddress = 3;</code>
+       * <code>string brokerAddress = 3;</code>
        */
       public Builder clearBrokerAddress() {
         
@@ -1290,7 +1333,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string brokerAddress = 3;</code>
+       * <code>string brokerAddress = 3;</code>
        */
       public Builder setBrokerAddressBytes(
           com.google.protobuf.ByteString value) {
@@ -1303,14 +1346,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1329,11 +1374,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpConnectMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpConnectMessageBody>() {
+      @java.lang.Override
       public WmpConnectMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpConnectMessageBody(input, extensionRegistry);
+        return new WmpConnectMessageBody(input, extensionRegistry);
       }
     };
 
@@ -1346,6 +1392,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnectMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1357,21 +1404,21 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
 
     /**
-     * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+     * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
      */
     int getReturnCodeValue();
     /**
-     * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+     * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode getReturnCode();
   }
@@ -1382,6 +1429,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpConnAckMessageBody)
       WmpConnAckMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpConnAckMessageBody.newBuilder() to construct.
     private WmpConnAckMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1394,14 +1442,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpConnAckMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1410,12 +1463,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -1428,6 +1475,13 @@ public final class WmpMessageProtos {
               returnCode_ = rawValue;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1436,6 +1490,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1444,6 +1499,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnAckMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnAckMessageBody_fieldAccessorTable
@@ -1454,7 +1510,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -1469,7 +1525,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -1488,20 +1544,22 @@ public final class WmpMessageProtos {
     public static final int RETURNCODE_FIELD_NUMBER = 2;
     private int returnCode_;
     /**
-     * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+     * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
      */
     public int getReturnCodeValue() {
       return returnCode_;
     }
     /**
-     * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+     * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode getReturnCode() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode.valueOf(returnCode_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1511,6 +1569,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -1519,8 +1578,10 @@ public final class WmpMessageProtos {
       if (returnCode_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode.ACCEPTED.getNumber()) {
         output.writeEnum(2, returnCode_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1533,11 +1594,11 @@ public final class WmpMessageProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, returnCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1552,6 +1613,7 @@ public final class WmpMessageProtos {
       result = result && getClientId()
           .equals(other.getClientId());
       result = result && returnCode_ == other.returnCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -1561,7 +1623,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + RETURNCODE_FIELD_NUMBER;
@@ -1571,6 +1633,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1630,6 +1703,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1637,6 +1711,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1660,6 +1735,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnAckMessageBody_fieldAccessorTable
@@ -1682,6 +1758,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -1691,15 +1768,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpConnAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -1708,6 +1788,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody(this);
         result.clientId_ = clientId_;
@@ -1716,32 +1797,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody)other);
@@ -1760,14 +1848,17 @@ public final class WmpMessageProtos {
         if (other.returnCode_ != 0) {
           setReturnCodeValue(other.getReturnCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1788,7 +1879,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -1803,7 +1894,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -1819,7 +1910,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -1832,7 +1923,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -1841,7 +1932,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -1857,13 +1948,13 @@ public final class WmpMessageProtos {
 
       private int returnCode_ = 0;
       /**
-       * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+       * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
        */
       public int getReturnCodeValue() {
         return returnCode_;
       }
       /**
-       * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+       * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
        */
       public Builder setReturnCodeValue(int value) {
         returnCode_ = value;
@@ -1871,14 +1962,15 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+       * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode getReturnCode() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode.valueOf(returnCode_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+       * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
        */
       public Builder setReturnCode(com.keepthinker.wavemessaging.proto.WmpMessageProtos.ConnectReturnCode value) {
         if (value == null) {
@@ -1890,7 +1982,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.ConnectReturnCode returnCode = 2;</code>
+       * <code>.tutorial.ConnectReturnCode returnCode = 2;</code>
        */
       public Builder clearReturnCode() {
         
@@ -1898,14 +1990,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1924,11 +2018,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpConnAckMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpConnAckMessageBody>() {
+      @java.lang.Override
       public WmpConnAckMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpConnAckMessageBody(input, extensionRegistry);
+        return new WmpConnAckMessageBody(input, extensionRegistry);
       }
     };
 
@@ -1941,6 +2036,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpConnAckMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1952,26 +2048,26 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 messageId = 1;</code>
+     * <code>int64 messageId = 1;</code>
      */
     long getMessageId();
 
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
 
     /**
-     * <code>optional string content = 3;</code>
+     * <code>string content = 3;</code>
      */
     java.lang.String getContent();
     /**
-     * <code>optional string content = 3;</code>
+     * <code>string content = 3;</code>
      */
     com.google.protobuf.ByteString
         getContentBytes();
@@ -1981,7 +2077,7 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 4;</code>
+     * <code>.tutorial.TargetType targetType = 4;</code>
      */
     int getTargetTypeValue();
     /**
@@ -1989,34 +2085,52 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 4;</code>
+     * <code>.tutorial.TargetType targetType = 4;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType();
 
     /**
      * <pre>
-     ** clientId or topic name, if many elements, separated by coma(,) 
+     ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
      * </pre>
      *
-     * <code>optional string target = 5;</code>
+     * <code>string target = 5;</code>
      */
     java.lang.String getTarget();
     /**
      * <pre>
-     ** clientId or topic name, if many elements, separated by coma(,) 
+     ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
      * </pre>
      *
-     * <code>optional string target = 5;</code>
+     * <code>string target = 5;</code>
      */
     com.google.protobuf.ByteString
         getTargetBytes();
 
     /**
      * <pre>
+     ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+     * </pre>
+     *
+     * <code>string targetClientId = 6;</code>
+     */
+    java.lang.String getTargetClientId();
+    /**
+     * <pre>
+     ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+     * </pre>
+     *
+     * <code>string targetClientId = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getTargetClientIdBytes();
+
+    /**
+     * <pre>
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 6;</code>
+     * <code>.tutorial.Direction direction = 7;</code>
      */
     int getDirectionValue();
     /**
@@ -2024,7 +2138,7 @@ public final class WmpMessageProtos {
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 6;</code>
+     * <code>.tutorial.Direction direction = 7;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection();
   }
@@ -2035,6 +2149,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpPublishMessageBody)
       WmpPublishMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpPublishMessageBody.newBuilder() to construct.
     private WmpPublishMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2045,20 +2160,26 @@ public final class WmpMessageProtos {
       content_ = "";
       targetType_ = 0;
       target_ = "";
+      targetClientId_ = "";
       direction_ = 0;
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpPublishMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2067,12 +2188,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               messageId_ = input.readInt64();
@@ -2102,10 +2217,23 @@ public final class WmpMessageProtos {
               target_ = s;
               break;
             }
-            case 48: {
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              targetClientId_ = s;
+              break;
+            }
+            case 56: {
               int rawValue = input.readEnum();
 
               direction_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -2116,6 +2244,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2124,6 +2253,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable
@@ -2134,7 +2264,7 @@ public final class WmpMessageProtos {
     public static final int MESSAGEID_FIELD_NUMBER = 1;
     private long messageId_;
     /**
-     * <code>optional int64 messageId = 1;</code>
+     * <code>int64 messageId = 1;</code>
      */
     public long getMessageId() {
       return messageId_;
@@ -2143,7 +2273,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 2;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -2158,7 +2288,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -2177,7 +2307,7 @@ public final class WmpMessageProtos {
     public static final int CONTENT_FIELD_NUMBER = 3;
     private volatile java.lang.Object content_;
     /**
-     * <code>optional string content = 3;</code>
+     * <code>string content = 3;</code>
      */
     public java.lang.String getContent() {
       java.lang.Object ref = content_;
@@ -2192,7 +2322,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string content = 3;</code>
+     * <code>string content = 3;</code>
      */
     public com.google.protobuf.ByteString
         getContentBytes() {
@@ -2215,7 +2345,7 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 4;</code>
+     * <code>.tutorial.TargetType targetType = 4;</code>
      */
     public int getTargetTypeValue() {
       return targetType_;
@@ -2225,9 +2355,10 @@ public final class WmpMessageProtos {
      ** one or many --&gt; a clientId or a topic contains many clientIds 
      * </pre>
      *
-     * <code>optional .tutorial.TargetType targetType = 4;</code>
+     * <code>.tutorial.TargetType targetType = 4;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
     }
@@ -2236,10 +2367,10 @@ public final class WmpMessageProtos {
     private volatile java.lang.Object target_;
     /**
      * <pre>
-     ** clientId or topic name, if many elements, separated by coma(,) 
+     ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
      * </pre>
      *
-     * <code>optional string target = 5;</code>
+     * <code>string target = 5;</code>
      */
     public java.lang.String getTarget() {
       java.lang.Object ref = target_;
@@ -2255,10 +2386,10 @@ public final class WmpMessageProtos {
     }
     /**
      * <pre>
-     ** clientId or topic name, if many elements, separated by coma(,) 
+     ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
      * </pre>
      *
-     * <code>optional string target = 5;</code>
+     * <code>string target = 5;</code>
      */
     public com.google.protobuf.ByteString
         getTargetBytes() {
@@ -2274,14 +2405,56 @@ public final class WmpMessageProtos {
       }
     }
 
-    public static final int DIRECTION_FIELD_NUMBER = 6;
+    public static final int TARGETCLIENTID_FIELD_NUMBER = 6;
+    private volatile java.lang.Object targetClientId_;
+    /**
+     * <pre>
+     ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+     * </pre>
+     *
+     * <code>string targetClientId = 6;</code>
+     */
+    public java.lang.String getTargetClientId() {
+      java.lang.Object ref = targetClientId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        targetClientId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+     * </pre>
+     *
+     * <code>string targetClientId = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTargetClientIdBytes() {
+      java.lang.Object ref = targetClientId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        targetClientId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DIRECTION_FIELD_NUMBER = 7;
     private int direction_;
     /**
      * <pre>
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 6;</code>
+     * <code>.tutorial.Direction direction = 7;</code>
      */
     public int getDirectionValue() {
       return direction_;
@@ -2291,14 +2464,16 @@ public final class WmpMessageProtos {
      ** message from where to where
      * </pre>
      *
-     * <code>optional .tutorial.Direction direction = 6;</code>
+     * <code>.tutorial.Direction direction = 7;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2308,6 +2483,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (messageId_ != 0L) {
@@ -2325,11 +2501,16 @@ public final class WmpMessageProtos {
       if (!getTargetBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, target_);
       }
-      if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
-        output.writeEnum(6, direction_);
+      if (!getTargetClientIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, targetClientId_);
       }
+      if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
+        output.writeEnum(7, direction_);
+      }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2352,15 +2533,18 @@ public final class WmpMessageProtos {
       if (!getTargetBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, target_);
       }
+      if (!getTargetClientIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, targetClientId_);
+      }
       if (direction_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.TO_CLIENT_SDK.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, direction_);
+          .computeEnumSize(7, direction_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2381,7 +2565,10 @@ public final class WmpMessageProtos {
       result = result && targetType_ == other.targetType_;
       result = result && getTarget()
           .equals(other.getTarget());
+      result = result && getTargetClientId()
+          .equals(other.getTargetClientId());
       result = result && direction_ == other.direction_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2391,7 +2578,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MESSAGEID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getMessageId());
@@ -2403,6 +2590,8 @@ public final class WmpMessageProtos {
       hash = (53 * hash) + targetType_;
       hash = (37 * hash) + TARGET_FIELD_NUMBER;
       hash = (53 * hash) + getTarget().hashCode();
+      hash = (37 * hash) + TARGETCLIENTID_FIELD_NUMBER;
+      hash = (53 * hash) + getTargetClientId().hashCode();
       hash = (37 * hash) + DIRECTION_FIELD_NUMBER;
       hash = (53 * hash) + direction_;
       hash = (29 * hash) + unknownFields.hashCode();
@@ -2410,6 +2599,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2469,6 +2669,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2476,6 +2677,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2499,6 +2701,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable
@@ -2521,6 +2724,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         messageId_ = 0L;
@@ -2533,20 +2737,25 @@ public final class WmpMessageProtos {
 
         target_ = "";
 
+        targetClientId_ = "";
+
         direction_ = 0;
 
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPublishMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -2555,6 +2764,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody(this);
         result.messageId_ = messageId_;
@@ -2562,37 +2772,45 @@ public final class WmpMessageProtos {
         result.content_ = content_;
         result.targetType_ = targetType_;
         result.target_ = target_;
+        result.targetClientId_ = targetClientId_;
         result.direction_ = direction_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody)other);
@@ -2622,17 +2840,24 @@ public final class WmpMessageProtos {
           target_ = other.target_;
           onChanged();
         }
+        if (!other.getTargetClientId().isEmpty()) {
+          targetClientId_ = other.targetClientId_;
+          onChanged();
+        }
         if (other.direction_ != 0) {
           setDirectionValue(other.getDirectionValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2653,13 +2878,13 @@ public final class WmpMessageProtos {
 
       private long messageId_ ;
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public long getMessageId() {
         return messageId_;
       }
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public Builder setMessageId(long value) {
         
@@ -2668,7 +2893,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public Builder clearMessageId() {
         
@@ -2679,7 +2904,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -2694,7 +2919,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -2710,7 +2935,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -2723,7 +2948,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder clearClientId() {
         
@@ -2732,7 +2957,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -2748,7 +2973,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object content_ = "";
       /**
-       * <code>optional string content = 3;</code>
+       * <code>string content = 3;</code>
        */
       public java.lang.String getContent() {
         java.lang.Object ref = content_;
@@ -2763,7 +2988,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string content = 3;</code>
+       * <code>string content = 3;</code>
        */
       public com.google.protobuf.ByteString
           getContentBytes() {
@@ -2779,7 +3004,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string content = 3;</code>
+       * <code>string content = 3;</code>
        */
       public Builder setContent(
           java.lang.String value) {
@@ -2792,7 +3017,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string content = 3;</code>
+       * <code>string content = 3;</code>
        */
       public Builder clearContent() {
         
@@ -2801,7 +3026,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string content = 3;</code>
+       * <code>string content = 3;</code>
        */
       public Builder setContentBytes(
           com.google.protobuf.ByteString value) {
@@ -2821,7 +3046,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 4;</code>
+       * <code>.tutorial.TargetType targetType = 4;</code>
        */
       public int getTargetTypeValue() {
         return targetType_;
@@ -2831,7 +3056,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 4;</code>
+       * <code>.tutorial.TargetType targetType = 4;</code>
        */
       public Builder setTargetTypeValue(int value) {
         targetType_ = value;
@@ -2843,9 +3068,10 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 4;</code>
+       * <code>.tutorial.TargetType targetType = 4;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
       }
@@ -2854,7 +3080,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 4;</code>
+       * <code>.tutorial.TargetType targetType = 4;</code>
        */
       public Builder setTargetType(com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType value) {
         if (value == null) {
@@ -2870,7 +3096,7 @@ public final class WmpMessageProtos {
        ** one or many --&gt; a clientId or a topic contains many clientIds 
        * </pre>
        *
-       * <code>optional .tutorial.TargetType targetType = 4;</code>
+       * <code>.tutorial.TargetType targetType = 4;</code>
        */
       public Builder clearTargetType() {
         
@@ -2882,10 +3108,10 @@ public final class WmpMessageProtos {
       private java.lang.Object target_ = "";
       /**
        * <pre>
-       ** clientId or topic name, if many elements, separated by coma(,) 
+       ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
        * </pre>
        *
-       * <code>optional string target = 5;</code>
+       * <code>string target = 5;</code>
        */
       public java.lang.String getTarget() {
         java.lang.Object ref = target_;
@@ -2901,10 +3127,10 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** clientId or topic name, if many elements, separated by coma(,) 
+       ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
        * </pre>
        *
-       * <code>optional string target = 5;</code>
+       * <code>string target = 5;</code>
        */
       public com.google.protobuf.ByteString
           getTargetBytes() {
@@ -2921,10 +3147,10 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** clientId or topic name, if many elements, separated by coma(,) 
+       ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
        * </pre>
        *
-       * <code>optional string target = 5;</code>
+       * <code>string target = 5;</code>
        */
       public Builder setTarget(
           java.lang.String value) {
@@ -2938,10 +3164,10 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** clientId or topic name, if many elements, separated by coma(,) 
+       ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
        * </pre>
        *
-       * <code>optional string target = 5;</code>
+       * <code>string target = 5;</code>
        */
       public Builder clearTarget() {
         
@@ -2951,10 +3177,10 @@ public final class WmpMessageProtos {
       }
       /**
        * <pre>
-       ** clientId or topic name, if many elements, separated by coma(,) 
+       ** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null 
        * </pre>
        *
-       * <code>optional string target = 5;</code>
+       * <code>string target = 5;</code>
        */
       public Builder setTargetBytes(
           com.google.protobuf.ByteString value) {
@@ -2968,13 +3194,102 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      private java.lang.Object targetClientId_ = "";
+      /**
+       * <pre>
+       ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+       * </pre>
+       *
+       * <code>string targetClientId = 6;</code>
+       */
+      public java.lang.String getTargetClientId() {
+        java.lang.Object ref = targetClientId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          targetClientId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+       * </pre>
+       *
+       * <code>string targetClientId = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTargetClientIdBytes() {
+        java.lang.Object ref = targetClientId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          targetClientId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+       * </pre>
+       *
+       * <code>string targetClientId = 6;</code>
+       */
+      public Builder setTargetClientId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        targetClientId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+       * </pre>
+       *
+       * <code>string targetClientId = 6;</code>
+       */
+      public Builder clearTargetClientId() {
+        
+        targetClientId_ = getDefaultInstance().getTargetClientId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       ** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker
+       * </pre>
+       *
+       * <code>string targetClientId = 6;</code>
+       */
+      public Builder setTargetClientIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        targetClientId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int direction_ = 0;
       /**
        * <pre>
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 6;</code>
+       * <code>.tutorial.Direction direction = 7;</code>
        */
       public int getDirectionValue() {
         return direction_;
@@ -2984,7 +3299,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 6;</code>
+       * <code>.tutorial.Direction direction = 7;</code>
        */
       public Builder setDirectionValue(int value) {
         direction_ = value;
@@ -2996,9 +3311,10 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 6;</code>
+       * <code>.tutorial.Direction direction = 7;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction getDirection() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.valueOf(direction_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction.UNRECOGNIZED : result;
       }
@@ -3007,7 +3323,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 6;</code>
+       * <code>.tutorial.Direction direction = 7;</code>
        */
       public Builder setDirection(com.keepthinker.wavemessaging.proto.WmpMessageProtos.Direction value) {
         if (value == null) {
@@ -3023,7 +3339,7 @@ public final class WmpMessageProtos {
        ** message from where to where
        * </pre>
        *
-       * <code>optional .tutorial.Direction direction = 6;</code>
+       * <code>.tutorial.Direction direction = 7;</code>
        */
       public Builder clearDirection() {
         
@@ -3031,14 +3347,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3057,11 +3375,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpPublishMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpPublishMessageBody>() {
+      @java.lang.Override
       public WmpPublishMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpPublishMessageBody(input, extensionRegistry);
+        return new WmpPublishMessageBody(input, extensionRegistry);
       }
     };
 
@@ -3074,6 +3393,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPublishMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3085,16 +3405,16 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 messageId = 1;</code>
+     * <code>int64 messageId = 1;</code>
      */
     long getMessageId();
 
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
@@ -3106,6 +3426,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpPubAckMessageBody)
       WmpPubAckMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpPubAckMessageBody.newBuilder() to construct.
     private WmpPubAckMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3118,14 +3439,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpPubAckMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3134,12 +3460,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               messageId_ = input.readInt64();
@@ -3151,6 +3471,13 @@ public final class WmpMessageProtos {
               clientId_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3159,6 +3486,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3167,6 +3495,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPubAckMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPubAckMessageBody_fieldAccessorTable
@@ -3177,7 +3506,7 @@ public final class WmpMessageProtos {
     public static final int MESSAGEID_FIELD_NUMBER = 1;
     private long messageId_;
     /**
-     * <code>optional int64 messageId = 1;</code>
+     * <code>int64 messageId = 1;</code>
      */
     public long getMessageId() {
       return messageId_;
@@ -3186,7 +3515,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 2;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -3201,7 +3530,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 2;</code>
+     * <code>string clientId = 2;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -3218,6 +3547,7 @@ public final class WmpMessageProtos {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3227,6 +3557,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (messageId_ != 0L) {
@@ -3235,8 +3566,10 @@ public final class WmpMessageProtos {
       if (!getClientIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clientId_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3249,11 +3582,11 @@ public final class WmpMessageProtos {
       if (!getClientIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clientId_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3269,6 +3602,7 @@ public final class WmpMessageProtos {
           == other.getMessageId());
       result = result && getClientId()
           .equals(other.getClientId());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3278,7 +3612,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MESSAGEID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getMessageId());
@@ -3289,6 +3623,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3348,6 +3693,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3355,6 +3701,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3378,6 +3725,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPubAckMessageBody_fieldAccessorTable
@@ -3400,6 +3748,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         messageId_ = 0L;
@@ -3409,15 +3758,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpPubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -3426,6 +3778,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody(this);
         result.messageId_ = messageId_;
@@ -3434,32 +3787,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody)other);
@@ -3478,14 +3838,17 @@ public final class WmpMessageProtos {
           clientId_ = other.clientId_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3506,13 +3869,13 @@ public final class WmpMessageProtos {
 
       private long messageId_ ;
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public long getMessageId() {
         return messageId_;
       }
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public Builder setMessageId(long value) {
         
@@ -3521,7 +3884,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional int64 messageId = 1;</code>
+       * <code>int64 messageId = 1;</code>
        */
       public Builder clearMessageId() {
         
@@ -3532,7 +3895,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -3547,7 +3910,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -3563,7 +3926,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -3576,7 +3939,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder clearClientId() {
         
@@ -3585,7 +3948,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 2;</code>
+       * <code>string clientId = 2;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -3598,14 +3961,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3624,11 +3989,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpPubAckMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpPubAckMessageBody>() {
+      @java.lang.Override
       public WmpPubAckMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpPubAckMessageBody(input, extensionRegistry);
+        return new WmpPubAckMessageBody(input, extensionRegistry);
       }
     };
 
@@ -3641,6 +4007,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpPubAckMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3652,11 +4019,11 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
@@ -3666,16 +4033,16 @@ public final class WmpMessageProtos {
      ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
-     * <code>optional int32 subscribeId = 2;</code>
+     * <code>int32 subscribeId = 2;</code>
      */
     int getSubscribeId();
 
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     int getTargetTypeValue();
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType();
 
@@ -3705,6 +4072,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpSubscribeMessageBody)
       WmpSubscribeMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpSubscribeMessageBody.newBuilder() to construct.
     private WmpSubscribeMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3719,14 +4087,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpSubscribeMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3735,12 +4108,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -3767,6 +4134,13 @@ public final class WmpMessageProtos {
               topics_.add(s);
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3778,6 +4152,7 @@ public final class WmpMessageProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           topics_ = topics_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3786,6 +4161,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubscribeMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubscribeMessageBody_fieldAccessorTable
@@ -3797,7 +4173,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -3812,7 +4188,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -3835,7 +4211,7 @@ public final class WmpMessageProtos {
      ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
-     * <code>optional int32 subscribeId = 2;</code>
+     * <code>int32 subscribeId = 2;</code>
      */
     public int getSubscribeId() {
       return subscribeId_;
@@ -3844,15 +4220,16 @@ public final class WmpMessageProtos {
     public static final int TARGETTYPE_FIELD_NUMBER = 3;
     private int targetType_;
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     public int getTargetTypeValue() {
       return targetType_;
     }
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
     }
@@ -3887,6 +4264,7 @@ public final class WmpMessageProtos {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3896,6 +4274,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -3910,8 +4289,10 @@ public final class WmpMessageProtos {
       for (int i = 0; i < topics_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, topics_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3936,11 +4317,11 @@ public final class WmpMessageProtos {
         size += dataSize;
         size += 1 * getTopicsList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3959,6 +4340,7 @@ public final class WmpMessageProtos {
       result = result && targetType_ == other.targetType_;
       result = result && getTopicsList()
           .equals(other.getTopicsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3968,7 +4350,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + SUBSCRIBEID_FIELD_NUMBER;
@@ -3984,6 +4366,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4043,6 +4436,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4050,6 +4444,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4073,6 +4468,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubscribeMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubscribeMessageBody_fieldAccessorTable
@@ -4095,6 +4491,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -4108,15 +4505,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubscribeMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -4125,6 +4525,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody(this);
         int from_bitField0_ = bitField0_;
@@ -4142,32 +4543,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody)other);
@@ -4199,14 +4607,17 @@ public final class WmpMessageProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4228,7 +4639,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -4243,7 +4654,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -4259,7 +4670,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -4272,7 +4683,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -4281,7 +4692,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -4301,7 +4712,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public int getSubscribeId() {
         return subscribeId_;
@@ -4311,7 +4722,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public Builder setSubscribeId(int value) {
         
@@ -4324,7 +4735,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public Builder clearSubscribeId() {
         
@@ -4335,13 +4746,13 @@ public final class WmpMessageProtos {
 
       private int targetType_ = 0;
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public int getTargetTypeValue() {
         return targetType_;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder setTargetTypeValue(int value) {
         targetType_ = value;
@@ -4349,14 +4760,15 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder setTargetType(com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType value) {
         if (value == null) {
@@ -4368,7 +4780,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder clearTargetType() {
         
@@ -4470,14 +4882,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4496,11 +4910,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpSubscribeMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpSubscribeMessageBody>() {
+      @java.lang.Override
       public WmpSubscribeMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpSubscribeMessageBody(input, extensionRegistry);
+        return new WmpSubscribeMessageBody(input, extensionRegistry);
       }
     };
 
@@ -4513,6 +4928,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubscribeMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4524,11 +4940,11 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
@@ -4538,16 +4954,16 @@ public final class WmpMessageProtos {
      ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
-     * <code>optional int32 subscribeId = 2;</code>
+     * <code>int32 subscribeId = 2;</code>
      */
     int getSubscribeId();
 
     /**
-     * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
      */
     int getReturnCodeValue();
     /**
-     * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode getReturnCode();
   }
@@ -4558,6 +4974,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpSubAckMessageBody)
       WmpSubAckMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpSubAckMessageBody.newBuilder() to construct.
     private WmpSubAckMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4571,14 +4988,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpSubAckMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4587,12 +5009,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -4610,6 +5026,13 @@ public final class WmpMessageProtos {
               returnCode_ = rawValue;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4618,6 +5041,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4626,6 +5050,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubAckMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubAckMessageBody_fieldAccessorTable
@@ -4636,7 +5061,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -4651,7 +5076,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -4674,7 +5099,7 @@ public final class WmpMessageProtos {
      ** unique subscribe id for the clientId to differentiate different subscribe action
      * </pre>
      *
-     * <code>optional int32 subscribeId = 2;</code>
+     * <code>int32 subscribeId = 2;</code>
      */
     public int getSubscribeId() {
       return subscribeId_;
@@ -4683,20 +5108,22 @@ public final class WmpMessageProtos {
     public static final int RETURNCODE_FIELD_NUMBER = 3;
     private int returnCode_;
     /**
-     * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
      */
     public int getReturnCodeValue() {
       return returnCode_;
     }
     /**
-     * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode getReturnCode() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode.valueOf(returnCode_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4706,6 +5133,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -4717,8 +5145,10 @@ public final class WmpMessageProtos {
       if (returnCode_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode.SUB_SUCCESS.getNumber()) {
         output.writeEnum(3, returnCode_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4735,11 +5165,11 @@ public final class WmpMessageProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, returnCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4756,6 +5186,7 @@ public final class WmpMessageProtos {
       result = result && (getSubscribeId()
           == other.getSubscribeId());
       result = result && returnCode_ == other.returnCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4765,7 +5196,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + SUBSCRIBEID_FIELD_NUMBER;
@@ -4777,6 +5208,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4836,6 +5278,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4843,6 +5286,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4866,6 +5310,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubAckMessageBody_fieldAccessorTable
@@ -4888,6 +5333,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -4899,15 +5345,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpSubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -4916,6 +5365,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody(this);
         result.clientId_ = clientId_;
@@ -4925,32 +5375,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody)other);
@@ -4972,14 +5429,17 @@ public final class WmpMessageProtos {
         if (other.returnCode_ != 0) {
           setReturnCodeValue(other.getReturnCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5000,7 +5460,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -5015,7 +5475,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -5031,7 +5491,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -5044,7 +5504,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -5053,7 +5513,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -5073,7 +5533,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public int getSubscribeId() {
         return subscribeId_;
@@ -5083,7 +5543,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public Builder setSubscribeId(int value) {
         
@@ -5096,7 +5556,7 @@ public final class WmpMessageProtos {
        ** unique subscribe id for the clientId to differentiate different subscribe action
        * </pre>
        *
-       * <code>optional int32 subscribeId = 2;</code>
+       * <code>int32 subscribeId = 2;</code>
        */
       public Builder clearSubscribeId() {
         
@@ -5107,13 +5567,13 @@ public final class WmpMessageProtos {
 
       private int returnCode_ = 0;
       /**
-       * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
        */
       public int getReturnCodeValue() {
         return returnCode_;
       }
       /**
-       * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
        */
       public Builder setReturnCodeValue(int value) {
         returnCode_ = value;
@@ -5121,14 +5581,15 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode getReturnCode() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode.valueOf(returnCode_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
        */
       public Builder setReturnCode(com.keepthinker.wavemessaging.proto.WmpMessageProtos.SubscribeReturnCode value) {
         if (value == null) {
@@ -5140,7 +5601,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.SubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.SubscribeReturnCode returnCode = 3;</code>
        */
       public Builder clearReturnCode() {
         
@@ -5148,14 +5609,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5174,11 +5637,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpSubAckMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpSubAckMessageBody>() {
+      @java.lang.Override
       public WmpSubAckMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpSubAckMessageBody(input, extensionRegistry);
+        return new WmpSubAckMessageBody(input, extensionRegistry);
       }
     };
 
@@ -5191,6 +5655,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpSubAckMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5202,11 +5667,11 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
@@ -5218,6 +5683,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpDisConnectMessageBody)
       WmpDisConnectMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpDisConnectMessageBody.newBuilder() to construct.
     private WmpDisConnectMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5229,14 +5695,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpDisConnectMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5245,16 +5716,17 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
               clientId_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -5265,6 +5737,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5273,6 +5746,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable
@@ -5283,7 +5757,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -5298,7 +5772,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -5315,6 +5789,7 @@ public final class WmpMessageProtos {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5324,13 +5799,16 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, clientId_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5339,11 +5817,11 @@ public final class WmpMessageProtos {
       if (!getClientIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, clientId_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -5357,6 +5835,7 @@ public final class WmpMessageProtos {
       boolean result = true;
       result = result && getClientId()
           .equals(other.getClientId());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -5366,7 +5845,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -5374,6 +5853,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5433,6 +5923,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -5440,6 +5931,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -5463,6 +5955,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_fieldAccessorTable
@@ -5485,6 +5978,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -5492,15 +5986,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpDisConnectMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -5509,6 +6006,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody(this);
         result.clientId_ = clientId_;
@@ -5516,32 +6014,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody)other);
@@ -5557,14 +6062,17 @@ public final class WmpMessageProtos {
           clientId_ = other.clientId_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5585,7 +6093,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -5600,7 +6108,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -5616,7 +6124,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -5629,7 +6137,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -5638,7 +6146,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -5651,14 +6159,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5677,11 +6187,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpDisConnectMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpDisConnectMessageBody>() {
+      @java.lang.Override
       public WmpDisConnectMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpDisConnectMessageBody(input, extensionRegistry);
+        return new WmpDisConnectMessageBody(input, extensionRegistry);
       }
     };
 
@@ -5694,6 +6205,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpDisConnectMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5705,26 +6217,26 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
 
     /**
-     * <code>optional int32 unsubscribeId = 2;</code>
+     * <code>int32 unsubscribeId = 2;</code>
      */
     int getUnsubscribeId();
 
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     int getTargetTypeValue();
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType();
 
@@ -5754,6 +6266,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpUnsubscribeMessageBody)
       WmpUnsubscribeMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpUnsubscribeMessageBody.newBuilder() to construct.
     private WmpUnsubscribeMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5768,14 +6281,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpUnsubscribeMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5784,12 +6302,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -5816,6 +6328,13 @@ public final class WmpMessageProtos {
               topics_.add(s);
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5827,6 +6346,7 @@ public final class WmpMessageProtos {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           topics_ = topics_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5835,6 +6355,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubscribeMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubscribeMessageBody_fieldAccessorTable
@@ -5846,7 +6367,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -5861,7 +6382,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -5880,7 +6401,7 @@ public final class WmpMessageProtos {
     public static final int UNSUBSCRIBEID_FIELD_NUMBER = 2;
     private int unsubscribeId_;
     /**
-     * <code>optional int32 unsubscribeId = 2;</code>
+     * <code>int32 unsubscribeId = 2;</code>
      */
     public int getUnsubscribeId() {
       return unsubscribeId_;
@@ -5889,15 +6410,16 @@ public final class WmpMessageProtos {
     public static final int TARGETTYPE_FIELD_NUMBER = 3;
     private int targetType_;
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     public int getTargetTypeValue() {
       return targetType_;
     }
     /**
-     * <code>optional .tutorial.TargetType targetType = 3;</code>
+     * <code>.tutorial.TargetType targetType = 3;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
     }
@@ -5932,6 +6454,7 @@ public final class WmpMessageProtos {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5941,6 +6464,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -5955,8 +6479,10 @@ public final class WmpMessageProtos {
       for (int i = 0; i < topics_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, topics_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5981,11 +6507,11 @@ public final class WmpMessageProtos {
         size += dataSize;
         size += 1 * getTopicsList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6004,6 +6530,7 @@ public final class WmpMessageProtos {
       result = result && targetType_ == other.targetType_;
       result = result && getTopicsList()
           .equals(other.getTopicsList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6013,7 +6540,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + UNSUBSCRIBEID_FIELD_NUMBER;
@@ -6029,6 +6556,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6088,6 +6626,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6095,6 +6634,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6118,6 +6658,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubscribeMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubscribeMessageBody_fieldAccessorTable
@@ -6140,6 +6681,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -6153,15 +6695,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubscribeMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -6170,6 +6715,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody(this);
         int from_bitField0_ = bitField0_;
@@ -6187,32 +6733,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody)other);
@@ -6244,14 +6797,17 @@ public final class WmpMessageProtos {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6273,7 +6829,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -6288,7 +6844,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -6304,7 +6860,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -6317,7 +6873,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -6326,7 +6882,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -6342,13 +6898,13 @@ public final class WmpMessageProtos {
 
       private int unsubscribeId_ ;
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public int getUnsubscribeId() {
         return unsubscribeId_;
       }
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public Builder setUnsubscribeId(int value) {
         
@@ -6357,7 +6913,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public Builder clearUnsubscribeId() {
         
@@ -6368,13 +6924,13 @@ public final class WmpMessageProtos {
 
       private int targetType_ = 0;
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public int getTargetTypeValue() {
         return targetType_;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder setTargetTypeValue(int value) {
         targetType_ = value;
@@ -6382,14 +6938,15 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType getTargetType() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.valueOf(targetType_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder setTargetType(com.keepthinker.wavemessaging.proto.WmpMessageProtos.TargetType value) {
         if (value == null) {
@@ -6401,7 +6958,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.TargetType targetType = 3;</code>
+       * <code>.tutorial.TargetType targetType = 3;</code>
        */
       public Builder clearTargetType() {
         
@@ -6503,14 +7060,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6529,11 +7088,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpUnsubscribeMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpUnsubscribeMessageBody>() {
+      @java.lang.Override
       public WmpUnsubscribeMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpUnsubscribeMessageBody(input, extensionRegistry);
+        return new WmpUnsubscribeMessageBody(input, extensionRegistry);
       }
     };
 
@@ -6546,6 +7106,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubscribeMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -6557,26 +7118,26 @@ public final class WmpMessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     java.lang.String getClientId();
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     com.google.protobuf.ByteString
         getClientIdBytes();
 
     /**
-     * <code>optional int32 unsubscribeId = 2;</code>
+     * <code>int32 unsubscribeId = 2;</code>
      */
     int getUnsubscribeId();
 
     /**
-     * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
      */
     int getReturnCodeValue();
     /**
-     * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
      */
     com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode getReturnCode();
   }
@@ -6587,6 +7148,7 @@ public final class WmpMessageProtos {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:tutorial.WmpUnsubAckMessageBody)
       WmpUnsubAckMessageBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use WmpUnsubAckMessageBody.newBuilder() to construct.
     private WmpUnsubAckMessageBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6600,14 +7162,19 @@ public final class WmpMessageProtos {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private WmpUnsubAckMessageBody(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6616,12 +7183,6 @@ public final class WmpMessageProtos {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -6639,6 +7200,13 @@ public final class WmpMessageProtos {
               returnCode_ = rawValue;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6647,6 +7215,7 @@ public final class WmpMessageProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6655,6 +7224,7 @@ public final class WmpMessageProtos {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubAckMessageBody_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubAckMessageBody_fieldAccessorTable
@@ -6665,7 +7235,7 @@ public final class WmpMessageProtos {
     public static final int CLIENTID_FIELD_NUMBER = 1;
     private volatile java.lang.Object clientId_;
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -6680,7 +7250,7 @@ public final class WmpMessageProtos {
       }
     }
     /**
-     * <code>optional string clientId = 1;</code>
+     * <code>string clientId = 1;</code>
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -6699,7 +7269,7 @@ public final class WmpMessageProtos {
     public static final int UNSUBSCRIBEID_FIELD_NUMBER = 2;
     private int unsubscribeId_;
     /**
-     * <code>optional int32 unsubscribeId = 2;</code>
+     * <code>int32 unsubscribeId = 2;</code>
      */
     public int getUnsubscribeId() {
       return unsubscribeId_;
@@ -6708,20 +7278,22 @@ public final class WmpMessageProtos {
     public static final int RETURNCODE_FIELD_NUMBER = 3;
     private int returnCode_;
     /**
-     * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
      */
     public int getReturnCodeValue() {
       return returnCode_;
     }
     /**
-     * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+     * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
      */
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode getReturnCode() {
+      @SuppressWarnings("deprecation")
       com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode.valueOf(returnCode_);
       return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6731,6 +7303,7 @@ public final class WmpMessageProtos {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getClientIdBytes().isEmpty()) {
@@ -6742,8 +7315,10 @@ public final class WmpMessageProtos {
       if (returnCode_ != com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode.UNSUB_SUCCESS.getNumber()) {
         output.writeEnum(3, returnCode_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6760,11 +7335,11 @@ public final class WmpMessageProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, returnCode_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6781,6 +7356,7 @@ public final class WmpMessageProtos {
       result = result && (getUnsubscribeId()
           == other.getUnsubscribeId());
       result = result && returnCode_ == other.returnCode_;
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6790,7 +7366,7 @@ public final class WmpMessageProtos {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CLIENTID_FIELD_NUMBER;
       hash = (53 * hash) + getClientId().hashCode();
       hash = (37 * hash) + UNSUBSCRIBEID_FIELD_NUMBER;
@@ -6802,6 +7378,17 @@ public final class WmpMessageProtos {
       return hash;
     }
 
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6861,6 +7448,7 @@ public final class WmpMessageProtos {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6868,6 +7456,7 @@ public final class WmpMessageProtos {
     public static Builder newBuilder(com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6891,6 +7480,7 @@ public final class WmpMessageProtos {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubAckMessageBody_fieldAccessorTable
@@ -6913,6 +7503,7 @@ public final class WmpMessageProtos {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         clientId_ = "";
@@ -6924,15 +7515,18 @@ public final class WmpMessageProtos {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.internal_static_tutorial_WmpUnsubAckMessageBody_descriptor;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody getDefaultInstanceForType() {
         return com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody build() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody result = buildPartial();
         if (!result.isInitialized()) {
@@ -6941,6 +7535,7 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody buildPartial() {
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody result = new com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody(this);
         result.clientId_ = clientId_;
@@ -6950,32 +7545,39 @@ public final class WmpMessageProtos {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody) {
           return mergeFrom((com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody)other);
@@ -6997,14 +7599,17 @@ public final class WmpMessageProtos {
         if (other.returnCode_ != 0) {
           setReturnCodeValue(other.getReturnCodeValue());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7025,7 +7630,7 @@ public final class WmpMessageProtos {
 
       private java.lang.Object clientId_ = "";
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public java.lang.String getClientId() {
         java.lang.Object ref = clientId_;
@@ -7040,7 +7645,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public com.google.protobuf.ByteString
           getClientIdBytes() {
@@ -7056,7 +7661,7 @@ public final class WmpMessageProtos {
         }
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientId(
           java.lang.String value) {
@@ -7069,7 +7674,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder clearClientId() {
         
@@ -7078,7 +7683,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional string clientId = 1;</code>
+       * <code>string clientId = 1;</code>
        */
       public Builder setClientIdBytes(
           com.google.protobuf.ByteString value) {
@@ -7094,13 +7699,13 @@ public final class WmpMessageProtos {
 
       private int unsubscribeId_ ;
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public int getUnsubscribeId() {
         return unsubscribeId_;
       }
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public Builder setUnsubscribeId(int value) {
         
@@ -7109,7 +7714,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional int32 unsubscribeId = 2;</code>
+       * <code>int32 unsubscribeId = 2;</code>
        */
       public Builder clearUnsubscribeId() {
         
@@ -7120,13 +7725,13 @@ public final class WmpMessageProtos {
 
       private int returnCode_ = 0;
       /**
-       * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
        */
       public int getReturnCodeValue() {
         return returnCode_;
       }
       /**
-       * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
        */
       public Builder setReturnCodeValue(int value) {
         returnCode_ = value;
@@ -7134,14 +7739,15 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
        */
       public com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode getReturnCode() {
+        @SuppressWarnings("deprecation")
         com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode result = com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode.valueOf(returnCode_);
         return result == null ? com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
        */
       public Builder setReturnCode(com.keepthinker.wavemessaging.proto.WmpMessageProtos.UnsubscribeReturnCode value) {
         if (value == null) {
@@ -7153,7 +7759,7 @@ public final class WmpMessageProtos {
         return this;
       }
       /**
-       * <code>optional .tutorial.UnsubscribeReturnCode returnCode = 3;</code>
+       * <code>.tutorial.UnsubscribeReturnCode returnCode = 3;</code>
        */
       public Builder clearReturnCode() {
         
@@ -7161,14 +7767,16 @@ public final class WmpMessageProtos {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7187,11 +7795,12 @@ public final class WmpMessageProtos {
 
     private static final com.google.protobuf.Parser<WmpUnsubAckMessageBody>
         PARSER = new com.google.protobuf.AbstractParser<WmpUnsubAckMessageBody>() {
+      @java.lang.Override
       public WmpUnsubAckMessageBody parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new WmpUnsubAckMessageBody(input, extensionRegistry);
+        return new WmpUnsubAckMessageBody(input, extensionRegistry);
       }
     };
 
@@ -7204,6 +7813,7 @@ public final class WmpMessageProtos {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.keepthinker.wavemessaging.proto.WmpMessageProtos.WmpUnsubAckMessageBody getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7269,37 +7879,38 @@ public final class WmpMessageProtos {
       "\030\002 \001(\t\022\025\n\rbrokerAddress\030\003 \001(\t\"Z\n\025WmpConn" +
       "AckMessageBody\022\020\n\010clientId\030\001 \001(\t\022/\n\nretu" +
       "rnCode\030\002 \001(\0162\033.tutorial.ConnectReturnCod" +
-      "e\"\257\001\n\025WmpPublishMessageBody\022\021\n\tmessageId" +
+      "e\"\307\001\n\025WmpPublishMessageBody\022\021\n\tmessageId" +
       "\030\001 \001(\003\022\020\n\010clientId\030\002 \001(\t\022\017\n\007content\030\003 \001(" +
       "\t\022(\n\ntargetType\030\004 \001(\0162\024.tutorial.TargetT" +
-      "ype\022\016\n\006target\030\005 \001(\t\022&\n\tdirection\030\006 \001(\0162\023" +
-      ".tutorial.Direction\";\n\024WmpPubAckMessageB",
-      "ody\022\021\n\tmessageId\030\001 \001(\003\022\020\n\010clientId\030\002 \001(\t" +
-      "\"z\n\027WmpSubscribeMessageBody\022\020\n\010clientId\030" +
-      "\001 \001(\t\022\023\n\013subscribeId\030\002 \001(\005\022(\n\ntargetType" +
-      "\030\003 \001(\0162\024.tutorial.TargetType\022\016\n\006topics\030\004" +
-      " \003(\t\"p\n\024WmpSubAckMessageBody\022\020\n\010clientId" +
-      "\030\001 \001(\t\022\023\n\013subscribeId\030\002 \001(\005\0221\n\nreturnCod" +
-      "e\030\003 \001(\0162\035.tutorial.SubscribeReturnCode\"," +
-      "\n\030WmpDisConnectMessageBody\022\020\n\010clientId\030\001" +
-      " \001(\t\"~\n\031WmpUnsubscribeMessageBody\022\020\n\010cli" +
-      "entId\030\001 \001(\t\022\025\n\runsubscribeId\030\002 \001(\005\022(\n\nta",
-      "rgetType\030\003 \001(\0162\024.tutorial.TargetType\022\016\n\006" +
-      "topics\030\004 \003(\t\"v\n\026WmpUnsubAckMessageBody\022\020" +
-      "\n\010clientId\030\001 \001(\t\022\025\n\runsubscribeId\030\002 \001(\005\022" +
-      "3\n\nreturnCode\030\003 \001(\0162\037.tutorial.Unsubscri" +
-      "beReturnCode*\251\001\n\021ConnectReturnCode\022\014\n\010AC" +
-      "CEPTED\020\000\022)\n%REFUSED_UNACCEPTABLE_PROTOCO" +
-      "L_VERSION\020\001\022\037\n\033REFUSED_IDENTIFIER_REJECT" +
-      "ED\020\002\022\032\n\026REFUSED_NOT_AUTHORIZED\020\003\022\036\n\032REFU" +
-      "SED_SERVER_UNAVAILABLE\020\004*.\n\nTargetType\022\r" +
-      "\n\tCLIENT_ID\020\000\022\021\n\rTOPIC_GENERAL\020\001*5\n\tDire",
-      "ction\022\021\n\rTO_CLIENT_SDK\020\000\022\025\n\021TO_SERVER_HA" +
-      "NDLER\020\001*7\n\023SubscribeReturnCode\022\017\n\013SUB_SU" +
-      "CCESS\020\000\022\017\n\013SUB_FAILURE\020\001*=\n\025UnsubscribeR" +
-      "eturnCode\022\021\n\rUNSUB_SUCCESS\020\000\022\021\n\rUNSUB_FA" +
-      "ILURE\020\001B7\n#com.keepthinker.wavemessaging" +
-      ".protoB\020WmpMessageProtosb\006proto3"
+      "ype\022\016\n\006target\030\005 \001(\t\022\026\n\016targetClientId\030\006 " +
+      "\001(\t\022&\n\tdirection\030\007 \001(\0162\023.tutorial.Direct" +
+      "ion\";\n\024WmpPubAckMessageBody\022\021\n\tmessageId" +
+      "\030\001 \001(\003\022\020\n\010clientId\030\002 \001(\t\"z\n\027WmpSubscribe" +
+      "MessageBody\022\020\n\010clientId\030\001 \001(\t\022\023\n\013subscri" +
+      "beId\030\002 \001(\005\022(\n\ntargetType\030\003 \001(\0162\024.tutoria" +
+      "l.TargetType\022\016\n\006topics\030\004 \003(\t\"p\n\024WmpSubAc" +
+      "kMessageBody\022\020\n\010clientId\030\001 \001(\t\022\023\n\013subscr" +
+      "ibeId\030\002 \001(\005\0221\n\nreturnCode\030\003 \001(\0162\035.tutori" +
+      "al.SubscribeReturnCode\",\n\030WmpDisConnectM" +
+      "essageBody\022\020\n\010clientId\030\001 \001(\t\"~\n\031WmpUnsub" +
+      "scribeMessageBody\022\020\n\010clientId\030\001 \001(\t\022\025\n\ru" +
+      "nsubscribeId\030\002 \001(\005\022(\n\ntargetType\030\003 \001(\0162\024" +
+      ".tutorial.TargetType\022\016\n\006topics\030\004 \003(\t\"v\n\026" +
+      "WmpUnsubAckMessageBody\022\020\n\010clientId\030\001 \001(\t" +
+      "\022\025\n\runsubscribeId\030\002 \001(\005\0223\n\nreturnCode\030\003 " +
+      "\001(\0162\037.tutorial.UnsubscribeReturnCode*\251\001\n" +
+      "\021ConnectReturnCode\022\014\n\010ACCEPTED\020\000\022)\n%REFU" +
+      "SED_UNACCEPTABLE_PROTOCOL_VERSION\020\001\022\037\n\033R" +
+      "EFUSED_IDENTIFIER_REJECTED\020\002\022\032\n\026REFUSED_" +
+      "NOT_AUTHORIZED\020\003\022\036\n\032REFUSED_SERVER_UNAVA" +
+      "ILABLE\020\004*.\n\nTargetType\022\r\n\tCLIENT_ID\020\000\022\021\n" +
+      "\rTOPIC_GENERAL\020\001*5\n\tDirection\022\021\n\rTO_CLIE" +
+      "NT_SDK\020\000\022\025\n\021TO_SERVER_HANDLER\020\001*7\n\023Subsc" +
+      "ribeReturnCode\022\017\n\013SUB_SUCCESS\020\000\022\017\n\013SUB_F" +
+      "AILURE\020\001*=\n\025UnsubscribeReturnCode\022\021\n\rUNS" +
+      "UB_SUCCESS\020\000\022\021\n\rUNSUB_FAILURE\020\001B7\n#com.k" +
+      "eepthinker.wavemessaging.protoB\020WmpMessa" +
+      "geProtosb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7330,7 +7941,7 @@ public final class WmpMessageProtos {
     internal_static_tutorial_WmpPublishMessageBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tutorial_WmpPublishMessageBody_descriptor,
-        new java.lang.String[] { "MessageId", "ClientId", "Content", "TargetType", "Target", "Direction", });
+        new java.lang.String[] { "MessageId", "ClientId", "Content", "TargetType", "Target", "TargetClientId", "Direction", });
     internal_static_tutorial_WmpPubAckMessageBody_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_tutorial_WmpPubAckMessageBody_fieldAccessorTable = new

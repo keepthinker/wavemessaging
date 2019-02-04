@@ -91,7 +91,7 @@ subprojects {
         commonsCodecVersion = '1.10'
         servletApiVersion = '3.0-alpha-1'
         httpClientVersion = '4.5.2'
-        protobufVersion = '3.2.0'
+        protobufVersion = '3.6.1'
     }
 
     configurations {

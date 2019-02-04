@@ -22,10 +22,12 @@ message WmpPublishMessageBody {
     string content = 3;
     /** one or many --> a clientId or a topic contains many clientIds */
     TargetType targetType = 4;
-    /** clientId or topic name, if many elements, separated by coma(,) */
+    /** topic name or, if many elements, separated by coma(,). if targetType is CLIENT_ID, then set null */
     string target = 5;
+    /** if topic publish, should publish to all subscriber, set subscriber's clientId here. Besides, It's used to find client's channel by broker*/
+    string targetClientId = 6;
     /** message from where to where*/
-    Direction direction = 6;
+    Direction direction = 7;
 }
 
 message WmpPubAckMessageBody {

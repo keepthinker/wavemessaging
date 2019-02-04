@@ -7,7 +7,7 @@ wm-*/build
 /**/logs
 /.gradle
 
-/out
+/**/out
 
 #idea config file
 /.idea

@@ -74,9 +74,9 @@ public class MessageServiceImpl implements MessageService{
         Channel channel = holder.getChannel();
 
         if(channel != null && channel.isActive()){
-            LOGGER.warn("not connected to server yet");
             return channel;
         } else {
+            LOGGER.warn("not connected to server yet");
             return null;
         }
 

@@ -6,6 +6,7 @@ import com.keepthinker.wavemessaging.nosql.ClientInfoNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.ClientMessageSendingNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.ClientMessageWaitingNoSqlDao;
 import com.keepthinker.wavemessaging.nosql.MessageInfoNoSqlDao;
+import com.keepthinker.wavemessaging.nosql.redis.model.MessageInfo;
 import com.keepthinker.wavemessaging.proto.WmpMessageProtos;
 import com.keepthinker.wavemessaging.proto.WmpPublishMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +38,7 @@ public class MessagePublishHelper {
     public void findAvailableMessageToSend(String clientId){
         Long messageId = cmSendingNoSqlDao.get(clientId);
         if(messageId != null){
-            WmpMessageProtos.WmpPublishMessageBody body = messageInfoNoSqlDao.getPublishMessageBody(messageId);
-            if(body == null){
-                return;
-            }
-            WmpPublishMessage msg = new WmpPublishMessage();
-            msg.setVersion(Constants.WMP_VERSION);
-            msg.setBody(body);
-            channelHolder.getChannel(clientInfoNoSqlDao.getBrokerPrivateAddress(clientId)).
-                    writeAndFlush(msg);
+            publish(clientId, messageId);
         }else{
             findWaitingMsgAndSend(clientId);
         }
@@ -57,23 +50,44 @@ public class MessagePublishHelper {
      * until client message waiting list is empty.
      * @param clientId
      */
-    public void findWaitingMsgAndSend(String clientId){
+    private void findWaitingMsgAndSend(String clientId){
         Long messageId = cmWaitingNoSqlDao.dequeue(clientId);
         if(messageId == null) {
             return;
         }
         if(cmSendingNoSqlDao.setNotExist(clientId, messageId)){
-            WmpPublishMessage publishMessage = new WmpPublishMessage();
-            publishMessage.setVersion(Constants.WMP_VERSION);
-            WmpMessageProtos.WmpPublishMessageBody body = messageInfoNoSqlDao.getPublishMessageBody(messageId);
-            if(body == null){
-                return;
-            }
-            publishMessage.setBody(body);
-            channelHolder.getChannel(clientInfoNoSqlDao.getBrokerPrivateAddress(clientId)).
-                    writeAndFlush(publishMessage);
+
+            publish(clientId, messageId);
+
         }else{
             cmWaitingNoSqlDao.enqueue(clientId, messageId);
         }
+    }
+
+    private void publish(String clientId, long messageId){
+        MessageInfo messageInfo = messageInfoNoSqlDao.getPartialForPublish(messageId);
+
+        if(messageInfo == null){
+            cmSendingNoSqlDao.delete(clientId);
+            findWaitingMsgAndSend(clientId);  //--todo should limit the number of recursion in case of bugs
+            return;
+        }
+
+        WmpMessageProtos.WmpPublishMessageBody body = WmpMessageProtos.WmpPublishMessageBody.newBuilder()
+                .setTargetTypeValue(messageInfo.getTargetType())
+                .setTarget(messageInfo.getTarget())
+                .setContent(messageInfo.getContent())
+                .setTargetClientId(clientId)
+                .setMessageId(messageId)
+                .setDirection(WmpMessageProtos.Direction.TO_CLIENT_SDK)
+                .build();
+
+        WmpPublishMessage msg = new WmpPublishMessage();
+        msg.setVersion(Constants.WMP_VERSION);
+        msg.setBody(body);
+
+        channelHolder.getChannel(clientInfoNoSqlDao.getBrokerPrivateAddress(clientId)).
+                writeAndFlush(msg);
+
     }
 }
